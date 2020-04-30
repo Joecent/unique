@@ -1,0 +1,27 @@
+<!--pages/mine/refundlist/refundlist.wxml-->
+<!-- 售后 -->
+
+    <view>
+      <view class='swiper-items'>
+        <view wx:for='{{serviceList}}' wx:for-item='items' class='list' wx:key="this">
+          <image data-items='{{items}}' data-order_id='{{items.order_id}}' bindtap='serviceinfo' data-user_id='{{items.user_id}}' src='{{items.order[0].goods_img}}'></image>
+          <view class='list_top'>
+            <!-- <text>{{items.goodsname[0]}}</text> -->
+            <text style='color:{{backgroundColor}}'>实付￥{{items.pay_money}}</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.status==0}}'>处理中</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.status==1}}'>已处理</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.status==2}}'>拒绝处理</text>
+          </view>
+          <view class='list_bottom'>
+            <view class='list_num'>
+              <text style='font-size:24rpx'>申请时间：{{items.create_time}}</text>
+            </view>
+            <view class='list_btn'>
+              <view data-items='{{items}}' bindtap='serviceinfo' class='list_btn_button'>查看详情</view>
+            </view>
+          </view>
+        </view>
+      </view>
+       <view hidden='{{loadall}}' class='loadall'>已加载全部</view>
+ 
+</view>

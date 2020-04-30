@@ -1,0 +1,183 @@
+/**app.wxss**/
+
+page{
+  background: #EBEAEA;
+  color: #333;
+}
+
+
+.showLoad{
+  position: fixed;
+  top: 15%;
+  width: 80%;
+  height: 770rpx;
+  background-color: white;
+  left: 10%;
+  border-radius: 10rpx;
+}
+.showLoadModal{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  text-align: center;
+}
+.showLoad_title{
+  font-size: 32rpx;
+  color: #333333;
+  margin-top: 74rpx;
+  margin-bottom: 44rpx;
+}
+.showLoad_tip{
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 14rpx;
+}
+.showLoad_image{
+  margin-top: 40rpx;
+}
+.showLoad_image image{
+  width: 360rpx;
+  height: 300rpx;
+}
+.permite{
+  position: absolute;
+  right: 60rpx;
+  bottom: 250rpx;
+  color: #5AA761;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 1px solid #e1e1e1;
+  background-color: white;
+  line-height: 100rpx;
+}
+.showLoadButton{
+  width: 80%;
+  margin-top: 40rpx;
+  color: white;
+  border: none;
+}
+.fs22{
+  font-size: 22rpx;
+}
+.fs24{
+  font-size: 24rpx;
+}
+.fs26{
+  font-size: 26rpx;
+}
+.fs28{
+  font-size: 28rpx;
+}
+.fs30{
+  font-size: 30rpx;
+}
+.fs32{
+  font-size: 32rpx;
+}
+.fs32{
+  font-size: 32rpx;
+}
+.fs34{
+  font-size: 34rpx;
+}
+
+.fs40{
+  font-size: 40rpx;
+}
+
+
+.colors{
+  color: #fc413c
+}
+.color-bg{
+  background: #fc413c
+}
+
+.color{
+  color: #333
+}
+
+
+.l-sf-style{
+  min-height:0;
+  max-height: 360rpx;
+  overflow: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: 'iconfont';  /* project id 901812 */
+  src: url('//at.alicdn.com/t/font_901812_kpnjkvb958f.eot');
+  src: url('//at.alicdn.com/t/font_901812_kpnjkvb958f.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_901812_kpnjkvb958f.woff') format('woff'),
+  url('//at.alicdn.com/t/font_901812_kpnjkvb958f.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_901812_kpnjkvb958f.svg#iconfont') format('svg');
+}
+
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size:24px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-dianhua:before { content: "\e624"; }
+
+.icon-fenxiang:before { content: "\e619"; }
+
+.icon-icon1460187932551:before { content: "\e60e"; }
+
+.icon-shouyeweixuanzhong:before { content: "\e608"; }
+
+.icon-fenxiang1:before { content: "\e6b9"; }
+
+.icon-qiehuan:before { content: "\e63a"; }
+
+.icon-dingwei1:before { content: "\e600"; }
+
+.icon-shouye-weixuanzhong:before { content: "\e602"; }
+
+.icon-p:before { content: "\e7cc"; }
+
+.icon-jiebantubiao-:before { content: "\e623"; }
+
+.icon-dianpu:before { content: "\e68e"; }
+
+.icon-quanbunormal:before { content: "\e695"; }
+
+.icon-gengduo:before { content: "\e603"; }
+
+.icon-wode:before { content: "\e662"; }
+
+.icon-icon-dingwei:before { content: "\e601"; }
+
+.icon-duoxuankuang:before { content: "\e632"; }
+
+.icon-shezhi:before { content: "\e72c"; }
+
+
+

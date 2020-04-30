@@ -1,0 +1,151 @@
+/* pages/mine/refundapply/refundapply.wxss */
+
+.choose{
+  width: 32rpx;
+  height: 20rpx;
+}
+.choose image{
+  width: 32rpx;
+  height: 20rpx;
+  display: block;
+}
+
+.type{
+  background-color: white;
+  padding: 10rpx 40rpx 20rpx;
+}
+.refund_type{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+.order_status{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+.title{
+  color: #323232;
+  font-size: 28rpx;
+  line-height: 80rpx;
+}
+.reason_title{
+  color: #323232;
+  font-size: 28rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+.reason_input{
+  width: 100%;
+  padding-top: 30rpx;
+  font-size: 28rpx;
+}
+.refund_money{
+  display: flex;
+  height: 80rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+.money_title{
+  color: #323232;
+  font-size: 28rpx;
+  line-height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+.money_input{
+  margin-left: 20rpx;
+  font-size: 28rpx;
+  width: 240rpx;
+}
+.refund_reason{
+  border-bottom: 1px solid #f9f9f9;
+}
+.max_money{
+  font-size: 28rpx;
+  color: #aaaaaa;
+  text-align: right;
+}
+.photos{
+  background-color: white;
+  margin-top: 20rpx;
+  padding: 10rpx 40rpx 20rpx;
+}
+.photos image{
+  width: 180rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
+}
+.submit_button{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  border-radius: 0;
+  padding: 12rpx;
+}
+.type_to_choose{
+  text-align: center;
+  font-size: 28rpx;
+  color: #323232;
+  border-bottom: 1px solid #f9f9f9;
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.type_name{
+  font-size: 28rpx;
+  color: #323232;
+}
+.order_detail{
+  margin-top: 20rpx;
+  background-color: white;
+  font-size: 28rpx;
+  padding: 30rpx 40rpx 150rpx;
+}
+.goodslist image {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.goodslist {
+  font-size: 26rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+  min-height: 0;
+}
+
+.goodslist_sun {
+ display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goodslist_text {
+  margin-left: 32rpx;
+}
+.allcost{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  margin-right: 0;
+  color: #FF4040;
+  display: flex;
+  justify-content: flex-end;
+}
+.getinstrc {
+  font-size: 28rpx;
+  margin-top: 50rpx;
+}
+
+.getinstrc_text {
+  font-size: 26rpx;
+  margin-top: 30rpx;
+}

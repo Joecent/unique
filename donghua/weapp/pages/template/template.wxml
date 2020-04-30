@@ -1,0 +1,17 @@
+<!--pages/template/template.wxml-->
+<template name="is_tabBar">
+  <view class='is_tabBar'>
+    <view style='color:{{indexColor}}' bindtap='toIndex' class='tabBar_item'>
+      <icon class='iconfont icon-shouyeweixuanzhong'></icon>
+      <text>主页</text>
+    </view>
+    <view style='color:{{cateColor}}' bindtap='toCate' class='tabBar_item'>
+      <icon class='iconfont icon-shouyeweixuanzhong'></icon>
+      <text>分类</text>
+    </view>
+    <view style='color:{{mineColor}}' bindtap='toMine' class='tabBar_item'>
+      <icon  class='iconfont icon-wode'></icon>
+      <text>我的</text>
+    </view>
+  </view>
+</template>

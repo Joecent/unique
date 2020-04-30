@@ -1,0 +1,52 @@
+<!--pages/mine/address/address.wxml-->
+
+
+<view class="container">
+
+  <view wx:if="{{list.length<1}}" class="none">
+    <view class='none_image'>
+      <image src='/image/none.png'></image>
+    </view>
+    <view class='tips'>这里什么都没有哦~</view>
+  </view>
+
+  <!-- <scroll-view scroll-y style="height:{{winHeight}}px"> -->
+    <view class='address' wx:for='{{list}}' data-id='{{item.id}}' wx:key="this" >
+      
+      <view data-id='{{item.id}}' data-receiver='{{item.receiver}}' data-phone='{{item.phone}}' data-detail='{{item.detail}}' data-address='{{item.address}}' data-city='{{item.city}}' bindtap='bindaddreeChange'>
+        <view class='address_name_phone'>
+          <text>{{item.receiver}}</text>
+          <text>{{item.phone}}</text>
+        </view>
+        <view class='address_school'>
+          <text>{{item.address}}{{item.detail}}</text>
+        </view>
+      </view>
+
+      <view class='address_operation'>
+        <radio-group class="radio-group" bindchange="radioChange" data-id='{{item.id}}' data-receiver='{{item.receiver}}' data-phone='{{item.phone}}' data-detail='{{item.detail}}' data-address='{{item.address}}' data-province='{{item.province}}' data-city='{{item.city}}'
+          data-latitude='{{item.latitude}}' data-longitude='{{item.longitude}}'>
+          <label class="radio">
+            <radio checked="{{item.status==1}}" color='{{backgroundColor}}' />
+          </label>
+        </radio-group>
+        <text bindtap="bindradioChange" data-id='{{item.id}}' data-receiver='{{item.receiver}}' data-phone='{{item.phone}}' data-detail='{{item.detail}}' data-address='{{item.address}}' data-province='{{item.province}}' data-city='{{item.city}}' data-latitude='{{item.latitude}}'
+          data-longitude='{{item.longitude}}' wx:if='{{item.status==1}}'>已设为默认</text>
+        <text bindtap="bindradioChange" data-id='{{item.id}}' data-receiver='{{item.receiver}}' data-phone='{{item.phone}}' data-detail='{{item.detail}}' data-address='{{item.address}}' data-province='{{item.province}}' data-city='{{item.city}}' data-latitude='{{item.latitude}}'
+          data-longitude='{{item.longitude}}' wx:else>设为默认</text>
+        <view class='edit' bindtap='bindedit' data-id='{{item.id}}' data-receiver='{{item.receiver}}' data-phone='{{item.phone}}' data-detail='{{item.detail}}' data-address='{{item.address}}' data-province='{{item.province}}' data-city='{{item.city}}' data-latitude='{{item.latitude}}'
+          data-longitude='{{item.longitude}}'>
+          <image src='/image/edit.png'></image>
+          <text>编辑</text>
+        </view>
+        <view class='edit' bindtap='binddelete' data-id='{{item.id}}'>
+          <image src='/image/delete.png'></image>
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  <!-- </scroll-view> -->
+  <view class='addnewaddress' style='background:{{backgroundColor}};color:#ffffff' bindtap='bindaddnewaddress'>
+    <text>添加新地址</text>
+  </view>
+</view>

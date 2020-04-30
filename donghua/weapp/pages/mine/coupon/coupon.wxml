@@ -1,0 +1,80 @@
+<!--pages/mine/coupon/coupon.wxml-->
+
+
+
+<view class='swiper-tab'>
+  <view class="swiper-tab-list" bindtap="swichNav" data-current='0'>
+    <view class="border-bottom {{currentTab==0 ? 'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}">未使用</view>
+  </view>
+  <view class="swiper-tab-list" bindtap="swichNav" data-current='1'>
+    <view class="border-bottom {{currentTab==1 ? 'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}">已过期</view>
+  </view>
+</view>
+
+
+<view class='none' wx:if='{{coupon_num==0}}'>
+  <view class='none_image'>
+    <image src='/image/none.png'></image>
+  </view>
+  <view class='tips'>这里什么都没有哦~</view>
+</view>
+
+
+<swiper current='{{currentTab}}' class="swiper-box" duration='300' bindchange='bindchange'>
+  <!-- 可用优惠券 -->
+  <swiper-item>
+    <view class='useable_coupons' wx:for='{{coupons}}' wx:for-item='items'>
+      <!-- <view class='border'>
+        <image src='/image/coupon/useable_border.png'></image>
+      </view> -->
+      <view style=' background:{{backgroundColor}};' class='coupon_info'>
+        <view class='cash_money_useable' hidden='{{items.cash_type==1}}'>￥
+          <text>{{items.cash_money}}</text>
+          <!-- <view class='cash_name_useable'>{{items.cash_name}}</view> -->
+        </view>
+        <view class='cash_discount_useable' hidden='{{items.cash_type==0}}'>
+          <text>{{items.cash_money}}</text>折
+          <!-- <view class='cash_name'>{{items.cash_name}}</view> -->
+        </view>
+        <view class='discount_condition'>
+          <view class="shop_name">{{items.shop_name}}</view>
+          <view class='money_condition_useable' hidden='{{items.cash_type==1}}'>满{{items.pay_money}}减{{items.cash_money}}</view>
+          <view class='money_condition_useable' hidden='{{items.cash_type==0}}'>满{{items.pay_money}}享{{items.cash_money}}折优惠</view>
+          
+          <view class='time_useable'>{{items.start_time}} - {{items.end_time}}</view>
+        </view>
+        <view class='touse' bindtap='touse' data-shop_id='{{items.shop_id}}'>立即使用</view>
+      </view>
+    </view>
+  </swiper-item>
+
+  <!-- 不可用优惠券 -->
+
+  <swiper-item>
+    <view class='useless_coupons'  wx:for='{{coupons}}' wx:for-item='items'>
+      <!-- <view class='border'>
+        <image src='/image/coupon/border.png'></image>
+      </view> -->
+      <view class='coupon_info coupon_infos'>
+        <view class='cash_money' hidden='{{items.cash_type==1}}'>￥
+          <text>{{items.cash_money}}</text>
+          <!-- <view class='cash_name'>{{items.cash_name}}</view> -->
+        </view>
+        <view class='cash_discount' hidden='{{items.cash_type==0}}'>
+          <text>{{items.cash_money}}</text>折
+          <!-- <view class='cash_name'>{{items.cash_name}}</view> -->
+        </view>
+        <view class='condition'>
+          <view class="shop_name">{{items.shop_name}}</view>
+          <view class='money_condition' hidden='{{items.cash_type==1}}'>满{{items.pay_money}} 减 {{items.cash_money}}</view>
+          <view class='money_condition' hidden='{{items.cash_type==0}}'>满{{items.pay_money}} 享 {{items.cash_money}}折优惠</view>
+
+          <view class='time'>{{items.start_time}} - {{items.end_time}} </view>
+        </view>
+        <view class='status'>
+          <image src='/image/coupon/statu.png'></image>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>

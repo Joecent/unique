@@ -1,0 +1,151 @@
+<!--pages/mine/distribution/dispatching/dispatching.wxml-->
+<view class='dispatching'>
+  <view></view>
+  <view class='search'>
+    <input bindinput='search' placeholder='请输入手机号或姓名进行搜索'></input>
+    <view bindtap='tosearch' class='search_imgbox'>
+      <image src='/image/search.png'></image>
+    </view>
+  </view>
+  <!-- <view class='timesearch'>
+  <text class='time_title'>开始：</text>
+  <view class='alltime'>
+    <view style='display:flex;'>
+    <text class='time_title'>日期：</text>
+    <picker class='timechange'  mode="date" value="{{date}}"  start="2019-04-08"
+    end="2030-09-01" bindchange="bindstartDate">
+    <view>{{startDate}}</view>
+    </picker>
+    </view>
+        <view style='display:flex;'>
+        <text class='time_title'>时间：</text>
+    <picker class='timechange' mode="time" style='margin-left:5rpx' value="{{bindstartTime}}" start="00:00" end="23:59" bindchange="bindstartTime">
+        <view class="picker">{{startTime}}</view>
+      </picker>
+        </view>
+      </view>
+  </view>
+  <view class='timesearch'>
+      <text class='time_title'>结束：</text>
+      <view class='alltime'>
+        <view style='display:flex;'>
+        <text class='time_title'>日期：</text>
+       <picker class='timechange' mode="date" value="{{startDate}}" start="2019-04-08"
+    end="2030-09-01" bindchange="bindendDate">
+        <view class="picker">{{endDate}}</view>
+        </picker>
+        </view>
+        <view style='display:flex;'>
+        <text class='time_title'>时间：</text>
+      <picker class='timechange' mode="time" style='margin-left:5rpx' value="{{endTime}}" start="00:00" end="23:59" bindchange="bindendTime">
+        <view class="picker">{{endTime}}</view>
+      </picker>
+        </view>
+      </view>
+    </view>
+    <view style='display:flex;justify-content:center'>
+      <view class='time_search' bindtap='searchBytime'>按时间段搜索</view>
+    </view> -->
+    <!-- <view style='display:flex;justify-content:center'>
+      <view class='time_search' bindtap='scanOrder'>扫码</view>
+    </view> -->
+  
+
+  <view style='padding-bottom:90rpx;'>
+    <view class='content' wx:for='{{grouplist}}'>
+      <view class='content_top'>
+         <view style='display:flex;justify-content:space-between'>
+          <view>姓名：{{item.buyer}}</view>
+          <view>订单编号：{{item.day_times}}</view>
+         </view>
+         <view style='display:flex;justify-content:space-between'>
+         <view bindtap='tocall' data-phone='{{item.phone}}' wx:if='{{item.order_type==1}}' style='color:#2470b9;font-size:22rpx;margin-top:15rpx;'>手机号：{{item.phone}}</view>
+         <view bindtap='tocall' data-phone='{{item.phone}}' wx:if="{{item.order_type==2&&item.desk_num==''}}" style='color:#2470b9;font-size:22rpx;margin-top:15rpx;'>手机号：{{item.phone}}</view>
+         <view bindtap='tocall' wx:if="{{item.order_type==2&&item.desk_num!=''}}" style='margin-top:15rpx;'>桌号：{{item.desk_num}}</view>
+         <view data-items='{{item}}' data-idx='{{index}}' style='color:#2470b9;font-size:22rpx;margin-top:15rpx;' bindtap='print' wx:if='{{item.print_status==0}}'>未出票，打印小票</view>
+          <view data-items='{{item}}' data-idx='{{index}}'  style='color:#2470b9;font-size:22rpx;margin-top:15rpx;' bindtap='print' wx:if='{{item.print_status==1}}'>已出票，重打小票</view>
+          </view>      
+          <view style='font-size:22rpx;margin-top:15rpx;color:#666666'>收货地址：{{item.address}}</view>
+          <view style='font-size:22rpx;margin-top:15rpx;color:#666666'>买家留言：{{item.message==''?'无':item.message}}</view>
+          <view style='font-size:22rpx;margin-top:15rpx;color:#666666'>下单时间：{{item.order_time}}</view>
+        <view class='content_top_message'>
+          <!-- <text style='font-size:26rpx;'>{{item.goods_name}}</text> -->
+          <!-- <text>送货上门</text> -->
+        </view>
+        <!-- <view style='margin-top:30rpx;'>此团开始时间：{{item.group_create_time}}</view>
+        <view style='margin-top:15rpx;'>此团完成时间：{{item.group_success_time}}</view> -->
+      </view>
+
+      <view class='content_details'>
+        <view class='content_item' wx:for="{{item.goods}}" wx:for-item="items">
+          <view class='item_top'>
+            <view class='item_top_left'>
+              <view style='display:flex;align-items:center'>
+              <image src='{{items.goods_img}}'></image>
+              <view style='margin-left:20rpx;'>
+              <text>{{items.goods_name}}</text>
+              <view wx:if="{{items.key_name!=''}}" class="goods_attr">#{{items.key_name}}</view>
+              </view>
+              </view>
+              <view>
+              <text style='margin-left:20rpx;'>数量：{{items.goods_num}}</text>
+              </view>
+              <view>
+              <text style='margin-left:20rpx;'>￥{{items.goods_cost}}</text>
+              </view>
+            </view>
+            <view wx:if='{{items.fictitious_status==1}}'>
+              <text style='color:#FF204C'>已签收</text>
+              <text style='margin-left:10rpx;'>编号：{{items.day_times}}</text>
+            </view>
+            <view wx:if='{{items.fictitious_status==0}}'>
+              <text wx:if='{{items.status==2}}' style='color:#FF204C'>已签收</text>
+              <text style='margin-left:10rpx;'>编号：{{items.day_times}}</text>
+            </view>
+          </view>
+          <!-- <view style='font-size:22rpx;margin-top:15rpx;'>姓名：{{items.fictitious_status==0?items.buyer:'东西猎人'}}</view> -->
+         
+          
+        </view>
+      </view>
+      <view class='item_bottom' style='font-size:22rpx;margin-top:15rpx;color:#666666'>
+            <block>
+              <view class='space_between'>
+                <view data-order_id='{{item.order_sn}}' data-idx='{{index}}' wx:if="{{send_type==3&&item.status==0}}" class='delivered' bindtap='callsend'>呼叫配送</view>
+                <view style='display:flex;' wx:if='{{send_type==3&&item.status==1}}'><view data-order_id='{{item.order_sn}}' data-idx='{{index}}' class='delivered' bindtap='canclesend'>取消订单</view><text style='line-height:60rpx;margin-left:20rpx;'>待接单</text></view>
+                <view style='display:flex;' wx:if='{{send_type==3&&item.status==2}}'><view data-order_id='{{item.order_sn}}' data-idx='{{index}}' class='delivered' bindtap='callsender'>联系骑手</view><text style='line-height:60rpx;margin-left:20rpx;'>待取货</text><text bindtap='canclesend' data-order_id='{{item.order_sn}}' data-idx='{{index}}' style='line-height:60rpx;margin-left:20rpx;'>取消订单</text></view>
+                <view style='display:flex;' wx:if='{{send_type==3&&item.status==3}}'><view  data-order_id='{{item.order_sn}}' data-idx='{{index}}' class='delivered' bindtap='callsender'>联系骑手</view><text style='line-height:60rpx;margin-left:20rpx;'>骑手配送中</text></view>
+                <view wx:if='{{send_type==3&&item.status==4}}' class='delivered'>已送达</view>
+                 <view style='display:flex;' wx:if='{{send_type==3&&item.status==5}}'><view data-order_id='{{item.order_sn}}' data-idx='{{index}}'  class='delivered' bindtap='recallsend'>重新发单</view><text style='line-height:60rpx;margin-left:20rpx;'>已取消订单</text></view>
+                <view style='display:flex;' wx:if='{{send_type==3&&item.status==7}}'><view data-order_id='{{item.order_sn}}' data-idx='{{index}}'   class='delivered' bindtap='recallsend'>重新发单</view><text style='line-height:60rpx;margin-left:20rpx;'>超时暂无骑手接单</text></view>
+                <view style='display:flex;' wx:if='{{send_type==3&&item.status==9}}'><view data-order_id='{{item.order_sn}}' data-idx='{{index}}' class='delivered' bindtap='recallsend'>重新发单</view><text style='line-height:60rpx;margin-left:20rpx;'>配送异常</text></view>
+                
+                <view wx:if='{{send_type==1}}'style='font-size:22rpx;color:#666666'>自主配送</view>
+                <view data-order_id='{{item.order_id}}' data-idx='{{index}}' class='delivered' bindtap='sendnote' wx:if='{{item.phone_times<1}}' >通知</view>
+                <view wx:if='{{item.phone_times>=1}}' class='delivered'>已通知</view>
+              </view>
+            </block>
+          </view>
+    </view>
+    <view hidden="{{loadall}}" class="loadall">已加载全部</view>
+  </view>
+
+  <!-- <view  class='dispatching_top' wx:if='{{orderInfo}}'>
+    <!-- <button class='dispatching_top_item' disabled='{{surestatus}}' bindtap='onekeysure'>一键交货</button> 
+     <button class='dispatching_top_item' disabled='{{noticetatus}}' bindtap='onekeynotice'>一键通知</button> 
+  </view> -->
+  <view wx:if="{{grouplist==''}}">
+    <view class='none'>
+      <view class='none_image'>
+        <image src='/image/none.png'></image>
+      </view>
+      <view class='tips fs24'>这里什么都没有哦~</view>
+    </view>
+  </view>
+
+<button class='btn' style='background-color:{{backgroundColor}}' bindtap='scanOrder'>扫码</button>
+
+
+
+
+</view>

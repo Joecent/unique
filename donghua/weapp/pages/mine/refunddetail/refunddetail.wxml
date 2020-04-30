@@ -1,0 +1,98 @@
+<!--pages/mine/refundapply/refundapply.wxml-->
+
+<form>
+  <view class='infos'>
+    <view class='type'>
+      <!-- <view class='refund_type' bindtap='to_choose'>
+        <view class='title'>退款类型</view>
+        <view class='type_name' wx:if='{{refund_type==1}}'>我想仅退款</view>
+        <view class='type_name' wx:if='{{refund_type==2}}'>我想退货退款</view>
+        <view class='choose'>
+          <image wx:if='{{type_choose_button}}' src='/image/refund/choose.png'></image>
+          <image wx:if='{{type_choose_button==false}}' src='/image/refund/choosed.png'></image>
+        </view>
+      </view>
+      <view class='refund_type_choose' hidden='{{type_choose_button}}'>
+        <view class='type_to_choose' bindtap='choose_type' data-type='1'>仅退款</view>
+        <view class='type_to_choose' bindtap='choose_type' data-type='2'>退货退款</view>
+      </view>
+      <view class='order_status' bindtap='to_choose_statu'>
+        <view class='title'>收货状态</view>
+        <view class='type_name' wx:if='{{statu==1}}'>已收到商品</view>
+        <view class='type_name' wx:if='{{statu==0}}'>未收到商品</view>
+        <view class='choose'>
+          <image wx:if='{{statu_choose_button}}' src='/image/refund/choose.png'></image>
+          <image wx:if='{{statu_choose_button==false}}' src='/image/refund/choosed.png'></image>
+        </view>
+      </view>
+      <view class='status' hidden='{{statu_choose_button}}'>
+        <view class='type_to_choose' bindtap='choose_statu' data-type='1'>已收到商品</view>
+        <view class='type_to_choose' bindtap='choose_statu' data-type='0'>未收到商品</view>
+      </view> -->
+      <view class='refund_reason'>
+        <view class='reason_title'>售后详情：
+        </view>
+        <text class='reason_input'>{{reason}}</text>
+      </view>
+      <!-- <view class='refund_money'>
+        <view class='money_title'>退款金额￥
+        <text>{{refund_money}}</text>
+           <input class='money_input' placeholder='{{refund_money}}' placeholder-style='font-size:28rpx;color:#323232' bindinput='money_input'></input> 
+        </view>
+      </view> -->
+    </view>
+     <view class='photos'>
+      <view class='title'>售后照片</view>
+      <image bindtap='topreview' mode='aspectFit'  wx:for-item="items" data-discuss_img='{{files}}' data-src='{{items}}' wx:for='{{files}}' src='{{items}}'></image>
+      <!-- <image src='/image/defaultImg.png' bindtap='to_upload' hidden='{{hide_add}}'></image> -->
+      <view class='handle'>
+        <view style='color:{{backgroundColor}}' wx:if='{{status==0}}'>处理中</view>
+        <view style='color:{{backgroundColor}}' wx:if='{{status==1}}'>已处理</view>
+        <view style='color:{{backgroundColor}}' wx:if='{{status==2}}'>拒绝处理</view>
+        <view wx:if='{{!is_shop}}' style='color:#6d9eeb' bindtap='contact'>联系商家</view>
+        <view  wx:if='{{is_shop}}' style='color:#6d9eeb' bindtap='contact_user'>联系买家</view>
+      </view>
+    </view> 
+    <view class='order_detail'>
+      <view class='title'>订单详情</view>
+      <view>
+        <view class='goodslist' wx:for='{{goodslists}}'>
+    <view class='goodslist_sun'>
+      <image mode='aspectFit' src='{{item.goodsimg}}'></image>
+      <view class='goodslist_text'>
+        <view class='text_item1' style='margin-top:-5rpx'>
+          <view class='goodsname'>{{item.goodsname}}</view>
+          <view style='margin-top:20rpx'>×{{item.goodsnum}}</view>
+        </view>
+         
+      </view>
+      
+    </view>
+    <view class='text_item1' style='margin-top:5rpx;'>
+         <!-- <text>{{item.key_name}}</text>-->
+          <text style='color:#FF4040;font-size:28rpx'>￥{{item.goodscost}}</text>
+        </view> 
+    <!-- <view wx:for-item="ite"  class='text_item2'>
+      <text  wx:for='{{item.products}}'  style="white-space:nowrap;;color:{{index==length-1?'#FF4040':''}}" wx:for-item="items">￥{{items}}{{index==2?'':'-'}}</text>
+    </view> -->
+  
+  </view>
+
+  <view class='allcost' >共计：￥{{allcost}}</view>
+
+  <view class='getinstrc'>收货信息</view>
+  <view class='getinstrc_text'>
+    <view style='margin-top:-5rpx'>联系人：{{receiver}}</view>
+    <view style='margin-top:5rpx;'>联系电话：{{phone}}</view>
+    <view style='margin-top:5rpx;'>收货地址：{{address}}</view>
+    <view style='margin-top:5rpx;'>下单时间：{{order_time}}</view>
+  </view>
+      </view>
+    </view>
+  </view>
+    <view wx:if='{{is_shop&&status==0}}' class='submit_button'>
+       <view  class='refuse_button' bindtap='refuse_submit'>拒绝</view> 
+      <view class='agree_button' style='background-color: {{backgroundColor}}' bindtap='agree_submit'>确认处理</view> 
+    </view>
+   
+</form>

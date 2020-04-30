@@ -1,0 +1,75 @@
+/* pages/mine/sale/sale.wxss */
+.content{
+  
+}
+.boot{
+  background-color: white;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 40rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.boot-lr .image image{
+  width: 30rpx;
+  height: 30rpx;
+  display: block;
+  margin-left: 10rpx;
+}
+.boot-lr{
+  display: flex;
+  align-items: center;
+}
+.boot-lr .cashMoney{
+  font-weight: bold;
+  color: #fc413c
+}
+.boot-lr .image{
+   height: 30rpx;
+}
+.photo{
+  margin-right:10rpx;
+  height: 40rpx;
+  width: 36rpx;
+}
+.totalData{
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 60rpx 40rpx 30rpx;
+}
+.totalData .money{
+  text-align: center;
+}
+.totalData .money .num{
+  font-weight: bold;
+  color: #333;
+}
+.totalData .money .name{
+  font-size: 26rpx;
+  margin-top: 12rpx;
+  color: #999;
+}
+.todayData{
+  background-color: white;
+  margin-top: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 60rpx 40rpx 30rpx;
+}
+.todayData .money{
+  text-align: center;
+}
+.todayData .money .num{
+  font-weight: bold;
+  color: #333;
+}
+.todayData .money .name{
+  font-size: 26rpx;
+  margin-top: 12rpx;
+  color: #999;
+}

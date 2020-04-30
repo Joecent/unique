@@ -1,0 +1,323 @@
+<!--pages/shoppages/index/index.wxml-->
+<import src="/pages/template/template.wxml" />
+<!-- <view class='top_info'>
+  <view class='how'>
+    <view class="how_text">如何拼团</view>
+    <image class="question" bindtap='showHow' src="/image/question.png"></image>
+  </view>
+  <view wx:if="{{groupinfo}}" bindtap='changeShow' class='banner_top'>正在参加<image src='{{photo}}'></image>{{name}}的团 <text style='color:{{backgroundColor}};margin-left:20rpx;'>{{num}}</text>/3 <image src='/image/toright.png' class='icon'></image></view>
+  <view wx:if="{{groupinfo==false&&groups.length>0}}" class='group_info' bindtap='changeShow'>
+    <view class='group_num'><text style='color:{{backgroundColor}};margin-right:10rpx;'>{{groups.length}}</text>人正在拼, 去参团</view>
+     <image src='/image/toright.png' class='icon'></image> 
+     <text class="to_group">去参团</text> 
+  </view>
+</view> -->
+<!-- <view wx:if="{{sourcehide}}" class="pick_container {{needAnimation ? (openPicker ? 'slidown' : 'slidup') : ''}}">
+  <view style='opacity:1;' class='top_left'>
+    <text wx:if="{{group_success}}">此团已经拼团成功，系统已跳转到新团</text>
+    <text wx:if="{{group_over}}">此团已经拼团结束，系统已跳转到新团</text>
+  </view>
+</view> -->
+<view class="{{bannerGone==true?'banner_none':'banner'}}" >
+  <swiper autoplay='true' indicator-dots='true' style='height:340rpx'>
+    <block wx:for="{{imgUrls}}" wx:key="this">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<!--pages/shoppages/waimaiindex/waimaiindex.wxml-->
+
+<!-- 商品列表 -->
+<view class='goods-list'>
+  <view class="goods" style='height:{{windowHeight-40}}px' wx:if="{{status==0||item.status==status}}">
+    <view class="menu-wrapper">
+      <scroll-view scroll-y="true" style='height:{{cateHeight}}rpx;'>
+        <view wx:for="{{goods}}" class="menu-item border-1px {{index==active?'menu-item1':''}}" bindtap="selectMenu" data-item-index="{{index}}" wx:key="key" data-cate_id='{{item.cate_id}}'>
+          <view class="text">
+            {{item.cate_name}}
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <scroll-view scroll-y="true"  bindscrolltoupper='show_banner' scroll-into-view="{{toView}}" class="foods-wrapper">
+      <view wx:for="{{goods}}" class="food-list food-list-hook" wx:for-index="parentIndex" wx:key="key">
+        <view id="a{{parentIndex}}" class="title">{{item.cate_name}}</view>
+        <view wx:for="{{item.goods}}" bindtap='show_image' data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" class="food-item" wx:for-item="food" data-food="{{food}}" wx:key="key">
+          <view class="icon">
+            <image src="{{food.goods_img}}" mode="aspectFill"></image>
+          </view>
+          <view class="content">
+            <view class="name">{{food.goods_name}}</view>
+            <view class='desc' wx:if="{{food.goods_desc!=''}}">{{food.goods_desc}}</view>
+            <view class='differ_profit_out'>
+                <!-- <view class='differ_profit_item' wx:for='{{food.products[0].differ_profit}}' style="color:{{index==num?backgroundColor:'#999'}}">￥{{item}}{{index==2?'':'-'}}</view> -->
+                <view class="pirce" style='color:{{backgroundColor}}'>￥{{food.products[0].goods_price}}</view>
+                <view class="market_price">￥{{food.products[0].market_price}}</view>
+            </view>
+            
+            <view class="price">
+              <!-- <view class="now" style='color:{{backgroundColor}}'>￥{{food.products[0].differ_profit[num]}}</view> -->
+              <view class="extra">
+                <text class="count">已售:{{food.goods_num}}</text>
+              </view>
+              <view wx:if="{{shop_status==1&&food.products[0].goods_score>0}}" class="cartControl-wrapper">
+                <view class="cartControl">
+                  <view style='display: flex;flex-direction: row;align-items: center;' name="fade">
+
+                    <view class="cart-decrease" wx:if="{{food.Count > 0}}" data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" catchtap="decreaseShopCart">
+                      <view class="inner iconfont icon-jianhao" style="font-size:18px; color:#999;"></view>
+                    </view>
+                    <view class="cart-count" wx:if="{{food.Count > 0 }}">{{food.Count}}</view>
+                    <view class=" iconfont icon-jiahao cart-add " style="padding-bottom:2rpx;color:{{backgroundColor}}; " data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" catchtap="addShopCart"></view>
+
+
+                  </view>
+                </view>
+              </view>
+              <view  class='shop_off' wx:if="{{shop_status==1&&food.products[0].goods_score==0}}">
+                  <text>已售罄</text>
+              </view>
+              <view  class='shop_off' wx:if="{{shop_status==0}}">
+                  <text>已打烊</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!--shopCart 底部操作单-->
+    <view class="shopCart">
+      <view class="content">
+        <view bindtap="toggleList" class="content-left">
+          <view class="logo-wrapper">
+            <view style="background:{{totalPrice!=0? backgroundColor:''}};" class="logo {{totalPrice!=0?'highlight':''}}">
+              <view style="background:{{totalPrice!=0? backgroundColor:''}};" class="iconfont icon-gouwuche {{totalPrice!=0?'highlight':''}}"></view>
+            </view>
+            <view style='background:{{backgroundColor}}' class="num" wx:if="{{totalCount> 0}}">{{totalCount}}</view>
+          </view>
+
+          <view class="price highlight">
+            <view class="price-total {{totalPrice!=0?'price-totals':''}}"> ￥{{totalPrice}}</view>
+
+            <view wx:if="{{is_out_food==1}}"  class="price-size {{totalPrice!=0?'price-size1':''}}">{{shop_extra}}</view> 
+          </view>
+        </view>
+        <view class="content-right">
+          <view wx:if="{{totalPrice<0.01}}" class='pay'>
+          <view wx:if="{{send_price>0&&is_out_food==1}}">满￥{{initial_price}}免 </view>
+          <view wx:if="{{send_price>0&&is_out_food==1}}">配送费{{send_price}}元</view>
+          <view wx:if="{{send_price==0&&is_out_food==1}}">免配送费</view> 
+          <view wx:if="{{is_out_food==0}}">结  算</view>
+          </view>
+          <view wx:else  style="background:{{totalPrice!=0? backgroundColor:''}};" class="pay {{totalPrice!=0?'enough':''}}" bindtap="toPayOrder">
+            <!-- {{payDesc}} -->
+            结  算
+          </view>
+        </view>
+      </view>
+
+      <!-- 弹出框 -->
+      <view class="shopcart-list-modal" catchtap='toggleList' style="display:{{cartShow}}"></view>
+      <view class="shopcart-list" style="display:{{cartShow}}">
+        <view class="list-header">
+          <view class="title">购物车</view>
+          <text class="empty" bindtap="empty">清空</text>
+        </view>
+        <view class="list-content">
+          <scroll-view scroll-y style="height: 200px;">
+            <view class="shopcart-food" wx:for="{{carArray}}" wx:key="key">
+              <view class="name_key">
+                <view class="name">{{item.name}}</view>
+                <view class='key_name'>{{item.key_name}}</view>
+                <view style='color:{{backgroundColor}};' class="price" wx:if="{{item.num > 0}}">
+                <span>￥{{item.price}}</span>
+                </view>
+              </view>
+              <view class="cartControl-wrapper" style="bottom:10px;" wx:if="{{item.num > 0}}">
+                <view class="cartControl" style="width:50px;">
+                  <view name="fade" class='cartNum'>
+                    x{{item.spec_count}}
+                  </view>
+                </view>
+              </view>
+            </view>
+
+            <view wx:for="{{cartItems}}" wx:key="this">
+              <view>{{item.goods_name}}</view>
+            </view>
+
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+
+    <view name="fade">
+      <view class="list-mask" wx:if="{{listShow}}" bindtap="hideList"></view>
+    </view>
+  </view>
+
+</view>
+<!-- 新人红包 -->
+<view class='modal' bindtap="close_coupon" wx:if='{{show_coupon}}'></view>
+<view class='coupon' wx:if='{{show_coupon}}'>
+    <view class='coupon_front'>
+    <image bindtap="close_coupon" class="coupon_cha" src="/image/coupon/cha.png"></image>
+    <image class='coupon_back' src='/image/coupon/toget.png'></image>
+    <view class='coupon_text'>
+    <view class="text1">{{cash_name}}</view>
+    <view class="text1">￥{{cash_money}}</view>
+    <view class="text3" >满￥{{pay_money}} 可用</view>
+    </view>
+    <view class="coupon_get" catchtap='click'><text class="get_text">立即领取</text></view>
+    <!-- <image class='coupon_click' catchtap='click' src='/image/coupon/click.png'></image> -->
+    </view>
+</view>
+<!-- 转发红包 -->
+<view class='modal' bindtap="close_share_coupon" wx:if='{{show_share_coupon}}'></view>
+<view class='coupon' wx:if='{{show_share_coupon}}'>
+    <view class='coupon_front'>
+    <image bindtap="close_coupon" class="coupon_cha" src="/image/coupon/cha.png"></image>
+    <image class='coupon_back' src='/image/coupon/toget.png'></image>
+    <view class='coupon_text'>
+    <view class="text1">{{share_cash_name}}</view>
+    <view class="text1">￥{{share_cash_money}}</view>
+    <view class="text3" >满￥{{share_pay_money}} 可用</view>
+    </view>
+    <view class="coupon_get" catchtap='click_share'><text class="get_text">立即领取</text></view>
+    <!-- <image class='coupon_click' catchtap='click' src='/image/coupon/click.png'></image> -->
+    </view>
+</view>
+<!-- 商品详情弹窗 -->
+<view class='drawer_screen' bindtap='selectInfo' wx:if="{{showModalStatus}}"></view>
+<view class='drawer_box_ad slidup'  wx:if="{{showModalStatus}}">
+  <view class='drawer_content_ad'>
+    <!-- <view class='chahao-icon' bindtap='selectInfo'>
+      <icon style='color:{{backgroundColor}};font-size:36rpx;' class='iconfont icon-chahao'></icon>
+      <!-- <image  src='/image/chahao-icon.png'></image> 
+    </view> -->
+    
+    <view class='drawer_image'>
+      <image src='{{goods_image}}' class="goods_image" mode="aspectFill"></image>
+      <image bindtap='selectInfo' wx:if="{{show_cancel}}" class="cancel_image" src="/image/goods_info/cancel.png"></image>
+      <view class='price_bg'>
+        <image src="/image/price_bg.png" class="bg"></image>
+        <view class='differ_profit'>
+          <!-- <view class='differ_profit_item' wx:for='{{differ_profit}}' style="color:#fff">￥{{item}}{{index==2?'':'-'}}</view> -->
+          <view class="pirce">￥{{goods_price}}</view>
+          <view class="market_price" >￥{{market_price}}</view>
+        </view>
+        <button class="share_button" open-type='share'>
+          <image src='/image/fenxiang.png' class='share_img'></image>
+          <text class='share_text'>分享好友</text>
+      </button>
+      </view>
+    </view>
+    <view class='drawer_box-name'>{{goods_name}}</view>
+    <view class='share_line'>
+      <view class="drawer_extra">
+        <text class="count">已售:{{goods_num}}</text>
+      </view>
+      <view class="select-price">
+      <!-- <view class='select-prices'>
+        ¥{{spec_price_choose}}
+      </view> -->
+      <view wx:if="{{shop_status==1&&goods_score>0}}" class="cartControl-wrapper">
+        <view class="cartControl">
+          <view name="fade" class='cartControl-fade'>
+            <view class="cart-decrease" wx:if="{{Count > 0}}"  data-item-index="{{index}}" data-parentIndex="{{parentIndex}}" catchtap="decreaseCart_pre">
+              <view class="inner iconfont icon-jianhao" style="padding-bottom:5rpx;font-size:20px; color:#999; "></view>
+            </view>
+            <view class="cart-count" wx:if="{{Count > 0}}">{{Count}}</view>
+            <view class=" iconfont icon-jiahao cart-add " style="padding-bottom:12rpx;font-size:21px;color:{{backgroundColor}}; padding-top:10rpx " data-item-index="{{index_pre}}" data-parentIndex="{{parentIndex_pre}}" catchtap="addCart_pre"></view>
+          </view>
+        </view>
+      </view>
+      <view  class='shop_off' wx:if="{{shop_status==1&&goods_score==0}}">
+                  <text>已售罄</text>
+      </view>
+      <view  class='shop_off' wx:if="{{shop_status==0}}">
+                  <text>已打烊</text>
+      </view>
+      </view>
+    </view>
+    </view>
+     <view class='drawer_desc' wx:if="{{goods_desc!=''}}">{{goods_desc}}</view>
+    <!-- <view class='select-line-nav' wx:if="{{is_on_spec==1}}">{{spec_name}}：
+      <view bindtap='chooseSpec' data-index='{{index}}' wx:for='{{spec_item}}' style="border-radius: 20rpx;padding:10rpx;margin-left:10rpx;;color:{{item==spec_item[chooseIndex]?backgroundColor:''}};border: 1rpx solid {{item==spec_item[chooseIndex]?backgroundColor:''}}">{{item}}</view>
+    </view> -->
+    <view class="price_add">
+      <!-- <view class="group_tips">如何拼团？</view> -->
+      <!-- <view></view> -->
+  </view>
+</view>
+<!-- 规格属性弹出框 -->
+<view class="showAttrModal"  wx:if="{{show_attr}}"></view>
+<view class="showAttr_out" bindtap='changeShowAttr' wx:if="{{show_attr}}">
+  <view class="showAttr" catchtap="noChange">
+    <view class="goods_name">{{goods_name}}</view>
+    <view class="attr_list" wx:for-index='indexs'  wx:for-item='items' wx:for="{{goods_attr}}">
+      <view class="attr_name">{{items.attr_name}}</view>
+      <view class="attr_values">
+        <view class="attr_value {{index==items.chooseIndex?'value_choose':''}}" catchtap='chooseAttr'  data-index='{{index}}' data-indexs="{{indexs}}" wx:for="{{items.attr_value_pre}}">{{item}}</view>
+      </view>
+    </view>
+    <view catchtap="addCartAttr" class="add_button">加入购物车</view>
+  </view>
+</view>
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}};' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>
+<!-- 拼团列表弹出框 -->
+<!-- <view class='showGroup' bindtap='changeShow' wx:if="{{groupsShow}}"></view>
+<view class="showGroups {{groups.length>=5?'showLongGroups':''}}" wx:if="{{groupsShow}}">
+  <view class='title'>正在拼团</view>
+  <view class="groupsLists" wx:if='{{groups.length>0}}'>
+  <view class='groupsList' wx:for='{{groups}}'>
+    <view class='image_name'>
+    <image src='{{item.photo}}'></image>
+    <text>{{item.name}}</text>
+    </view>
+    <view><text style='color:{{backgroundColor}};'>{{item.count}}</text>/3</view>
+    <view bindtap='join_group' data-item='{{item}}' class='join_button' style='background-color:{{backgroundColor}};'>参团</view>
+  </view>
+  </view>
+  <view  wx:if='{{groups.length==0}}' class='none'>暂无人拼团，去开启团购吧！</view>
+</view> -->
+<!-- 如何拼团弹出框 -->
+<!-- <view bindtap='showHow' class='howModel' wx:if='{{howGroup}}'></view>
+<view class='howModelshow' wx:if='{{howGroup}}'>
+  <view class='text'>1、添加购物车结算即可开团或参团，橙色标识价格为当前价格，下单成功即会安排配送。</view>
+  <view class='text'>2、在规定时间内，若有人参与你的团，订单优惠差额将以零钱转账的形式退还到微信账户,同时参团人享受全店低价优惠。</view>
+</view> -->
+<!-- 授权弹出框 -->
+<!-- <view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view> -->
+
+
+<block>
+  <template is="is_tabBar" data='{{indexColor}}' />
+</block>

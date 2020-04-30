@@ -1,0 +1,83 @@
+/* pages/mine/addaddress/addaddress.wxss */
+
+.container{
+  width: 100%;
+  height: auto;
+  padding: 0;
+  /* background-color: #f0f0f0; */
+}
+.addaddress{
+  width: 100%;
+  height: auto;
+  padding: 20rpx 0;
+}
+.addinput{
+  width: 90%;
+  height: 120rpx;
+  line-height: 120rpx;
+  padding: 0 5%;
+  font-size: 30rpx;
+  background-color: #fff;
+  border-bottom: 1px solid #eeeeee;
+  position: relative;
+}
+.addinput label{
+  width: 20%;
+  height: 120rpx;
+  line-height: 120rpx;
+  float: left;
+}
+.addinput input{
+  width: 80%;
+  height: 120rpx;
+  line-height: 120rpx;
+  float: left;
+  color: #323232;
+}
+.addnewaddress{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+.infoText{
+  width: 65%;
+  height: 100%;
+  background-color: #fff;
+  position: absolute;
+  left: 180rpx;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #787878;
+}
+.on{
+  color: #323232;
+}
+.addnewaddress button{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+  border-radius: 0;
+}
+.addnewaddress button::after{
+  border: none
+}
+.addinput .tiao{
+  position:absolute;
+  top:47rpx;
+  right:5%;
+  width:30rpx;
+  height:30rpx;
+  display:block;
+}

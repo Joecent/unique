@@ -1,0 +1,29 @@
+<!--pages/mine/mycoupon/mycoupon.wxml-->
+<view class='none' hidden='{{none}}'>
+  <view class='none_image'><image src='/image/none.png'></image></view>
+  <view class='tips'>这里什么都没有哦~</view>
+</view>
+<view class='coupons'>
+ <view class='useable_coupons' wx:for='{{coupons}}' wx:for-item='items'>
+        <view style=' background:{{backgroundColor}};' class='coupon_info'>
+        <view class='cash_money_useable' hidden='{{items.cash_type==1}}'>￥
+          <text>{{items.cash_money}}</text>
+          <!-- <view class='cash_name_useable'>{{items.cash_name}}</view> -->
+        </view>
+        <view class='cash_discount_useable' hidden='{{items.cash_type==0}}'>
+          <text>{{items.cash_money}}</text>折
+          <!-- <view class='cash_name'>{{items.cash_name}}</view> -->
+        </view>
+        <view class='discount_condition'>
+          <view class="shop_name">{{items.cash_name}}</view>
+          <view class='money_condition_useable' hidden='{{items.cash_type==1}}'>满{{items.pay_money}}减{{items.cash_money}}</view>
+          <view class='money_condition_useable' hidden='{{items.cash_type==0}}'>满{{items.pay_money}}享{{items.cash_money}}折优惠</view>
+          <view class="cash_state" wx:if="{{items.cash_state==2}}">新人领取</view>
+          <view class="cash_state" wx:if="{{items.cash_state==0}}">转发领取</view>
+          <view class='time_useable'>{{items.start_time}} - {{items.end_time}}</view>
+        </view>
+        <view class='touse'wx:if="{{items.cash_state==0}}"><button data-cash_id="{{items.id}}" data-cash_name="{{items.cash_name}}" data-pay_money="{{items.pay_money}}" data-cash_money="{{items.cash_money}}" class="share_button" open-type="share">分享</button></view>
+        <view class='touse'wx:if="{{items.cash_state==2}}">上架中</view>
+      </view>
+      </view>
+</view>

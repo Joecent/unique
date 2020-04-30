@@ -1,0 +1,143 @@
+/* pages/mine/orderlist/orderdetails/orderdetails.wxss */
+
+page {
+  background-color: #fff;
+}
+.orderdetails{
+  padding-top: 100rpx;
+}
+.orderdetails_instrc {
+  font-size: 26rpx;
+  line-height: 34rpx;
+  padding: 30rpx 50rpx;
+  color: #FF4040;
+}
+
+.orderdetails_time {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 15rpx;
+  font-size: 26rpx;
+}
+
+.orderdetails_imagelist {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20rpx;
+}
+
+.orderdetails_imagelist_image image {
+  width: 70rpx;
+  height: 70rpx;
+  background-color: #999;
+  border-radius: 50%;
+}
+
+.orderdetails_imagelist_img image {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: #999;
+  border-radius: 50%;
+}
+
+.goodslist image {
+  margin-left: 20rpx;
+  width: 200rpx;
+  height: 100rpx;
+}
+
+.goodslist {
+  border-radius: 10rpx;
+  border: 1rpx solid #ebebeb;
+  width: 650rpx;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 40rpx;
+  margin-top: 30rpx;
+  padding: 20rpx 10rpx;
+  min-height: 0;
+  box-shadow:0px 5px 5px 0px rgba(188,185,185,0.23);
+}
+
+.goodslist_sun {
+ display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.goodslist_text {
+  margin-right: 20rpx;
+  width: 400rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 6rpx 0;
+}
+
+.text_item1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.text_item2 {
+  word-break: break-all;
+  margin-top: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.text_item3{
+  color: #999;
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.allcost{
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  margin-left: 68%;
+  color: #FF4040;
+}
+
+.goodsname {
+  width: 250rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn {
+  margin-top: 50rpx;
+  color: #fff;
+  width: 300rpx;
+  height: 86rpx;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn::after {
+  border: none;
+}
+
+.getinstrc {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  margin-top: 100rpx;
+}
+
+.getinstrc_text {
+  font-size: 26rpx;
+  padding: 20rpx 50rpx;
+}

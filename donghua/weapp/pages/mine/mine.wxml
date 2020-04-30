@@ -1,0 +1,145 @@
+<!--pages/mine/mine.wxml-->
+<import src="/pages/template/template.wxml" />
+<view style='padding-bottom:101rpx;'>
+  <view class='background' style='background:{{backgroundColor}}'>
+    <view class='user'>
+      <image src='{{avatar}}'></image>
+    </view>
+    <view class='username fs24' style='color:#ffffff;'>{{name}}</view>
+  </view>
+
+  <!-- 全部订单 -->
+  <view class='container'>
+    <view class='orders'>
+      <view class='title'>
+        <view class='titlename fs30'>全部订单</view>
+        <view class='titlename2 fs30' bindtap='tonotpay' data-bindid='0'>
+          <view class="name">查看订单</view>
+          <view class="image"><image src='/image/one.png' class='titlename-img'></image></view>
+        </view>
+      </view>
+      <view class='orderstatus'>
+        <view class='orderstatu' bindtap='tonotpay' data-bindid='0'>
+          <image src='/image/mine/daichengtuan.png'></image>
+          <view class='statu fs24'>待配送</view>
+        </view>
+        <view class='orderstatu' bindtap='tonotpost' data-bindid='1'>
+          <image src='/image/mine/peisongzhong.png'></image>
+          <view class='statu fs24'>已送达</view>
+        </view>
+        <view class='orderstatu' bindtap='tonotreceive' data-bindid='2'>
+          <image src='/image/mine/yiwancheng.png'></image>
+          <view class='statu fs24'>已完成</view>
+        </view>
+         <view class='orderstatu' bindtap='toservice' data-bindid='3'>
+          <image src='/image/mine/shouhou.png'></image>
+          <view class='statu fs24'>售后</view>
+        </view> 
+      </view>
+    </view>
+  </view>
+
+
+
+
+  <view class='container'>
+    <view class='bootmenu'>
+      <!-- <view bindtap='toApplyFor' hidden="{{changeStatus==true}}" class='boot fs30'>
+        <view>
+          <view>申请团长</view>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view> -->
+      
+
+      <view class='boot fs30' bindtap='toshop' wx:if='{{owner}}'>
+        <view>
+          <text>店主收入
+          </text>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view>
+
+      <view bindtap='toGoNext'  wx:if='{{seller}}' class='boot fs30'>
+        <view>
+          <view>我的分销</view>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view> 
+
+      <view class='boot fs30' bindtap='tosend' wx:if='{{sender}}'>
+        <view>
+          <text>订单信息</text>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view>
+       <view class='boot fs30' bindtap='tomycoupon' wx:if='{{sender}}'>
+        <view>
+          <text>店铺优惠券</text>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view>
+      <view class='boot fs30' bindtap='toshopservice' wx:if='{{sender}}'>
+        <view>
+          <text>售后信息</text>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view>
+      
+      <view class='boot fs30' bindtap='tocoupon'>
+        <view>
+          <text>优惠券</text>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view>
+      <view class='boot fs30' bindtap='toaddress'>
+        <view>
+          <text>收货地址</text>
+        </view>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view>
+      <!-- <view class='boot'>
+        <button bindtap='calltokf' class='service_button'>联系商家</button>
+        <view class='boot-lr'>
+          <image src='/image/one.png'></image>
+        </view>
+      </view> -->
+
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{showLoad}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>
+<block>
+  <template is="is_tabBar" data='{{mineColor}}' />
+</block>

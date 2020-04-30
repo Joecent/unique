@@ -1,0 +1,95 @@
+<!--pages/mine/Withdraw/Withdraw.wxml-->
+<form bindsubmit="formSubmit"  report-submit='true'>
+<view class='container'>
+  <view class='container_top'>
+   
+    <view class='container_top_item'>
+     <text style='font-size:28rpx;'>我的余额</text>
+    <text style='font-size:46rpx;font-weight:bold;'>￥{{allIncome}}</text>
+    </view>
+      <!-- <view class='container_top_item2'>
+     <text style='font-size:28rpx;'>总金额</text>
+    <text style='font-size:46rpx;font-weight:bold;'>￥{{account}}</text>
+    </view> -->
+  </view>
+  <view class='container_method'>
+    <!-- <view style='background-color: {{backgroundColor}};color:#ffffff;' bindtap='showChange' hidden='{{showSelected}}' class='container_method_concrete'>{{selected}}
+      <image class='container_method_image' src='/image/drop-down.png' ></image>
+    </view> 
+    <!-- 支付方式选择 
+    <view bindtap='selectorMode' id='{{index}}' data-user="{{item}}" class='container_method_popup' style="color:{{item.content==selected?'#ffffff':''}};background-color:{{item.content==selected?backgroundColor:''}};{{item.id==1?'border-top-left-radius':''}}:10rpx;{{item.id==1?'border-top-right-radius':''}}:10rpx;{{item.id==wayList.length?'border-bottom-right-radius':''}}:10rpx;{{item.id==wayList.length?'border-bottom-left-radius':''}}:10rpx;" wx:for='{{wayList}}' hidden='{{!showSelected}}'>{{item.content}}</view> 
+    <!-- 微信 -->
+    <view wx:if="{{selected=='微信'}}" class='container_method_import'>
+      <!-- <view style='color: red;font-size:32rpx;margin-top:46rpx;'>微信</view>
+      <view class='container_method_import_top'></view> -->
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>提现金额</text>
+        <input type='digit' name='wxMoney' style='font-size:24rpx;width:400rpx;' placeholder='请输入大于0的整数'></input>
+      </view>
+    </view>
+    <!-- 支付宝 
+    <view wx:if="{{selected=='支付宝'}}" class='container_method_import'>
+      <!-- <view style='color: red;font-size:32rpx;margin-top:46rpx;'>支付宝</view>
+      <view class='container_method_import_top'></view> 
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>收款人姓名</text>
+        <input name='zfbName' style='font-size:24rpx;width:400rpx;' placeholder='请输入收款人姓名'></input>
+      </view>
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>输入账号</text>
+        <input name='zfbAccount' style='font-size:24rpx;width:400rpx;' placeholder='请输入收款人支付宝号/手机号'></input>
+      </view>
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>提现金额</text>
+        <input type='digit' name='zfbMoney' style='font-size:24rpx;width:400rpx;' placeholder='请输入提现金额'></input>
+      </view>
+    </view>
+    <!-- 银行卡 
+    <view wx:if="{{selected=='银行卡'}}" class='container_method_import'>
+      <!-- <view style='color: red;font-size:32rpx;margin-top:46rpx;'>银行卡</view>
+      <view class='container_method_import_top'></view> 
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>开户人姓名</text>
+        <input name='yhkName' style='font-size:24rpx;width:400rpx;' placeholder='请输入开户人姓名'></input>
+      </view>
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>银行卡卡号</text>
+        <input name='yhkAccount' style='font-size:24rpx;width:400rpx;' placeholder='请输入银行卡卡号'></input>
+      </view>
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>所属银行</text>
+        <input name='yhkBank' style='font-size:24rpx;width:400rpx;' placeholder='请选择所属银行'></input>
+      </view>
+      <view class='container_method_import_text'>
+        <text style='font-size:28rpx;width:170rpx;'>提现金额</text>
+        <input type='digit' name='yhkMoney' style='font-size:24rpx;width:400rpx;' placeholder='请输入提现金额'></input>
+      </view>
+    </view>-->
+
+    <view class='container_instruction'>
+      <view>提现说明：</view>
+      <view class='spacing'>1.暂时仅支持微信提现。</view>
+      <view class='spacing'>2.提现后，系统将即时提现到微信零钱，请注意查看到账通知。</view>
+      <view class='spacing'>3.如提现遇到问题，请及时联系店铺负责人。</view>
+      <view class='container_instruction_last'>
+        <image bindtap='selectRead' class="container_instruction_last_image {{allSelect?'active':''}}"></image>
+        <text style='margin-left:10rpx;color:red;'>我已了解，并进行提现申请</text>
+      </view>
+    </view>
+    <button disabled='{{disabled}}' style="color: #ffffff;background-color: {{allSelect?backgroundColor:'#999999'}};" class='btn' form-type='submit'>提现</button>
+  </view>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+</view>
+</form>

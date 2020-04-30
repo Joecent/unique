@@ -1,0 +1,48 @@
+<!--pages/mine/sale/sale.wxml-->
+<view class="content">
+<view class="totalData">
+   <view class="money">
+      <view class="num">0.00</view>
+      <view class="name">累计收益（元）</view>
+   </view>
+   <view class="money">
+      <view class="num">20</view>
+      <view class="name">累计订单</view>
+   </view>
+   <view class="money">
+      <view class="num">30</view>
+      <view class="name">累计客户</view>
+   </view>
+</view>
+<view bindtap='toshop'  class='boot fs30'>
+  <view>
+      <view>可提现金额（元）</view>
+  </view>
+  <view class='boot-lr'>
+      <view class="cashMoney">35.23</view>
+      <view class="image"><image src='/image/one.png'></image></view>
+  </view>
+</view> 
+<view bindtap='qrCode'  class='boot fs30'>
+  <view>
+      <view>店铺二维码</view>
+  </view>
+  <view class='boot-lr'>
+      <image class="photo" src='/image/mine/photo.png'></image>
+  </view>
+</view> 
+<view class="todayData">
+    <view class="money">
+      <view class="num">0.00</view>
+      <view class="name">今日收益（元）</view>
+    </view>
+    <view class="money">
+      <view class="num">20</view>
+      <view class="name">今日订单</view>
+    </view>
+    <view class="money">
+      <view class="num">30</view>
+      <view class="name">今日新增客户</view>
+    </view>
+</view>
+</view>

@@ -1,0 +1,176 @@
+<!--pages/mine/orderlist/orderlist.wxml-->
+<view class='container'>
+  <view class='swiper-tab'>
+    <view class="swiper-tab-list {{currentTab==0 ? 'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" bindtap="swichNav" data-current='0'>待配送</view>
+    <view class="swiper-tab-list {{currentTab==1 ? 'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" bindtap="swichNav" data-current='1'>已送达</view>
+    <view class="swiper-tab-list {{currentTab==2 ? 'on':''}}" style="color:{{currentTab==2 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" bindtap="swichNav" data-current='2'>已完成</view>
+    <view class="swiper-tab-list {{currentTab==3 ? 'on':''}}" style="color:{{currentTab==3 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" bindtap="swichNav" data-current='3'>售后</view>
+  </view>
+
+
+
+  <view class='none' wx:if='{{order_num==0}}'>
+    <view class='none_image'>
+      <image src='/image/none.png'></image>
+    </view>
+    <view class='tips'>这里什么都没有哦~</view>
+  </view>
+
+ 
+
+    <!-- 正在拼 -->
+
+    <view wx:if="{{currentTab=='0'}}">
+      <view class='swiper-items'>
+        <view wx:for='{{waitGrouplist}}' wx:for-item='items' class='list' wx:key="this">
+          <image data-items='{{items}}' bindtap='seebtn' src='{{items.goodsimg[0]}}'></image>
+          <view class='list_top'>
+            <!-- <text>{{items.goodsname[0]}}</text> -->
+            <text style='color:{{backgroundColor}}'>实付￥{{items.goods_amount}}</text>
+             
+             <text style='color:{{backgroundColor}}' wx:if='{{items.order_status==3}}'>待退款</text>
+            <!-- <text wx:if='{{items.order_status!=3}}' style='color:{{backgroundColor}}'>{{items.groups_time}}</text> -->
+             <!-- <text wx:if='{{items.order_status!=3}}' style='color:{{backgroundColor}}'>{{items.order_time}}</text> -->
+          </view>
+          <view class='list_bottom'>
+            <view class='list_num'>
+              <text style='font-size:24rpx'>{{items.order_time}}</text>
+              <!-- <view class='list_bottom_text'>
+                <text wx:if='{{items.order_status!=3}}' style='color:{{backgroundColor}}'>{{items.num}}</text>
+                <text wx:if='{{items.order_status!=3}}'>/</text>
+                <text>{{items.group_num}}人</text>
+              </view> -->
+
+              <!-- <text class='list_bottom_text' wx:if='{{items.send_type==1}}'>自取</text>
+              <text class='list_bottom_text' wx:if='{{items.send_type==2}}'>包邮</text>
+              <text class='list_bottom_text' wx:if='{{items.send_type==3}}'>送货上门</text> -->
+            </view>
+            <view class='list_btn'>
+              <view data-shop_phone='{{items.cs_phone}}' bindtap='call' class='list_btn_button'>联系商家</view>
+              <!-- <view style='margin-left:24rpx;' data-items='{{items}}' bindtap='seebtn' class='list_btn_button'>查看拼团</view> -->
+              <view data-items='{{items}}' bindtap='offer' style='margin-left:24rpx;' class='list_btn_button'>申请售后</view>
+              <!-- <view hidden='{{items.order_status==3}}' data-group_price='{{items.group_price}}' data-order_id='{{items.order_id}}' class='list_btn_button' bindtap='refund' style='margin-left:24rpx;'>退款</view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+       <view hidden='{{loadall}}' class='loadall'>已加载全部</view>
+ 
+</view>
+
+    <!-- 配送中 -->
+
+    <view wx:if="{{currentTab=='1'}}">
+      <view class='swiper-items'>
+        <view wx:for='{{alreadyGrouplist}}' wx:for-item='items' wx:for-index='index' class='list' wx:key="this">
+
+          <image data-items='{{items}}' bindtap='seebtn' src='{{items.goodsimg[0]}}'></image>
+          <view class='list_top'>
+            <!-- <text>{{items.goodsname[0]}}</text> -->
+            <text style='color:{{backgroundColor}}'>实付￥{{items.goods_amount}}</text>
+            
+            <text style='color:{{backgroundColor}}' wx:if='{{items.shipping_status==1}}'>已送达</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.shipping_status==2}}'>已签收</text>
+          </view>
+          <view class='list_bottom'>
+            <view class='list_num'>
+              <text style='font-size:24rpx'>{{items.order_time}}</text>
+
+              <!-- <view wx:if='{{items.num<=items.group_num}}' class='list_bottom_text'>
+                <text style='color:{{backgroundColor}}'>{{items.num}}</text>
+                <text>/</text>
+                <text>{{items.group_num}}人</text>
+              </view>
+              <view wx:if='{{items.num>items.group_num}}' class='list_bottom_text'>
+                <text style='color:{{backgroundColor}}'>{{items.group_num}}</text>
+                <text>/</text>
+                <text>{{items.group_num}}人</text>
+              </view> -->
+              <!-- <text class='list_bottom_text' wx:if='{{items.send_type==1}}'>自取</text>
+              <text class='list_bottom_text' wx:if='{{items.send_type==2}}'>包邮</text>
+                 <text class='list_bottom_text' wx:if='{{items.send_type==3}}'>送货上门</text> -->
+            </view>
+            <view class='list_btn'>
+               <view data-shop_phone='{{items.cs_phone}}' bindtap='call' class='list_btn_button'>联系商家</view>
+              <view wx:if='{{items.shipping_status==1}}' data-goods_id='{{items.goods_id}}' data-order_id='{{items.order_id}}' bindtap='sureConfirm' class='list_btn_button' style='margin-left:24rpx;'>确认收货
+              <!-- <button></button> -->
+              </view>
+              <view data-items='{{items}}' bindtap='offer' style='margin-left:24rpx;' class='list_btn_button'>申请售后</view>
+            </view>
+          </view>
+
+        </view>
+      </view>
+       <view hidden='{{loadall}}' class='loadall'>已加载全部</view>
+    <!-- </swiper-item> -->
+</view>
+
+    <!-- 已完成 -->
+
+    <view wx:if="{{currentTab=='2'}}">
+      <view class='swiper-items'>
+        <view wx:for='{{finshGrouplist}}' wx:for-item='items' class='list' wx:key="this">
+          <image data-items='{{items}}' bindtap='seebtn' src='{{items.goodsimg[0]}}'></image>
+          <view class='list_top'>
+            <!-- <text>{{items.goodsname[0]}}</text> -->
+            <text style='color:{{backgroundColor}}'>实付￥{{items.goods_amount}}</text>
+            
+            <text style='color:{{backgroundColor}}'>已完成</text>
+          </view>
+          <view class='list_bottom'>
+            <view class='list_num'>
+              <text style='font-size:24rpx'>{{items.order_time}}</text>
+
+              <!-- <view wx:if='{{items.num<=items.group_num}}' class='list_bottom_text'>
+                <text style='color:{{backgroundColor}}'>{{items.num}}</text>
+                <text>/</text>
+                <text>{{items.group_num}}人</text>
+              </view> -->
+              <!-- <view wx:if='{{items.num>items.group_num}}' class='list_bottom_text'>
+                <text style='color:{{backgroundColor}}'>{{items.group_num}}</text>
+                <text>/</text>
+                <text>{{items.group_num}}人</text>
+              </view> -->
+              <!-- <text class='list_bottom_text' wx:if='{{items.send_type==1}}'>自取</text>
+              <text class='list_bottom_text' wx:if='{{items.send_type==2}}'>包邮</text>
+                 <text class='list_bottom_text' wx:if='{{items.send_type==3}}'>送货上门</text> -->
+            </view>
+            <view class='list_btn'>
+              <view data-shop_phone='{{items.cs_phone}}' bindtap='call' class='list_btn_button'>联系商家</view>
+              <!-- <view data-items='{{items}}' style='margin-left:24rpx;' bindtap='seebtn' class='list_btn_button'>查看拼团</view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+       <view hidden='{{loadall}}' class='loadall'>已加载全部</view>
+ 
+</view>
+
+<!-- 售后 -->
+
+    <view wx:if="{{currentTab=='3'}}">
+      <view class='swiper-items'>
+        <view wx:for='{{serviceList}}' wx:for-item='items' class='list' wx:key="this">
+          <image data-items='{{items}}' data-order_id='{{items.order_id}}' bindtap='serviceinfo' data-user_id='{{items.user_id}}' src='{{items.order[0].goods_img}}'></image>
+          <view class='list_top'>
+            <!-- <text>{{items.goodsname[0]}}</text> -->
+            <text style='color:{{backgroundColor}}'>实付￥{{items.pay_money}}</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.status==0}}'>处理中</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.status==1}}'>已处理</text>
+            <text style='color:{{backgroundColor}}' wx:if='{{items.status==2}}'>拒绝处理</text>
+          </view>
+          <view class='list_bottom'>
+            <view class='list_num'>
+              <text style='font-size:24rpx'>申请时间：{{items.create_time}}</text>
+            </view>
+            <view class='list_btn'>
+              <view data-items='{{items}}' bindtap='serviceinfo' class='list_btn_button'>查看详情</view>
+            </view>
+          </view>
+        </view>
+      </view>
+       <view hidden='{{loadall}}' class='loadall'>已加载全部</view>
+ 
+</view>
+
+</view>

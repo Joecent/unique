@@ -1,0 +1,127 @@
+<!-- <view class='bar'>
+  <view class='backwrap' bindtap='back' style='margin-top:{{bar}}px'>
+    <image src='../../../image/back.png'></image>
+    确认订单
+  </view>
+</view> -->
+
+
+
+<form bindsubmit="formSubmitWM" report-submit='true'>
+  <view class="container">
+     <view>
+      <view wx:if='{{is_in_food==1&&is_out_food==1}}' class='choose'>
+        <text style="color:{{switchChecked==false?backgroundColor:'#484848'}}">外卖</text>
+        <switch class='switch_item' color='#3adb20' checked="{{switchChecked}}" bindchange="switchChange"/>
+        <text style="color:{{switchChecked==true?'#3adb20':'#484848'}}">自提/堂吃</text>
+      </view>
+    </view> 
+     <view class='locationchoose' wx:if='{{switchChecked==false}}' bindtap='bindmodifyaddress'> 
+    <view class='locationchoose'>
+      <view class='title_name'>收货信息
+        <text style='color:{{backgroundColor}};' class='edit'>编辑</text>
+      </view>
+      <view class='name_phone' hidden='{{editaddress.address!== ""}}'>
+        <text>请选择或添加收货地址</text>
+      </view>
+      <view class='name_phone' hidden='{{editaddress.address== ""}}'>
+        <view>
+          <text>收货人： {{editaddress.receiver}}</text>
+        </view>
+        <view>
+          <text>电话： {{editaddress.phone}}</text>
+        </view>
+        <view>
+          <text>收货地址： {{editaddress.address}}</text>
+          <text>{{editaddress.detail}}</text>
+        </view>
+      </view>
+    </view>
+    </view>
+    <view class='address' wx:if='{{switchChecked}}'>
+      <view wx:if="{{desk_show==false}}" class='input_text'>
+          <view>买家姓名：</view>
+          <input bindinput='receiveer' value='{{receiver2}}' placeholder='请输入买家姓名'></input>
+      </view>
+      <view wx:if="{{desk_show==false}}" class='input_text'>
+          <view>联系方式：</view>
+          <input bindinput='inphone' value='{{phone2}}' placeholder='请输入联系方式'></input>
+      </view>
+      <view wx:if="{{desk_show}}" class='desk'>
+        <view class='deskTitle'>桌号：</view>
+          <view class='deskNum'>
+          <view placeholder-style='line-height:72rpx'>{{desk_num}}</view>
+        </view>
+      </view>
+      <view class='input_text'>自提/堂吃地点为：{{shop_address}}</view>
+      <view class='input_text'>营业时间：{{open_time}}</view>
+    </view> 
+    <view class="unenough" wx:if="{{unenough}}">{{unenough_msg}}库存不足！</view>
+    <view class='details' wx:for="{{goods}}" wx:key="this">
+      <image src='{{item.image}}'></image>
+      <view class="goods_info">
+        <view class="name_price">
+          <view class='name_author'>
+            <text>{{item.name}}</text>
+          </view>
+          <text style='color:{{backgroundColor}};' class='price'>￥{{item.price}}</text>
+        </view>
+        <view class="key_num">
+          <view class='spec_info'>{{item.key_name}}</view>
+          <view class='num'>
+            x {{item.num}}
+          </view>
+        </view>
+      </view>
+    </view>
+    
+    
+    <view class='coupon' bindtap='tocoupons'>
+    <view class="coupon_info">
+      <view class='couponname'>优惠券</view>
+      <view class='couponimage'><image src='/image/coupon.png' ></image></view>
+      <view class='couponnum'><text>：{{cash_num}} 张可用</text></view>
+    </view> 
+      <view class='toright'><image src='/image/one.png'></image></view>
+    </view>
+    <view class='time_logistics'>
+      <view>商品总额
+        <text style='color:{{backgroundColor}};' class='price'>￥{{totalPrice}}</text>
+      </view>
+      <view wx:if='{{switchChecked==false}}'>配送费用
+        <text class='express' style='color:{{backgroundColor}};'><text style="color:#999;margin-right:30rpx;font-size:26rpx;"><text wx:if='{{send_price!=0}}'>满￥{{initial_price}}</text>免配送费</text>￥{{express_fee}}</text>
+      </view>
+      <view>优惠减免
+        <text style='color:{{backgroundColor}};' class='discount'>￥{{discount}}</text>
+      </view>
+      <view>实际付款：
+        <text style='color:{{backgroundColor}};' class='totalprice'>￥{{totalMoney}}</text>
+      </view>
+    </view>
+    <!-- <view class='desk'>
+      <view class='deskTitle'>桌号：</view>
+      <view class='deskNum'>
+        <input name='deskNum' placeholder-style='line-height:72rpx' placeholder='请填写桌号（例如：8）'></input>
+      </view>
+    </view> -->
+
+    <view class='message'>
+      <view>备注留言</view>
+      <view class='message_input'>
+        <textarea wx:if='{{isShowText}}' class='inputmessage' value='{{newmessage}}' name='message' bindblur='onRemarkInput' bindconfirm='onShowText' focus='{{onFocus}}' placeholder='可填写给店家的留言' />
+        <view wx:else class='inputmessage' bindtap='onShowTextare'>{{newmessage==''?'可填写给店家的留言':newmessage}}</view>
+      </view>
+
+       <view class='message_pre' wx:if="{{messagelist!=''}}">
+        <view bindtap='binddescribe' data-item='{{item}}' wx:for='{{messagelist}}' wx:key="this">{{item}}</view>
+      </view> 
+
+    </view>
+
+    <view style='height:150rpx;background-color:white;'></view>
+
+    <view class='pay'>
+      <button style='z-index:555;background-color:{{backgroundColor}};' form-type='submit' disabled='{{disable}}'>付款</button>
+    </view>
+  </view>
+</form>

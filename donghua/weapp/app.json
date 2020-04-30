@@ -1,0 +1,36 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/mine/refundapply/refundapply",
+    "pages/mine/refunddetail/refunddetail",
+    "pages/mine/refundlist/refundlist",
+    "pages/mine/orderlist/orderdetails/orderdetails",
+    "pages/index/singleorderinfo/singleorderinfo",
+    "pages/mine/mine",
+    "pages/mine/addaddress/addaddress",
+    "pages/mine/address/address",
+    "pages/mine/editaddress/editaddress",
+    "pages/mine/dispatching/dispatching",
+    "pages/mine/orderlist/orderlist",
+    "pages/mine/withdraw/withdraw",
+    "pages/mine/income/income",
+    "pages/template/template",
+    "pages/mine/coupon/coupon",
+    "pages/mine/sale/sale",
+    "pages/mine/mycoupon/mycoupon",
+    "pages/mine/couponUse/couponUse"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FF5D35",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}
