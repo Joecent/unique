@@ -1,0 +1,59 @@
+<!--pages/shoppages/groupOrder/groupOrder.wxml-->
+
+<view class='order'>
+  <view class='title'>
+    <view class='group_type_time'>
+      <view class='group_type' wx:if='{{is_leader==1}}'>你发起了拼团</view>
+      <view class='group_type' wx:if='{{is_leader==0}}'>你参与了拼团</view>
+      <view class='group_time'>{{order_time}}</view>
+    </view>
+    <view class='group_statu fs30' style='color:{{backgroundColor}}' wx:if='{{group_status==0}}'>正在拼团中</view>
+    <view class='group_statu fs30' style='color:{{backgroundColor}}' wx:if='{{group_status==1}}'>拼团成功</view>
+  </view>
+  <view class='goods_info'>
+    <view class='goods_image'>
+      <image src='{{goods_img}}'></image>
+    </view>
+    <view class='goods_name_price'>
+      <view class='goods_name'>{{goods_name}}</view>
+      <view class='goods_price fs28' style='color:{{backgroundColor}}'>￥{{goods_price}}
+        <view class='text'>{{group_num}}人团 </view>
+      </view>
+    </view>
+  </view>
+  <view class='user_images'>
+    <view class='user_image' wx:for='{{child}}' wx:for-item='itemschild'>
+      <image src='{{itemschild}}'></image>
+    </view>
+  </view>
+
+  <view class='options'>
+    <view>
+      <button class='toorderinfo' style='background-color:{{backgroundColor}}'  open-type='share'>分享拼团</button>
+    </view>
+
+    <view class='gohome' style='background-color:{{backgroundColor}}' bindtap='gohome'>返回首页</view>
+  </view>
+
+</view>
+
+
+<!-- <view class='receive_info'>
+  <view class='receive_title'>收货信息：</view>
+  <view class='receiver'>{{receiver}}
+    <view class='phone'>{{phone}}</view>
+  </view>
+  <view class='address'>
+    地址：
+    {{address}}/{{detail}}</view>
+</view> -->
+
+<view class='receive_info'>
+  <view class='receive_title'>收货信息：</view>
+  <view class='receiver'>收货人：{{receiver}}</view>
+  <view class='phone'>电话：{{phone}}</view>
+  <view class='address'>
+    地址：
+    <!-- <image src='/image/position.png'></image> -->
+    {{address}}/{{detail}}</view>
+</view>

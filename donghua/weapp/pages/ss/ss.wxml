@@ -1,0 +1,53 @@
+<!--pages/ss/ss.wxml-->
+<!-- <view>
+
+  <view wx:for="{{constants}}" wx:key="this">
+
+
+
+    <view wx:for="{{item.goods}}" wx:key="goods_id" wx:for-index="indexs">
+
+      <view class='content-list-lr-name'>
+        {{item.goods_name}}
+      </view>
+
+      <text class='issue-name-icon' bindtap='addCart' data-goods_name="{{item.goods_name}}" data-spec_price="{{item.goods_price}}" data-spec_name="{{item.key_name}}" data-goods_img="{{item.goods_img}}" data-goods_id="{{item.goods_id}}" data-goods_score="{{item.goods_score}}"
+        data-product_id="{{item.product_id}}" data-index="{{index}}">+</text>
+    </view>
+  </view>
+</view> -->
+
+
+
+
+<!-- <view class='show-button' bindtap='showButton'>go</view>
+
+<view class="one {{showView?'show':'hide'}}">
+  sdvcsdv
+</view>
+<view class="two {{showView?'hide':'show'}}">
+  45555555
+</view> -->
+
+
+<scroll-view scroll-y="{{isScroll}}">
+  <view class="rootView">
+    <view class="inTable">
+      <view wx:for="{{arrayData}}" wx:key="" class="unitItemLeft" bindtap="showDialog" data-statu="open">
+        <input class="baseItemWithBorder" value="{{item}}" disabled /> </view>
+      <!--测试弹窗-->
+      <view class="dialogMarsk" bindtap="showDialog" data-statu="close" wx:if="{{isDialogShow}}"></view>
+      <!--dialog-->
+
+      <view class="dialog" wx:if="{{isDialogShow}}">
+        <view class="appreciationTitle">
+          <text style="font-size:24px;">我是弹窗</text> </view>
+        <view wx:for="{{dialogData}}" class="appreciationTable">
+          <view class="unitItemLeft">
+            <text class="baseItemWithBorder">{{item.name}}</text> </view>
+        </view>
+      </view>
+      
+    </view>
+  </view>
+</scroll-view>

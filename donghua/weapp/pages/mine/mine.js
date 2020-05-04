@@ -1,67 +1,40 @@
 // pages/mine/mine.js
 import {
-  // wx_group_info,
-  // get_groupApply,
-  isUserInfo,
+  get_config,
   auth,
   user_info,
-  admin_shop_info,
-  addShopCard
-  // get_goods
+  change_photo,
+  get_applyDistributio
 } from '../../utils/api.js'
 import * as store from '../../utils/store.js'
 const app = getApp()
 Page({
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    phone:'13601624592',
-    owner:false,
-    sender:false,
-    seller:false,
-    changeStatus: false,
+/**
+ * 页面的初始数据
+ */
+data: {
+    hidDistribution: false,
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    backgroundColor: app.globalData.selectedColor,
-    indexColor: app.globalData.selectedColor,
-    mineColor: app.globalData.selectedColor
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
+  },
+
+  toShops: function() {
+    wx.redirectTo({
+      url: '../shoppages/shops/shops',
+    })
+  },
+  toCart: function() {
+    wx.redirectTo({
+      url: 'cart/cart',
+    })
   },
   toIndex: function() {
     wx.redirectTo({
-      url: '/pages/index/index',
+      url: '../shoppages/index/index',
     })
   },
-  tomycoupon(){
-    wx.navigateTo({
-      url: '/pages/mine/mycoupon/mycoupon',
-    })
-  },
-  tocoupon(){
-    wx.navigateTo({
-      url: '/pages/mine/coupon/coupon',
-    })
-  },
-  toGoNext(){
-    wx.navigateTo({
-      url: '/pages/mine/withdraw/withdraw',
-    })
-  },
-  calltokf: function() {
-    wx.makePhoneCall({
-      phoneNumber: this.data.phone
-    })
-  },
-  toshop(){
-    wx.navigateTo({
-      url: '/pages/mine/withdraw/withdraw',
-    })
-  },
-  toshopservice(){
-    wx.navigateTo({
-      url: '/pages/mine/refundlist/refundlist',
-    })
-  },
+
+
   bindGetUserInfo: function(e) {
     var that = this
     wx.login({
@@ -87,82 +60,72 @@ Page({
               avatar: e.detail.userInfo.avatarUrl,
               name: e.detail.userInfo.nickName
             })
-            addShopCard({ user_id: response.data.user_id, shop_id: app.globalData.shop_id }).then(res => {
-              
-            })
-             that.user_info()
-          } else if (response.error_code == 1001) {
-            wx.showLoading({
-              title: '登录失败',
-            })
-            setTimeout(function () {
-              wx.hideLoading()
-            }, 1000)
+            // that.user_info()
           }
         })
       }
     })
   },
-  tosend(){
-    wx.navigateTo({
-      url: '/pages/mine/dispatching/dispatching',
-    })
-  },
+
   user_info() {
     var that = this
-    wx.getUserInfo({
-      success(res) {
+    user_info({
+      user_id: store.get('user_id')
+    }).then((res) => {
+      // console.log(res)
+      if (res.error_code = 1000) {
         that.setData({
-          avatar: res.userInfo.avatarUrl,
-          name: res.userInfo.nickName
+          avatar: res.data.photo,
+          name: res.data.name
         })
       }
     })
-    isUserInfo({
-      user_id: app.globalData.userid,
-      shop_id:app.globalData.shop_id,
-    }).then(res=>{
-      if(res.error_code==1000){
-        res.data.forEach(function(item){
-          if(item.type==1){
-            that.setData({
-              owner: true
-            })
-          }
-          if(item.type==0){
-            that.setData({
-              sender: true
-            })
-          }
-          if(item.type==2){
-            app.globalData.seller=app.globalData.userid
-            that.setData({
-              seller: true
-            })
-          }
-        })
-      }
-    })
-    admin_shop_info({
-      shop_id:app.globalData.shop_id
-    }).then(res=>{
-      that.setData({
-        phone:res.data.cs_phone
-      })
-    })
   },
-  //联系客服
-  toPhone() {
-    wx.navigateTo({
-      url: 'applyFor/applyFor',
-    })
-  },
+
   //添加地址
   toaddress() {
     wx.navigateTo({
       url: '/pages/mine/address/address',
     })
   },
+
+  // 我的砍价
+  tomycut() {
+    wx.navigateTo({
+      url: '/pages/mine/cut/cut'
+    })
+  },
+
+  //我的拼团
+  tomygroup() {
+    wx.navigateTo({
+      url: '/pages/mine/groupbuy/groupbuy',
+
+    })
+  },
+
+  //我的优惠券
+  tocoupon() {
+    wx.navigateTo({
+      url: '/pages/mine/coupon/coupon',
+    })
+  },
+
+  //我的预约
+  appointment() {
+    wx.navigateTo({
+      url: '/pages/mine/appointment/appointment',
+    })
+  },
+
+  //退款售后
+
+  torefund() {
+    wx.navigateTo({
+      url: '/pages/mine/refund/refund',
+    })
+  },
+
   tonotpay(e) {
     wx.navigateTo({
       url: '/pages/mine/orderlist/orderlist?bindid=' + e.currentTarget.dataset.bindid,
@@ -179,73 +142,80 @@ Page({
       url: '/pages/mine/orderlist/orderlist?bindid=' + e.currentTarget.dataset.bindid,
     })
   },
-  toservice(e) {
+  tofinish(e) {
     wx.navigateTo({
       url: '/pages/mine/orderlist/orderlist?bindid=' + e.currentTarget.dataset.bindid,
     })
   },
-  toApplyFor() {
-    wx.navigateTo({
-      url: '/pages/mine/instructions/instructions',
+  //分销
+  toDistribution(e) {
+    // wx.navigateTo({
+    //   url: 'applyFor/applyFor',
+    // })
+    get_applyDistributio({
+      user_id: store.get('user_id'),
+      u: '',
+      getStatus: '1',
+    }).then((response) => {
+      // console.log(response)
+      // wx.showLoading({
+      //   title: response.msg,
+      // })
+      // setTimeout(function() {
+      // wx.hideLoading()
+      var actuality = JSON.stringify(response.data);
+      if (response.status == 2) {
+        if (response.data.status == 0) {
+          wx.navigateTo({
+            url: 'applyForResult/applyForResult?actuality=' + actuality,
+          })
+        } else {
+          if (response.data.verify_status == 1) {
+            wx.navigateTo({
+              url: 'distribution/distribution'
+            })
+          } else {
+            wx.navigateTo({
+              url: 'applyForResult/applyForResult?actuality=' + actuality,
+            })
+          }
+        }
+      } else {
+        wx.navigateTo({
+          url: 'applyFor/applyFor',
+        })
+      }
+      // }, 1000)
     })
   },
-  //开团
-  // toGoNext(e) {
-  //   get_groupApply({
-  //     shop_id: app.globalData.shop_id,
-  //     user_id: store.get('user_id')
-  //   }).then((response) => {
-  //     if (response.data.status == 1) {
-  //       if (response.data.verify_status == 1) {
-  //         wx.navigateTo({
-  //           url: 'distribution/distribution'
-  //         })
-  //       } else {
-  //         wx.navigateTo({
-  //           url: 'applyForResult/applyForResult'
-  //         })
-  //       }
-  //     } else {
-  //       wx.navigateTo({
-  //         url: 'applyForResult/applyForResult',
-  //       })
-  //     }
-  //   })
-  // },
 
-  // getConfig: function() {
-  //   get_groupApply({
-  //     shop_id: app.globalData.shop_id,
-  //     user_id: store.get('user_id')
-  //   }).then((response) => {
-
-  //     if (response.data == '') {
-
-  //       this.setData({
-  //         changeStatus: false
-  //       })
-  //     } else {
-
-  //       this.setData({
-  //         changeStatus: true
-  //       })
-
-  //     }
-  //   })
-  // },
+  getConfig: function() {
+    get_config({
+      shop_id: app.globalData.shop_id
+    }).then((response) => {
+      if (response.msg.is_share == 1) {
+        this.setData({
+          hidDistribution: true
+        })
+      } else {
+        this.setData({
+          hidDistribution: false
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     let that = this
-    if (!store.get('user_id')||app.globalData.userid==0) {
+    if (!store.get('user_id')) {
       that.setData({
         showLoad: true
       })
     }
     that.user_info()
-    // that.getConfig()
-
+    that.getConfig()
   },
 
   /**
@@ -261,17 +231,15 @@ Page({
 
   onShow: function() {
     let that = this
-    // that.setData({
-    //   backgroundColor: app.globalData.selectedColor,
-    //   mineColor: app.globalData.selectedColor,
-    // })
+    that.setData({
+      backgroundColor: app.globalData.selectedColor,
+    })
     if (!store.get('user_id')) {
       that.setData({
         showLoad: true
       })
     }
     that.user_info()
-    // that.getConfig()
   },
 
   /**

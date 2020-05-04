@@ -1,0 +1,213 @@
+<!--pages/shoppages/shops/shops.wxml-->
+
+<view class="container">
+  <view class='shops-top'>
+    <view class='shops-fenlei' bindtap="clickItemToggeHide">
+      <view class='shops-fenlei-img'>
+        <image src='/image/fenlei.png'></image>
+      </view>
+      <text class='fs24'>分类</text>
+    </view>
+
+    <view class="section" bindtap='to_search_goods'>
+      <image src='/image/search.png'></image>
+      <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' disabled="false" class='fs30' />
+    </view>
+
+    <!-- <view class='shops-lb ' bindtap='showButton'>
+      <view class='shops-fenlei-img'>
+        <image src='/image/liebiao1.png'></image>
+      </view>
+      <text class='fs24'>列表</text>
+    </view> -->
+  </view>
+
+  <!-- <view class='shops-conten'>
+    <view class='shops-conten-top fs30'>
+      <view>综合</view>
+      <view>销量</view>
+      <view>新品</view>
+      <view class='shops-conten-img'>
+        价格
+        <image src='/image/jiage.png'></image>
+      </view>
+    </view>
+  </view> -->
+</view>
+<!--左侧栏-->
+<!-- scroll_left -->
+
+<view wx:if="{{showModalStatus}}" bindtap="hideModals" class="commodity_screen" catchtouchmove="ture"></view>
+
+<scroll-view class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left  {{ishide?'cbp-spmenu-open':''}} " scroll-y="true" style="height:{{winHeight + 100}}px;" scroll-with-animation="true" scroll-top="{{scrollTop}}" wx:if="{{showModalStatus}}" catchtouchmove="ture">
+  <view class="nav_left">
+    <view class="fs28 nav_left_items {{index == idx ?'active':''}}"  style="border-left-style:{{index==idx?'solid':''}};border-left-color:{{index == idx ? backgroundColor:''}};border-left-width:{{index == idx?'6px':''}}" bindtap="switchRightTab" data-item-index="{{index}}" wx:for="{{goods}}" wx:for-item="item" wx:key="*this" id="a{{idx}}" wx:if="{{item.goods.length > 0}}">
+      <text>{{item.cate_name}}</text>
+    </view>
+  </view>
+</scroll-view>
+
+
+<!--右侧栏-->
+<scroll-view scroll-y="true" class="scroll_right" style="height:{{winHeight-75}}px;" scroll-into-view="{{scrollTopId}}" scroll-with-animation="true" bindscroll="scroll">
+
+  <view class="nav_right" wx:if="{{booleans==true}}">
+    <view class='mink' wx:for="{{goods}}" wx:for-index="idx" wx:for-item="item" wx:key="*this">
+
+      <view class='minl fs28' id='a{{idx}}' wx:if="{{item.goods.length > 0}}">
+        <view class='minl-bg'>
+          <!-- <image src='/image/bg.png'></image> -->
+          <view class='minl-title' style='color:{{backgroundColor}}'>{{item.cate_name}}
+            <view class='span' style='background:{{backgroundColor}}'></view>
+          </view>
+          
+        </view>
+      </view>
+
+      <view class='ss'>
+        <view class="nav_right_items" wx:for="{{item.goods}}" wx:key="*this" wx:for-index="index" wx:for-item="food" bindtap='toGoodsinfo' data-goods_id='{{food.goods_id}}'>
+          <image src="{{food.goods_img}}" mode="aspectFill"></image>
+          <view class='nav_right_goods_name fs26'>
+            <text>{{food.goods_name}}</text>
+          </view>
+          <view class='nav-bts'>
+            <view class='nav_right_items-price fs30' style='color:{{backgroundColor}}'>
+              <text>￥{{food.goods_price[0]}}</text>
+            </view>
+            <view class='prices-gwc' catchtap="addCart" data-goods_name="{{food.goods_name}}" data-spec_price="{{food.goods_price}}" data-spec_name="{{food.key_name}}" data-goods_img="{{food.goods_img}}" data-goods_id="{{food.goods_id}}" data-goods_score="{{food.goods_score}}"
+              data-product_id="{{food.product_id}}" data-index="{{index}}" data-spec_img="{{food.spec_img}}" data-market_price='{{food.market_price}}'>
+          <icon style='margin-bottom:10rpx;margin-right:20rpx;color:{{backgroundColor}};font-size:40rpx;' class='iconfont icon-jiebantubiao-'></icon>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="nav_right" wx:else>
+    <view class='nav-right-list' wx:for="{{goods}}" wx:for-index="idx" wx:for-item="item" wx:key="*this">
+      <view class='nav-right-list-titles fs30' id='a{{idx}}' wx:if="{{item.goods.length > 0}}">
+        <view class='minl-bg minl-bg1'>
+          <!-- <image src='/image/bg.png'></image> -->
+          <view class='minl-title' style='color:{{backgroundColor}}'>{{item.cate_name}}
+              <view class='span' style='background:{{backgroundColor}}'></view>
+          </view>
+
+        </view>
+        <!-- {{item.cate_name}} -->
+      </view>
+
+      <view wx:for="{{item.goods}}" wx:key="*this" wx:for-index="idex" wx:for-item="food" bindtap='toGoodsinfo' data-goods_id='{{food.goods_id}}' class='nav-right-conten'>
+
+        <view class="nav_right_img">
+          <image src="{{food.goods_img}}" mode="aspectFill"></image>
+        </view>
+
+        <view class='nav_right_lf fs32'>
+          <view class='nav_right_goods_title fs34'>
+            <text>{{food.goods_name}}</text>
+          </view>
+          <view class='nav-bts nav-btns'>
+            <view class='nav_right_goods_prices' style='color:{{backgroundColor}}'>
+              <text>￥{{food.goods_price[0]}}</text>
+            </view>
+            <view class='prices-gwc' catchtap="addCart" data-goods_name="{{food.goods_name}}" data-spec_price="{{food.goods_price}}" data-spec_name="{{food.key_name}}" data-goods_img="{{food.goods_img}}" data-goods_id="{{food.goods_id}}" data-goods_score="{{food.goods_score}}"
+              data-product_id="{{food.product_id}}" data-index="{{index}}" data-spec_img="{{food.spec_img}}" data-market_price='{{food.market_price}}'>
+             <icon style='color:{{backgroundColor}};font-size:40rpx;' class='iconfont icon-jiebantubiao-'></icon>
+            </view>
+          </view>
+
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+
+<!-- 购物车弹出框 -->
+<view class='maskLayer' wx:if="{{chooseSize}}" bindtap='hideModal' catchtouchmove="ture" catchtouchmove="ture"></view>
+<view class='choose' wx:if="{{chooseSize}}" animation='{{animationData}}' catchtouchmove="ture" catchtouchmove="ture">
+  <view class='specs'>
+    <view class='image'>
+      <view wx:if="{{spec_imgs>1}}">
+        <image src="{{spec_spec_imgs}}"></image>
+      </view>
+      <view wx:if="{{spec_imgs==1}}">
+        <image src="{{goods_img}}"></image>
+      </view>
+    </view>
+
+    <view class='specs_info '>
+      <view class='price_score'>
+        <view class='spec_price' style='color:{{backgroundColor}}'>
+          <view class='fs32'>￥{{spec_price_choose}}</view>
+          <!-- <view wx:if='{{type==1}}'>￥{{spec_group_prices}}</view> -->
+          <view class='spec_market_prices fs26'>￥{{spec_market_prices}}</view>
+        </view>
+        <view class='score fs24'>库存：{{spec_goods_scores}}</view>
+      </view>
+
+      <view class='spec_name fs28'>
+        <view wx:if="{{spec_names>1}}">
+          {{spec_name}}
+        </view>
+      </view>
+      <scroll-view scroll-y class='l-sf-style'>
+        <view class='spec_value fs28' wx:if="{{spec_names>1}}">
+          <view wx:for='{{spec_item}}' wx:for-index='index' class="value {{index==chooseIndex?'on':''}}" style="background-color:{{index==chooseIndex ? backgroundColor:''}};" wx:key="this" data-index="{{index}}" data-type='0' catchtap='chooseSpec'>{{item}}</view>
+        </view>
+      </scroll-view>
+
+      <!-- 加减 -->
+      <view class='nums fs28'>
+        <view>购买数量:</view>
+        <view class='num fs30' style='color:{{backgroundColor}}'>
+          <text bindtap='importCountjian' class='fs40 {{item.count == 1 ? "noclick" : ""}}'>-</text>
+          <input type='number' name='count{{index}}' value='{{count}}' bindinput="importCount" disabled="false"></input>
+          <text bindtap='importCountjia' class='fs40'>+</text>
+        </view>
+      </view>
+
+
+      <view class='buttons'>
+        <button class='imform' style='background-color:{{backgroundColor}}' bindtap='addToCart' data-spec_goods_scores="{{spec_goods_scores}}">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>
+
+<view class='bottomMenu fs24'>
+  <view bindtap='toIndex' class='bottomMenu-item'>
+    <icon class='iconfont icon-shouye-weixuanzhong'></icon>
+    <text>首页</text>
+  </view>
+  <view style='color:{{backgroundColor}}' class='bottomMenu-item'>
+    <icon class='iconfont icon-quanbunormal'></icon>
+    <text>全部商品</text>
+  </view>
+  <view bindtap='toCart' class='bottomMenu-item'>
+    <icon class='iconfont icon-jiebantubiao-'></icon>
+    <text>购物车</text>
+  </view>
+  <view bindtap='toMine' class='bottomMenu-item'>
+    <icon class='iconfont icon-wode'></icon>
+    <text>我的</text>
+  </view>
+</view>

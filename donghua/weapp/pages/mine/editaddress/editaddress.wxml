@@ -12,11 +12,7 @@
       </view>
       <view class='addinput' bindtap="bindaddinput">
         <label>所在位置</label>
-          <picker mode="region" bindchange="bindaddinput" custom-item="{{customItem}}">
-            <view class="infoText">
-             {{address}}
-            </view>
-          </picker>
+        <view class="infoText">{{address}}</view>
         <image src='/image/one.png' class='tiao'></image>
       </view>
       <view class='addinput'>

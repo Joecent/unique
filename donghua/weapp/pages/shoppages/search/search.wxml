@@ -1,0 +1,30 @@
+<!--pages/shoppages/search/search.wxml-->
+
+
+<view class="section">
+  <image src='/image/search.png'></image>
+  <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' bindinput='search' focus='{{inputShowed}}' confirm-type='search' value='{{inputVal}}' auto-focus class='fs30' />
+</view>
+
+
+
+<!-- 查找内容 -->
+<view class='cate_goodslist-con'>
+  <block wx:for="{{constants}}" wx:key="this" wx:if="{{inputVal}}">
+    <!-- {{item.goods_name}} -->
+    <view class='cate_goodslist' bindtap='toGoodsinfo' data-goods_id="{{item.goods_id}}">
+      <view class='cate_goodslist-img'>
+        <image mode="aspectFill" src='{{item.goods_img}}'></image>
+      </view>
+      <view class='cate_goodslist-bt'>
+        <view class='cate_goodslist-name fs26'>
+          <text>{{item.goods_name}}</text>
+        </view>
+        <view class='cate_goodslist-prices fs30' style='color:{{backgroundColor}}'>
+          <text class='cate_goodslist-price'>￥{{item.goods_price[0]}}</text>
+          <text class='market_price'>￥{{item.market_price[0]}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

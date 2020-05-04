@@ -1,0 +1,99 @@
+/* pages/mine/orderinfo/orderinfo.wxss */
+
+.details {
+  background-color: white;
+  height: auto;
+  overflow: hidden;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  padding: 20rpx 30rpx;
+  text-align: right;
+}
+
+.details image {
+  width: 150rpx;
+  height: 154.1rpx;
+  display: block;
+}
+
+.details .name_author {
+  font-size: 30rpx;
+  flex: 1;
+}
+
+.details .name_author text {
+  width: 100%;
+  height: auto;
+  font-size: 30rpx;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  color: #484848;
+  padding-top: 5rpx;
+}
+
+.details .num {
+  font-size: 28rpx;
+  padding: 10rpx 0;
+}
+
+.receive_info {
+  font-size: 28rpx;
+  color: #323232;
+  padding: 30rpx 40rpx;
+  background-color: white;
+  margin-top: 10rpx;
+}
+
+.receive_title {
+  line-height: 60rpx;
+}
+
+.receiver {
+  display: flex;
+  margin-top: 30rpx;
+}
+
+.address {
+  line-height: 60rpx;
+  margin-top: 30rpx;
+}
+
+.address image {
+  width: 40rpx;
+  height: 50rpx;
+  margin-right: 10rpx;
+  margin-bottom: -12rpx;
+}
+
+.phone {
+  margin-top: 30rpx;
+}
+
+.numbes {
+  background: #fff;
+  height: 50rpx;
+  line-height: 50rpx;
+  color: #999;
+  margin-top: 16rpx;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 0 30rpx;
+}
+
+.post_fee, .total_fee {
+  background: #fff;
+  color: #333;
+  padding: 5rpx 30rpx;
+  text-align: right;
+}
+
+.order_time {
+  padding:5rpx 30rpx;
+  font-size: 26rpx;
+  color: #aaa;
+  text-align: right;
+  background-color: white;
+}
+
+

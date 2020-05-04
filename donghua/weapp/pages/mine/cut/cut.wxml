@@ -1,0 +1,92 @@
+<!--pages/mine/cut/cut.wxml-->
+
+
+<view class='swiper-tab'>
+  <view class="swiper-tab-list" bindtap="swichNav" data-current='0'>
+    <view class="border-bottom {{currentTab==0 ? 'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" >正在砍价</view>
+  </view>
+  <view class="swiper-tab-list" bindtap="swichNav" data-current='1'>
+    <view class="border-bottom {{currentTab==1 ? 'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==1 ? backgroundColor:''}}" >砍价失败</view>
+  </view>
+</view>
+
+<view class='none' hidden='{{none}}'>
+  <view class='none_image'>
+    <image src='/image/none.png'></image>
+  </view>
+  <view class='tips'>这里什么都没有哦~</view>
+</view>
+
+<swiper current='{{currentTab}}' hidden='{{!none}}' class="swiper-box" duration='300' bindchange='bindchange'>
+  <!-- 正在砍价 -->
+  <swiper-item>
+    <view class='goods_info' wx:for="{{cut}}" wx:for-item='items' wx:key="this">
+      <view class='goods_desc'>
+        <view class='left'>
+          <image src='{{items.goods_img}}'></image>
+        </view>
+        <view class='right'>
+          <view class='name_num'>
+          <view class='goods_suggest'>{{items.goods_name}}</view>
+          <view class='people_num' >{{items.kj_num}}人已帮砍</view>
+          </view>
+          <view class='spec'>{{items.goods_item}}</view>
+          <view class='bottom'>
+            <view class='price_wrap'>
+              <text style='color:{{backgroundColor}}'>¥{{items.get_price}}</text>
+              <text class='underline_price'>¥{{items.goods_price}}</text>
+            </view>
+            <view class='people fs28' data-goods_id='{{items.goods_id}}' bindtap='Tocut' data-self_id='{{items.id}}' data-get_price="{{items.get_price}}" data-goods_price="{{items.goods_price}}">
+            <view class='people-bt' style='background-color:{{backgroundColor}}'>查看详情</view>
+          </view>
+          </view>
+
+          
+        </view>
+      </view>
+    </view>
+
+    <view class='goods_info'  wx:for-item='items' wx:key="this" wx:for="{{cut_success}}">
+      <view class='goods_desc'>
+        <view class='left'>
+          <image src='{{items.goods_img}}'></image>
+        </view>
+        <view class='right'>
+          <view class='goods_suggest'>{{items.goods_name}}</view>
+          <view class='spec'>{{items.goods_item}}</view>
+          <view class='bottom'>
+            <view class='price_wrap'>
+              <text style='color:{{backgroundColor}}' >¥{{items.get_price}}</text>
+              <text class='underline_price'>¥{{items.goods_price}}</text>
+            </view>
+            <view class='people-bt' style='background-color:{{backgroundColor}}' bindtap="to_order" data-goods_name='{{items.goods_name}}' data-goods_id='{{items.goods_id}}' data-goods_img='{{items.goods_img}}' data-price='{{items.get_price}}' data-spec='{{items.goods_item}}' data-self_id='{{items.id}}'>砍价成功，去下单</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+
+
+
+  <!-- 砍价失败 -->
+  <swiper-item>
+    <view class='goods_info' wx:for="{{cut_failure}}" wx:for-item='items' wx:key="this">
+      <view class='goods_desc'>
+        <view class='left'>
+          <image src='{{items.goods_img}}'></image>
+        </view>
+        <view class='right'>
+          <view class='goods_suggest'>{{items.goods_name}}</view>
+          <view class='spec'>{{items.goods_item}}</view>
+          <view class='bottom'>
+            <view class='price_wrap'>
+              <text  style='color:{{backgroundColor}}'>¥{{items.get_price}}</text>
+              <text class='underline_price'>¥{{items.goods_price}}</text>
+            </view>
+            <view class='people-bt' style='background-color: {{backgroundColor}}' bindtap='recut' data-goods_id='{{items.goods_id}}' data-get_price="{{items.get_price}}" data-goods_price="{{items.goods_price}}">砍价超时,再砍一次</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>

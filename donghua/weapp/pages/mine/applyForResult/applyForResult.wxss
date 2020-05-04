@@ -1,0 +1,47 @@
+/* pages/mine/applyForResult/applyForResult.wxss */
+.container_content{
+  margin: 328rpx 50rpx 0 50rpx;
+  background-color: white;
+    border-radius: 10rpx;
+    box-shadow:0px 5px 13px 0px rgba(179,176,176,0.16);
+    height: 450rpx;
+}
+.container_content_name{
+  padding-left: 41rpx;
+  
+  border-radius: 10rpx 10rpx 0 0 ; 
+  height: 120rpx;
+  text-justify: center;
+  font-size: 32rpx;
+  line-height: 120rpx;
+}
+.container_content_result{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 60rpx;
+  
+}
+.container_content_result_top{
+padding: 66rpx 0;
+font-size: 28rpx;
+  text-align: center;
+  color: #fc413c;
+  display: flex;
+  flex-direction: column;
+}
+.container_content_result_bottom{
+  display: flex;
+  flex-direction: column;
+  font-size: 20rpx;
+ 
+}
+.container_content_result_btn{
+  width: 200rpx;
+  height: 68rpx;
+ 
+  line-height: 68rpx;
+  font-size: 32rpx;
+  margin-top: 13rpx;
+  border-radius: 34rpx;
+}

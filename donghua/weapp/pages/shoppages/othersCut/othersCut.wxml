@@ -1,0 +1,98 @@
+<!--pages/shoppages/othersCut/othersCut.wxml-->
+<view class='wrap' style='  background-color:{{backgroundColor}} ;'>
+  <view class='avatar'>
+    <image src='{{topUserInfo.avtar}}'></image>
+  </view>
+  <view class='goods_info'>
+    <view class='avatar_name'>{{topUserInfo.userName}}</view>
+    <view class='findding'>我发现一件好货，来一起砍价低价拿吧</view>
+    <view class='goods_desc'>
+      <view class='left'>
+        <image src='{{goodsInfo.goods_img}}'></image>
+      </view>
+      <view class='right'>
+        <view class='goods_suggest'>{{goodsInfo.goods_name}}</view>
+        <!-- <view class='price_wrap'>
+          <text class='price'>¥{{goodsInfo.now_money}}</text>
+          <text class='underline_price'>¥{{goodsInfo.goods_price}}</text>
+        </view> -->
+        <view class='goods-price fs24'>
+          <text>原价: ¥ {{goodsInfo.goods_price}}</text>
+        </view>
+        <view class='price_wrap'>
+          <text class='price'>现价:¥ {{goodsInfo.final_money}}</text>
+        </view>
+      </view>
+      <view class='people_num'>{{goodsInfo.goods_p_num}}人已低价拿</view>
+    </view>
+  </view>
+  <view class='cuted_price'>已砍
+    <text style='color:#FFDE00'>{{goodsInfo.cuted_price}}</text>元，还剩砍价{{goodsInfo.surplus}}元</view>
+  <button class='btn' bindtap='showModel' disabled='{{helpCut}}'>帮砍一刀</button>
+  <view class='time'>剩余{{time}}结束</view>
+  <view class='help_list'>
+    <view class='title'>帮砍列表</view>
+    <view class='tip'>小提示：邀请用户越多，砍价成功率越高哦</view>
+    <view class='list'>
+
+      <view class='list_item' wx:for='{{helpList}}'>
+        <view class='left'>
+          <image src='{{item.photo}}'></image>
+          <view class='left_words'>
+            <view class='top'>{{item.nickname}}</view>
+            <view class='bottom'>帮砍一刀</view>
+          </view>
+        </view>
+        <view class='right'>
+          <image src='/image/knife.png'></image>
+          <view style='color:#FCD512;'>砍掉{{item.cut_money}}元</view>
+        </view>
+      </view>
+    </view>
+    <view class='more' bindtap='showMore'>查看更多</view>
+  </view>
+  <view class='explain'>
+    <view class='top'>
+      <view class='line_left'></view>
+      <view class='line_right'></view>
+      <view class='words'>说明</view>
+    </view>
+    <view class='words_line'>
+      <view>1.商品所标价格为商品砍价成功后的最终价格</view>
+      <view>2.每个微信账号只能帮砍一次</view>
+      <view>3.未在规定时间内完成砍价视为失败</view>
+      <view>4.砍价金额随机</view>
+      <view>5.更多相关信息，请咨询邻伍客服</view>
+    </view>
+  </view>
+</view>
+
+
+<!-- <button wx:if="{{ungetInfo}}" open-type="getUserInfo" class="auth_button" bindgetuserinfo="bindGetUserInfo">授权登录</button> -->
+<view class='modalWrap' wx:if='{{showModalFlag}}'>
+  <view class='modal'>
+    <view class='img'>
+      <image src='{{topUserInfo.avtar}}'></image>
+    </view>
+    <view class='content'>
+      <image src='/image/goods_info/cancel.png' bindtap='hideModal'></image>
+      <view class='title'>谢谢你帮我砍了{{cut_money}}元</view>
+      <view class='subTitle'>你也可以砍价低价拿哦，快去挑 选心仪的商品吧~</view>
+      <button bindtap='back'>我也要低价拿</button>
+    </view>
+  </view>
+</view>
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}};' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>

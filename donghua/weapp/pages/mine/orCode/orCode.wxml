@@ -1,0 +1,19 @@
+
+<view style='padding-bottom:60rpx;'>
+  <view class='text'>我的二维码</view>
+  <!-- <view class='text'>{{error}}</view>
+  <view class='text'>{{error2}}</view> -->
+  <canvas style="width:{{imageWidth-25}}px;height:450px" canvas-id="myCanvas" class='canvas'></canvas>
+
+  <view  class="edit-footer">
+    <button hidden='{{downloadHid}}' class='btn' style='margin-top:20rpx;background-color:{{backgroundColor}};color:#ffffff' type="primary" bindtap="savePic">下载图片</button>
+  </view>
+  <view>
+    <button hidden='{{downloadHid}}' class='btn' open-type='share' style='margin-top:25rpx;;background-color:f1f0f0;color:#999999'>分享给好友</button>
+  </view>
+</view>
+
+<view catchtouchmove="ture" class="bg" style='display:{{display}}'>
+  <view class='view_load' animation="{{animationData}}"></view>
+  <view class='view_load_text'>加载中</view>
+</view>

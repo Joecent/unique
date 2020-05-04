@@ -1,0 +1,31 @@
+<view class='container'>
+  <view class='container_content'>
+    <view class='container_content_name' style='background-color: {{backgroundColor}};color:#ffffff;'>{{saleName}}</view>
+
+    <view hidden='{{hidWait}}' class='container_content_result'>
+      <view class='container_content_result_top'>等待审核中...</view>
+      <view class='container_content_result_bottom'>
+        <text>销售权限正在审批中,我们将在24小时之内进行处理,请耐心等待。</text>
+        <text style='margin-top:10rpx;'>客服电话：13601624592</text>
+      </view>
+    </view>
+
+    <view hidden='{{hidBust}}' class='container_content_result'>
+      <view class='container_content_result_top'>
+      <text>审核失败！</text>
+      <text style='margin-top:5rpx;'>失败原因：{{extar}}</text>
+      </view>
+     
+      <button bindtap='applyAgain' style=' background-color: {{backgroundColor}};color:#ffffff;' class='container_content_result_btn'>重新申请</button>
+    </view>
+
+    <view hidden='{{hidForbidden}}' class='container_content_result'>
+      <view class='container_content_result_top'>×已禁用销售权限</view>
+      <view class='container_content_result_bottom'>
+        <text>销售权限已被禁用，无法进行操作。</text>
+        <text>客服电话：13601624592</text>
+      </view>
+    </view>
+
+  </view>
+</view>

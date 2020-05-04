@@ -1,0 +1,52 @@
+/* pages/mine/ORcode/ORcode.wxss */
+page{
+  background-color: #ffffff;
+}
+.btn{
+  border-radius: 50rpx;
+  width: 650rpx;
+  height: 100rpx;
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.text{
+  margin-left: 20rpx;
+  margin-top: 30rpx;
+  font-weight:bold;
+  font-size:36rpx;
+  line-height:48px;
+}
+.view_load{
+border-radius: 50%;
+border: 5rpx dashed black;
+  height:50rpx;
+  width:50rpx;
+   top:350rpx;
+   left: 350rpx;
+   position: absolute;
+   z-index: 9999;
+}
+.view_load_text{
+   top:420rpx;
+   left: 325rpx;
+   position: absolute;
+   z-index: 9999;
+}
+.bg {
+  display: none;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  -moz-opacity: 0.7;
+  opacity: 0.70;
+  filter: alpha(opacity=70);
+  color: black;
+}
+.btn::after{
+  border: none;
+}

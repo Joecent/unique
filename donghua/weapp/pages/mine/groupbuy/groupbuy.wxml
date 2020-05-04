@@ -1,0 +1,143 @@
+<!--pages/mine/groupbuy/groupbuy.wxml-->
+
+
+<view class='swiper-tab'>
+  <view class="swiper-tab-list" bindtap="swichNav" data-current='0'>
+    <view class="border-bottom {{currentTab==0 ? 'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}">我发起的</view>
+  </view>
+  <view class="swiper-tab-list" bindtap="swichNav" data-current='1'>
+    <view class="border-bottom {{currentTab==1 ? 'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==1 ? backgroundColor:''}}">我参与的</view>
+  </view>
+</view>
+
+
+
+<view class='none' hidden='{{groups_num!=0}}'>
+  <view class='none_image'>
+    <image src='/image/none.png'></image>
+  </view>
+  <view class='tips'>这里什么都没有哦~</view>
+</view>
+
+
+<swiper current='{{currentTab}}' class="swiper-box" duration='300' bindchange='bindchange'>
+
+  <!-- 我发起的 -->
+  <swiper-item>
+    <view class='groups' wx:for='{{groups}}' wx:for-item='items' wx:key="this"  wx:if='{{items.is_leader==1}}'>
+      <view data-order_status='notpost' data-index='{{index}}'>
+        <view class='title'>
+          <view class='group_type_time'>
+            <view class='group_type'>我发起了拼团</view>
+            <view class='group_time'>{{items.order_time}}</view>
+          </view>
+          <view class='group_statu' style='color:{{backgroundColor}}' wx:if='{{items.group_status==0}}'>正在拼团中</view>
+          <view class='group_statu' wx:if='{{items.group_status==1}}'>拼团成功</view>
+        </view>
+        <view class='goods_info'>
+          <view class='goods_image'>
+            <image src='{{items.goods_img}}'></image>
+          </view>
+          <view class='goods_name_price'>
+            <view class='goods_name'>{{items.goods_name}}</view>
+            <view class='goods_price_group_num'>
+              <text class='goods_price' style='color:{{backgroundColor}}'>￥{{items.group_price}}</text>
+              <text class='group_num'>{{items.group_num}}人团</text>
+            </view>
+          </view>
+        </view>
+        <view class='bottom'>
+          <view class='user_images'>
+            <view class='user_image' wx:for='{{items.child}}' wx:for-item='itemschild' wx:key="this">
+              <image src='{{itemschild}}'></image>
+            </view>
+          </view>
+          <view class='options'>
+            <button class='toorderinfo' bindtap='toorderinfo' data-group_num='{{items.group_num}}' data-order_sn='{{items.order_sn}}'>查看拼团</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+ 
+  <!-- 我参与的 -->
+
+  <swiper-item>
+    <view class='groups' wx:for='{{groups}}' wx:for-item='items' wx:key="this" wx:if='{{items.is_leader==0}}'>
+      <view data-order_status='finish' data-index='{{index}}'>
+        <view class='title'>
+          <view class='group_type_time'>
+           
+            <view class='group_type'>我参与了拼团</view>
+            <view class='group_time'>{{items.order_time}}</view>
+          </view>
+
+          <view class='group_statu' wx:if='{{items.group_status==0}}'>正在拼团中</view>
+          <view class='group_statu' wx:if='{{items.group_status==1}}'>拼团成功</view>
+        </view>
+
+        <view class='goods_info'>
+          <view class='goods_image'>
+            <image src='{{items.goods_img}}'></image>
+          </view>
+          <view class='goods_name_price'>
+            <view class='goods_name'>{{items.goods_name}}</view>
+            <view class='goods_price'>￥{{items.group_price}}
+              <view class='text'>{{items.group_num}}人团</view>
+            </view>
+          </view>
+        </view>
+
+        <view class='bottom'>
+          <view class='user_images'>
+            <view class='user_image' wx:for='{{items.child}}' wx:for-item='itemschild' wx:key="this">
+              <image src='{{itemschild}}'></image>
+            </view>
+
+          </view>
+          <view class='options'>
+            <button class='toorderinfo' bindtap='toorderinfo' data-group_num='{{items.group_num}}' data-order_sn='{{items.order_sn}}'>查看拼团</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+</swiper>
+
+
+
+<!-- <view class='groups' wx:for='{{groups}}' wx:for-item='items' wx:key="this">
+  <view class='title'>
+    <view class='group_type_time'>
+      <view class='group_type' wx:if='{{items.is_leader==1}}'>你发起了拼团</view>
+      <view class='group_type' wx:if='{{items.is_leader==0}}'>你参与了拼团</view>
+      <view class='group_time'>{{items.order_time}}</view>
+    </view>
+
+    <view class='group_statu' wx:if='{{items.group_status==0}}'>正在拼团中</view>
+    <view class='group_statu' wx:if='{{items.group_status==1}}'>拼团成功</view>
+  </view>
+
+  <view class='goods_info'>
+    <view class='goods_image'>
+      <image src='{{items.goods_img}}'></image>
+    </view>
+    <view class='goods_name_price'>
+      <view class='goods_name'>{{items.goods_name}}</view>
+      <view class='goods_price'>￥{{items.group_price}}
+        <view class='text'>{{items.group_num}}人团</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='bottom'>
+    <view class='user_images'>
+      <view class='user_image' wx:for='{{items.child}}' wx:for-item='itemschild' wx:key="this">
+        <image src='{{itemschild}}'></image>
+      </view>
+    </view>
+    <view class='options'>
+      <button class='toorderinfo' bindtap='toorderinfo' data-group_num='{{items.group_num}}' data-order_sn='{{items.order_sn}}'>查看拼团</button>
+    </view>
+  </view>
+</view> -->

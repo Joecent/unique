@@ -1,0 +1,290 @@
+<!--pages/shoppages/index/index.wxml-->
+
+<!-- 搜索 -->
+<view class="section" bindtap='to_search_goods'>
+  <image src='/image/search.png'></image>
+  <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' disabled="false" class='fs30' />
+</view>
+
+<!-- 轮播图 -->
+
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}" wx:key="this">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" mode="aspectFill" />
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- 店铺会员 -->
+<!-- <view class='huiyuan'>
+  <view class='huiyaun-title fs28'>店铺会员</view>
+  <view class='huiyaun-conten fs28'>
+    <view class='huiyuan-img'>
+      <image></image>
+    </view>
+    <view class='huiyaun-name'>
+      <text>王小姐店铺</text>
+    </view>
+  </view>
+
+  <view class='huiyuan-bt fs24'>
+    <text>成为会员></text>
+  </view>
+</view> -->
+
+
+
+<!-- 领取优惠 -->
+<!-- <view class='couponUses' wx:if="{{is_cash == 1}}">
+   <view class='couponUse-title'>领取优惠</view> 
+  <view class='couponUse-img' bindtap='showModal'>
+    <image src='{{cash_bg_img}}'></image>
+  </view>
+</view> -->
+
+<!-- <view class="commodity_screen" bindtap="hideModals" wx:if="{{showModalStatus}}" animation='{{animationData}}' catchtouchmove="ture"></view>
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}" catchtouchmove="ture">
+
+  <view class='couponUse-top'>
+    <view class='couponUse-titles fs32'>领取优惠劵</view>
+    <view class='commodity_screen-error' bindtap="hideModals">
+      <image src='/image/error.png'></image>
+    </view>
+  </view> -->
+
+  <!-- <view>
+    <!-- <view class='couponUse-titles fs32'>领取优惠劵</view> 
+    <scroll-view scroll-y style="height:{{winHeight}}rpx">
+      <view wx:for="{{casharr}}" wx:key="this">
+        <view class='couponUse-conten' style='background-color:{{backgroundColor}}'>
+          <view class='couponUse-price' hidden='{{item.cash_type==1}}'>
+            ￥
+            <text>{{item.cash_money}}</text>
+            <!-- <view class='cash_money_useable'>
+                  <text> {{item.cash_name}}</text>
+                </view> 
+          </view>
+          <view class='cash_discount_useable' hidden='{{item.cash_type==0}}'>
+            <text>{{item.cash_money}}</text>折
+            <!-- <view class='cash_name'>{{item.cash_name}}</view> 
+          </view>
+          <view class='discount_condition'>
+            <view class='money_condition_useable fs24' hidden='{{item.cash_type==1}}'>满{{item.pay_money}}减{{item.cash_money}}.00</view>
+            <view class='money_condition_useable fs24' hidden='{{item.cash_type==0}}'>满{{item.pay_money}}享{{item.cash_money}}折优惠</view>
+            <view class='fs24' hidden='{{item.cash_state==0}}'>新人领取</view>
+            <view class='fs24' hidden='{{item.cash_state==2}}'>店铺领取</view>
+            <view class='time_useable fs24'>{{item.start_time}} - {{item.end_time}}</view>
+          </view>
+          <view class='couponUse-lq fs32' bindtap='click' data-status="{{item.status}}" data-index="{{index}}" data-id="{{item.id}}">
+            立即领取
+          </view>
+        </view>
+      </view>
+      <view wx:if='{{none}}'>
+        <view class='commodity_screen-img'>
+          <image src='/image/none.png'></image>
+        </view>
+        <view class='commodity_screen-title fs24'>暂无优惠劵领取</view>
+      </view>
+
+    </scroll-view>
+  </view> -->
+
+  <!-- <view wx:else>
+    <view class='commodity_screen-img'>
+      <image src='/image/none.png'></image>
+    </view>
+    <view class='commodity_screen-title fs24'>暂无优惠劵领取</view>
+  </view> 
+</view>-->
+
+
+<!-- 店铺名称 -->
+<!-- <view class='store' wx:if='{{shop_info_isshow==1}}'>
+  <view class='store_logo'>
+    <view class='store_a'>
+      <image src="{{logo}}"></image>
+    </view>
+  </view>
+
+  <view class='store_name' bindsubmit="formSubmit">
+    <view class='shop_info1 fs28'>{{shopa}}</view>
+    <view class='shop_info fs26'>营业时间：{{business}}</view>
+    <view class='shop_info fs26'>
+      店铺地址：{{shop_address}}
+    </view>
+  </view>
+
+  <view class='store-lr'>
+    <view class='store-tel' bindtap="calling">
+   <icon style='color:{{backgroundColor}}' class='iconfont icon-dianhua'></icon>
+    </view>
+    <view class='store-map' bindtap="bindaddinput">
+    <icon style='color:{{backgroundColor}}' class='iconfont icon-dingwei1'></icon>
+    </view>
+  </view>
+</view>
+ -->
+
+<!-- 分类 -->
+<!-- <view class='index-conten'>
+  <view class='index-list'>
+    <view class='index-goodpart' wx:for="{{cates}}" wx:key="{{this}}" bindtap='bindcation' data-cate_id='{{item.cate_id}}' data-index="{{index}}" data-goods_id="{{item.goods_id}}" wx:if="{{index<6}}">
+
+      <block wx:if="{{item.goods_num > 0}}">
+        <view class='index-img'>
+          <image src='{{item.cate_img}}' mode="widthFix"></image>
+        </view>
+        <view class='index-name fs28'>{{item.cate_name}}</view>
+      </block>
+    </view>
+  </view>
+</view> -->
+
+
+<!-- 拼团商品 -->
+<!-- <view class='couponUses' wx:if="{{is_group == 1}}">
+  <view class='couponUses-cons'>
+    <view class='couponUses-title fs28'>拼团专区</view>
+    <view class='couponUses-lr' bindtap='Collage'>
+      <image src='/image/back.png'></image>
+    </view>
+  </view>
+  <view class='couponUses-img' bindtap='Collage'>
+    <image src='{{groupimg}}' mode="aspectFill"></image>
+  </view>
+</view> -->
+
+<!--砍价  -->
+<!-- <view class='couponUses' wx:if="{{is_bargain == 1}}">
+  <view class='couponUses-cons'>
+    <view class='couponUses-title fs28'>砍价专区</view>
+    <view class='couponUses-lr' bindtap='shopcut'>
+      <image src='/image/back.png'></image>
+    </view>
+  </view>
+  <view class='couponUses-img' bindtap='shopcut'>
+    <image src='{{bargain_bg_img}}' mode="aspectFill"></image>
+  </view>
+</view> -->
+
+
+
+
+<!-- 店铺热推 -->
+<view class='order'>
+  <text class='line'></text>
+  <text class='txt fs32'>店铺热推</text>
+  <text class='line'></text>
+</view>
+
+<view style='padding-bottom:125rpx;' class='recommend'>
+  <view class='recommend_goodslist'>
+    <block class='goodpart' wx:for='{{rec_goods}}' wx:for-index='idx' wx:for-item='item' wx:key="this">
+      <view class='good' bindtap='toGoodsinfo' data-goods_id='{{item.goods_id}}'>
+        <image src='{{item.goods_img}}' mode="aspectFill" />
+        <view class='goodname fs26 '>{{item.goods_name}}</view>
+        <view class='prices'>
+          <view class='price fs30' style='color:{{backgroundColor}}'>￥{{item.goods_price[item.goods_price.length-1]}}</view>
+          <!-- <view class='price' wx:if='{{item.is_group==1}}'>￥{{item.group_price}}</view> -->
+          <!-- <view class='market_price'>￥{{item.market_price}}</view> -->
+          <view class='prices-gwc' catchtap="addCart" data-goods_name="{{item.goods_name}}" data-spec_price="{{item.goods_price}}" data-spec_name="{{item.key_name}}" data-goods_img="{{item.goods_img}}" data-goods_id="{{item.goods_id}}" data-goods_score="{{item.goods_score}}"
+            data-product_id="{{item.product_id}}" data-index="{{index}}" data-spec_img="{{item.spec_img}}" data-market_price='{{item.market_price}}'>
+            <icon style='color:{{backgroundColor}};font-size:40rpx;' class='iconfont icon-jiebantubiao-'></icon>
+          </view>
+        </view>
+      </view>
+      <!-- </view> -->
+    </block>
+    <view hidden="{{loadall}}" class="loadall">已加载全部</view>
+  </view>
+</view>
+
+<!-- 购物车弹出框 -->
+<view class='maskLayer' wx:if="{{chooseSize}}" bindtap='hideModal' catchtouchmove="ture"></view>
+<view class='choose' wx:if="{{chooseSize}}" animation='{{animationData}}' catchtouchmove="ture">
+  <view class='specs'>
+    <view class='image'>
+      <view wx:if="{{spec_imgs>1}}">
+        <image src="{{spec_spec_imgs}}"></image>
+      </view>
+      <view wx:if="{{spec_imgs==1}}">
+        <image src="{{goods_img}}"></image>
+      </view>
+    </view>
+
+    <view class='specs_info '>
+      <view class='price_score'>
+        <view class='spec_price' style='color:{{backgroundColor}}'>
+          <view class='fs32'>￥{{spec_price_choose}}</view>
+          <!-- <view wx:if='{{type==1}}'>￥{{spec_group_prices}}</view> -->
+          <view class='spec_market_prices fs26'>￥{{spec_market_prices}}</view>
+        </view>
+        <view class='score fs24'>库存：{{spec_goods_scores}}</view>
+      </view>
+
+      <view class='spec_name fs28'>
+        <view wx:if="{{spec_names>1}}">
+          {{spec_name}}
+        </view>
+      </view>
+
+      <scroll-view scroll-y class='l-sf-style'>
+        <view class='spec_value fs28' wx:if="{{spec_names>1}}">
+          <view wx:for='{{spec_item}}' wx:for-index='index' class="value {{index==chooseIndex?'on':''}}" style="background-color:{{index==chooseIndex? backgroundColor:''}};"  wx:key="this" data-index="{{index}}" data-type='0' catchtap='chooseSpec'>
+            <view>{{item}} </view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <!-- 加减 -->
+      <view class='nums fs28'>
+        <view>购买数量:</view>
+        <view class='num fs30'>
+          <text bindtap='importCountjian' class='fs40 {{item.count == 1 ? "noclick" : ""}}'>-</text>
+          <input type='number' name='count{{index}}' value='{{count}}' bindinput="importCount" disabled="false"></input>
+          <text bindtap='importCountjia' class='fs40'>+</text>
+        </view>
+      </view>
+      <view class='buttons'>
+        <button class='imform' style='background-color:{{backgroundColor}}' bindtap='addToCart' data-spec_goods_scores="{{spec_goods_scores}}">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>
+
+<view class='bottomMenu fs24'>
+  <view style='color:{{backgroundColor}}' class='bottomMenu-item'>
+    <icon class='iconfont icon-shouye-weixuanzhong'></icon>
+    <text>首页</text>
+  </view>
+  <view bindtap='toShops' class='bottomMenu-item'>
+    <icon class='iconfont icon-quanbunormal'></icon>
+    <text>全部商品</text>
+  </view>
+  <view bindtap='toCart' class='bottomMenu-item'>
+    <icon class='iconfont icon-jiebantubiao-'></icon>
+    <text>购物车</text>
+  </view>
+  <view bindtap='toMine' class='bottomMenu-item'>
+    <icon class='iconfont icon-wode'></icon>
+    <text>我的</text>
+  </view>
+</view>

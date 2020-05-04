@@ -1,0 +1,68 @@
+<!--pages/mine/salesDetails/salesDetails.wxml-->
+<view class='container'>
+  <view class='container_top'>
+    <view class='container_top_content'>
+      <icon bindtap='showIncome' style="display: flex;flex-direction: row;justify-content: center;align-items: center;margin-right:10rpx;font-size:16px;color:{{oneSelect?backgroundColor:''}};" class="iconfont {{oneSelect?'icon-p':'icon-duoxuankuang'}}"></icon>
+      <text>收入明细</text>
+    </view>
+    <view class='container_top_content'>
+      <icon bindtap='showWithdraw' style="display: flex;flex-direction: row;justify-content: center;align-items: center;margin-right:10rpx;font-size:16px;color:{{twoSelect?backgroundColor:''}};" class="iconfont {{twoSelect?'icon-p':'icon-duoxuankuang'}}"></icon>
+      <text>提现明细</text>
+    </view>
+  </view>
+
+  <view wx:if="{{allList.length == 0}}">
+    <view class='none'>
+      <view class='none_image'>
+        <image style='margin-left:20rpx;' src='/image/none.png'></image>
+      </view>
+      <view class='tips fs24'>这里什么都没有哦~</view>
+    </view>
+  </view>
+
+  <view hidden='{{allHid}}' wx:for='{{allList}}' class='container_item'>
+    <view wx:if='{{item.refund_status==1}}' class='container_item_content'>
+      <view>
+        <view style='display: flex;flex-direction: row;align-items: baseline;'>
+          <view style='width:140rpx;margin-bottom:10rpx; overflow: hidden;text-overflow: ellipsis;white-space: nowrap'>{{item.userName}}</view>
+          <text>{{item.status==2?'购买商品':'金额提现'}}</text>
+          <text style='margin-left:40rpx;' wx:if='{{item.cash_type==1}}'>微信提现</text>
+          <text style='margin-left:40rpx;' wx:if='{{item.cash_type==2}}'>支付宝</text>
+          <text style='margin-left:40rpx;' wx:if='{{item.cash_type==3}}'>银行卡</text>
+        </view>
+      </view>
+      <text style="color:{{item.status==2?backgroundColor:''}}">{{item.status==2?'+':'-'}}￥{{item.sale_money}}</text>
+    </view>
+
+    <view wx:if='{{item.refund_status==2}}' class='container_item_content'>
+      <view>
+        <view style='display: flex;flex-direction: row;align-items: baseline;'>
+          <view style='width:140rpx;margin-bottom:10rpx; overflow: hidden;text-overflow: ellipsis;white-space: nowrap'>{{item.userName}}</view>
+          <text>提现失败</text>
+          <text style='margin-left:40rpx;' wx:if='{{item.cash_type==1}}'>微信提现</text>
+          <text style='margin-left:40rpx;' wx:if='{{item.cash_type==2}}'>支付宝</text>
+          <text style='margin-left:40rpx;' wx:if='{{item.cash_type==3}}'>银行卡</text>
+          <view class='looked' bindtap='showStratum' style='margin-left:30rpx;background-color: {{backgroundColor}}' data-user="{{item}}">查看原因</view>
+        </view>
+      </view>
+      <text style="color:{{item.status==2?backgroundColor:''}}">{{item.status==2?'+':'-'}}￥{{item.sale_money}}</text>
+    </view>
+  </view>
+  <view wx:if="{{allList.length !=0}}" class='container_line'></view>
+
+  <view catchtouchmove="ture" class="bg" bindtap='hideview' style='display:{{display}}'></view>
+  <view catchtouchmove="ture" class="classshow" style='display:{{display}}'>
+    <view class='classshow_content'>
+      <view class='classshow_content_top'>拒绝理由</view>
+      <view class='classshow_content_text'>{{extra}}</view>
+    </view>
+  </view>
+
+
+
+
+
+
+
+
+</view>

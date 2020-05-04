@@ -5,6 +5,7 @@ const get = (path, params, showToast) => {
   const newParams = { ...params };
    newParams.sessionId = store.get('sessionId') || 'undefined';
    newParams.appId = store.appId;
+
   if (showToast) {
     wx.showToast({
       title: '正在加载...',

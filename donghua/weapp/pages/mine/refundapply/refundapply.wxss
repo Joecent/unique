@@ -8,6 +8,7 @@
   width: 32rpx;
   height: 20rpx;
   display: block;
+  
 }
 
 .type{
@@ -88,7 +89,6 @@
   width: 100%;
   color: white;
   border-radius: 0;
-  padding: 12rpx;
 }
 .type_to_choose{
   text-align: center;
@@ -101,51 +101,4 @@
 .type_name{
   font-size: 28rpx;
   color: #323232;
-}
-.order_detail{
-  margin-top: 20rpx;
-  background-color: white;
-  font-size: 28rpx;
-  padding: 30rpx 40rpx 150rpx;
-}
-.goodslist image {
-  width: 150rpx;
-  height: 150rpx;
-}
-
-.goodslist {
-  font-size: 26rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 30rpx;
-  min-height: 0;
-}
-
-.goodslist_sun {
- display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.goodslist_text {
-  margin-left: 32rpx;
-}
-.allcost{
-  margin-top: 20rpx;
-  font-size: 28rpx;
-  margin-right: 0;
-  color: #FF4040;
-  display: flex;
-  justify-content: flex-end;
-}
-.getinstrc {
-  font-size: 28rpx;
-  margin-top: 50rpx;
-}
-
-.getinstrc_text {
-  font-size: 26rpx;
-  margin-top: 30rpx;
 }

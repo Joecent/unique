@@ -13,11 +13,7 @@
       <view class='addinput' bindtap="bindaddinput">
         <label>所在位置</label>
         <!-- <import src="../../../model/model.wxml"/> -->
-  <!-- <picker mode="region" bindchange="bindaddinput" custom-item="{{customItem}}"> -->
-            <view class="infoText {{selected==1?'on':''}}">
-             {{address}}
-            </view>
-          <!-- </picker> -->
+        <view class="infoText {{selected==1?'on':''}}">{{address}}</view>
         <image src='/image/one.png' class='tiao'></image>
         <!-- <template is="areaData" data="{{...item}}"/>  -->
       </view>

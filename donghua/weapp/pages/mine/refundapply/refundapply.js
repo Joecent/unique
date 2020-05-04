@@ -1,6 +1,5 @@
 // pages/mine/refundapply/refundapply.js
-import { newRefund, receive, addAftermarketService} from '../../../utils/api.js'
-import * as store from '../../../utils/store.js'
+import { refund } from '../../../utils/api.js'
 const app = getApp()
 Page({
 
@@ -8,10 +7,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    statu:0,
+    statu:3,
     type_name: '',
     type_choose_button: true,
-    refund_type: 1,
+    refund_type: '',
     statu_choose_button: true,
     filelist: [],
     files: [],
@@ -21,7 +20,6 @@ Page({
     reason: '',
     i: 0,
     order_id: '',
-    shop_id:'',
     file_data: [],
     disable: false
   },
@@ -29,9 +27,6 @@ Page({
     wx.navigateBack({
       delta: 1,
     })
-  },
-  receive_order(){
-    
   },
   to_choose() {
     var that = this
@@ -46,21 +41,21 @@ Page({
     }
 
   },
-  // choose_statu(e) {
+  choose_statu(e) {
  
-  //   var that = this
-  //   that.setData({
-  //     statu_choose_button: true,
-  //     statu: e.currentTarget.dataset.type
-  //   })
-  // },
-  // choose_type(e) {
-  //   var that = this
-  //   that.setData({
-  //     type_choose_button: true,
-  //     refund_type: e.currentTarget.dataset.type,
-  //   })
-  // },
+    var that = this
+    that.setData({
+      statu_choose_button: true,
+      statu: e.currentTarget.dataset.type
+    })
+  },
+  choose_type(e) {
+    var that = this
+    that.setData({
+      type_choose_button: true,
+      refund_type: e.currentTarget.dataset.type,
+    })
+  },
   to_choose_statu() {
     var that = this
     if (that.data.statu_choose_button == true) {
@@ -122,13 +117,11 @@ Page({
       var p = new Promise(function up(resolve) {
         if (that.data.files.length != 0) {
           wx.uploadFile({
-            url: 'https://www.linwushop.com/api/upload_img',
+            url: 'https://www.linwushop.com/upload_img',
             filePath: that.data.files[that.data.i],
             name: 'file',
             success: function (res) {
-              console.log(res.data,'tttt')
               var data = JSON.parse(res.data)
-              console.log(res.data,'4444')
               if (data.error_code == 1000) {
                 that.data.file_data.push(data.data.img_url)
                 that.data.i++
@@ -170,30 +163,30 @@ Page({
     upload().then(function (res) {
       console.log(res)
       var flag = true
-      // if (that.data.refund_money > that.data.order_money) {
-      //   wx.showLoading({
-      //     title: '退款金额过大',
-      //   })
-      //   setTimeout(function () {
-      //     wx.hideLoading()
-      //   }, 500)
-      // } else if (that.data.refund_type == ''){
-      //   wx.showLoading({
-      //     title: '退款类型必填',
-      //   })
-      //   setTimeout(function () {
-      //     wx.hideLoading()
-      //   }, 500)
-      if (that.data.reason == '') {
+      if (that.data.refund_money > that.data.order_money) {
         wx.showLoading({
-          title: '售后详情必填',
+          title: '退款金额过大',
         })
         setTimeout(function () {
           wx.hideLoading()
         }, 500)
-      } else if (that.data.file_data == '') {
+      } else if (that.data.refund_type == ''){
         wx.showLoading({
-          title: '请上传照片',
+          title: '退款类型必填',
+        })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 500)
+      } else if (that.data.statu == 3) {
+        wx.showLoading({
+          title: '收货状态必填',
+        })
+        setTimeout(function () {
+          wx.hideLoading()
+        }, 500)
+      } else if (that.data.reason == '') {
+        wx.showLoading({
+          title: '退货原因必填',
         })
         setTimeout(function () {
           wx.hideLoading()
@@ -202,14 +195,14 @@ Page({
         flag = false
       }
       if (res == true && flag == false) {
-        //console.log(app.globalData.userid,'888')
-        addAftermarketService({
+        refund({
           user_id: app.globalData.userid,
           order_id: that.data.order_id,
-          type: 1,
-          shop_id:that.data.shop_id,
-          extra: that.data.reason,
-          image: that.data.file_data.join(';'),
+          refund_type: that.data.refund_type,
+          receive_status: that.data.statu,
+          refund_money: that.data.refund_money,
+          refund_desc: that.data.reason,
+          refund_photo: that.data.file_data.join(',')
         }).then((res) => {
           if (res.error_code == 1000) {
             wx.showLoading({
@@ -217,8 +210,8 @@ Page({
             })
             setTimeout(function () {
               wx.hideLoading()
-              wx.redirectTo({
-                url: '/pages/mine/orderlist/orderlist?bindid=' + '3',
+              wx.navigateTo({
+                url: '/pages/mine/refund/refund',
               })
             }, 500)
           }
@@ -232,33 +225,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //console.log(store.get('order_detail'),'444')
     var that = this
-    var order=store.get('order_detail')
-    var goodslists=[]
-    var allcost = 0
-    for (var i = 0; i < order.goodscost.length; i++) {
-      // allcost = allcost + parseFloat(res.data[0].goodscost[i])
-      goodslists.push({
-        goodscost: order.goodscost[i],
-        goodsimg: order.goodsimg[i],
-        goodsname: order.goodsname[i],
-        goodsnum: order.goodsnum[i],
-        keyname: order.key_name[i]
-      })
-      allcost = allcost + parseFloat(goodslists[i].goodscost) * parseFloat(goodslists[i].goodsnum)
-    }
-    that.data.order_id = order.order_id
-    that.data.shop_id = order.shop_id
+    that.data.order_id = options.order_id
+    that.data.order_money = options.order_money
     that.setData({
-      allcost: allcost.toFixed(2),
-      goodslists: goodslists,
-      receiver:order.buyer,
-      phone:order.phone,
-      address:order.address+order.detail,
-      order_time:order.order_time,
       bar: app.globalData.barHeight,
-     // refund_money: options.order_money,
+      refund_money: options.order_money,
       backgroundColor: app.globalData.selectedColor,
     })
   },

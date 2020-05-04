@@ -1,0 +1,142 @@
+/* pages/shoppages/goodslist/goodslist.wxss */
+
+
+/*总体主盒子*/
+
+.container {
+  position: relative;
+  width: 100%;
+  /* height: 1220rpx; *//* background-color: #f0f4f7; */
+  color: #939393;
+}
+.shops-top {
+  padding: 0 3%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+ 
+}
+
+.shops-conten {
+  width: 100%;
+  background: #fff;
+}
+
+.shops-conten-top {
+  padding: 26rpx 5%;
+  display: flex;
+  justify-content: space-between;
+  /* border-bottom: 1px solid #D5D4D4; */
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.shops-conten-img image {
+  width: 14rpx;
+  height: 20rpx;
+}
+
+.none {
+  margin-top: 180rpx;
+}
+
+/*已加载完毕*/
+.loadall{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #939393;
+}
+.none_image {
+  width: 100%;
+  text-align: center;
+}
+
+.none_image image {
+  width: 316rpx;
+  height: 310rpx;
+}
+
+.tips {
+  width: 100%;
+  text-align: center;
+  font-size: 20rpx;
+  margin-top: 10rpx;
+  color: #484848;
+}
+
+.bar {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 10000;
+  background-color: #fff;
+  top: 0px;
+}
+
+.bar .backwrap {
+  height: 100%;
+  width: 60px;
+  position: absolute;
+}
+
+.bar image {
+  width: 19rpx;
+  height: 32rpx;
+  position: absolute;
+  display: block;
+  margin: 29rpx 48rpx;
+  z-index: 1000;
+}
+
+/* 列表页 */
+
+.cate_goodslist-con {
+  /* width: 95%; */
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cate_goodslist {
+  background: #fff;
+  overflow: hidden;
+  margin-top: 15rpx;
+  width: 49%;
+}
+
+.cate_goodslist-img image {
+  width: 370rpx;
+  height: 380rpx;
+  display: block;
+}
+
+.cate_goodslist-bt {
+  padding: 10rpx 20rpx;
+}
+
+.cate_goodslist-name {
+  color: #333;
+  font-size: 26rpx;
+  padding: 10rpx 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cate_goodslist-prices {
+  /* font-size: 27rpx; */
+}
+
+.market_price {
+  color: #999;
+  padding-left: 10rpx;
+  text-decoration: line-through;
+  font-size: 28rpx;
+}

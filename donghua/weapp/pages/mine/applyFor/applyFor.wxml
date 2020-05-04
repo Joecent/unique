@@ -1,0 +1,43 @@
+<view class='container'>
+  <view class='l-content'>
+    <view class='l-content-box'>
+      <view class='l-box-title'>姓名</view>
+      <view class='l-box-input'>
+        <input bindinput='importName' placeholder="请输入你的姓名" />
+      </view>
+    </view>
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>手机号</view>
+      <view class='l-box-input'>
+        <input bindinput='importPhone' placeholder="请输入你的手机号" />
+      </view>
+    </view>
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>验证码</view>
+      <view class='l-box-input'>
+        <input bindinput='importCode' style='width:85%;' placeholder="请输入你的手机验证码" />
+      </view>
+      <view hidden='{{hid}}' bindtap='getCode' style='color:{{backgroundColor}};' class='l-v-code'>获取验证码</view>
+     <view hidden='{{!hid}}' style='color:#999999;' class='l-v-code'>{{countDownNum}}s 后重新获取</view>
+    </view>
+
+    <!-- <view class='l-content-box'>
+      <view class='l-box-title'>行业</view>
+      <view class='l-box-input'>
+        <input bindinput='importTrade' placeholder="请输入你的行业" />
+      </view>
+    </view> -->
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>说明(选填)</view>
+      <view class='l-box-input'>
+      <textarea style='padding:10rpx;font-size:24rpx;height:200rpx;' bindinput='importState' placeholder="请输入申请说明"></textarea>
+      </view>
+    </view>
+    
+  </view>
+  <button bindtap='submit' disabled='{{disable}}' style='margin-bottom:120rpx;background-color: {{backgroundColor}};color:#ffffff;' class='l-submit'>提交</button>
+</view>
+

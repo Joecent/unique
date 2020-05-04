@@ -1,0 +1,179 @@
+<!--pages/shoppages/groupbuy/groupbuy.wxml-->
+
+<import src="../../../wxParse/wxParse.wxml" />
+
+<view class='banner'>
+  <view class='goods_image'>
+    <swiper autoplay='true' interval='5000' duration='1000' class='swiper' circular="true">
+      <block wx:for='{{goods_image}}' wx:key="this">
+        <swiper-item>
+          <image src='{{item}}' class="slide-image" mode="aspectFill"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+<view class='goods_info'>
+  <view class='goods_name'>
+    <view class='text'>
+      <text>{{goods.goods_name}}</text>
+    </view>
+  </view>
+  <view class='price_info'>
+    <view class='goods_price' style='color:{{backgroundColor}}'>
+      <!-- <text class='price' wx:if='{{goods.is_group==0}}'>￥{{goods_price}}</text> -->
+      <text class='price'>￥{{group_price}}</text>
+      <text class='realprice fs26'>￥{{market_price}}</text>
+      <text class='kc fs26 fs24'>库存：{{spec_goods_scores}}</text>
+    </view>
+  </view>
+
+  <view class='deal_rule'>
+    <view class='express fs24'>
+      <view class='rule_title'>
+      <view class='express_info'>全场包邮</view>
+      <view class='express_info'>七天退换</view>
+      <view class='express_info'>48小时发货</view>
+      <view class='express_info'>假一赔十</view>
+      </view>
+      <view class='rule_title'>
+      <view class='sold'>{{goods.group_num}}人团</view>
+      <view class='sold'>已售{{goods.goods_num}}件</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+<view class='groupBuy' wx:if='{{group_count!=0}}'>
+
+  <view class='title'>
+    <view class='groupBuynum'>{{group_count}}人正在拼单</view>
+    <view class='show_groups' catchtap='show_more_groups'>查看更多
+      <image src='/image/goods_info/tomore_gray.png'></image>
+    </view>
+  </view>
+
+
+  <view class='buygroups'>
+    <swiper vertical='true' circular='true' duration='500' autoplay='true' interval='5000' class='group_infos'>
+      <swiper-item wx:for='{{group_wait}}' class='group_info' wx:key="this">
+        <view class='buygroups-user'>
+          <view class='userinfo'>
+            <view>
+              <image src='{{item.photo}}'></image>
+            </view>
+            <view class='username'>{{item.name}}</view>
+          </view>
+          <view class='groupbuyinfo'>还差{{item.diff_num}}人拼成
+            <button class='togroupbuy' style='background-color:{{backgroundColor}}' data-goods_id='{{goods.goods_id}}' data-group_sn='{{item.group_sn}}' data-key_name='{{item.key_name}}' data-product_id='{{item.product_id}}' data-photo='{{item.photo}}' data-goods_cost='{{item.goods_cost}}' catchtap='joingroup'>去拼单</button>
+          </view>
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>
+
+
+<view class='goods_dec'>
+  <view class='goods_dec_title'>商品详情</view>
+  <view class='goods_dec_info'>
+    <view class='uinn'>
+      <view wx:for='{{goods.goods_desc}}'>
+        <image style='width:100%;display:block;' mode='widthFix' src='{{item}}'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class='blank' wx:if='{{show_groups}}' bindtap='cancel_groups_show'></view>
+
+<view class='groups' wx:if='{{show_groups}}'>
+    
+  <view class='error' bindtap='cancel_groups_show'>
+    <image src='/image/error.png'></image>
+  </view>
+
+  <view wx:for='{{group_wait}}' class='groups_show' wx:key="this">
+    <view class='userinfo'>
+      <view>
+        <image src='{{item.photo}}'></image>
+      </view>
+    </view>
+    <view class='groupbuyinfo'>还差{{item.diff_num}}人拼成</view>
+    <button class='groups_togroupbuy' style='background-color:{{backgroundColor}}' data-goods_id='{{goods.goods_id}}' data-group_sn='{{item.group_sn}}' data-key_name='{{item.key_name}}' data-product_id='{{item.product_id}}' data-photo='{{item.photo}}' data-goods_cost='{{item.goods_cost}}' catchtap='joingroup'>去拼单</button>
+  </view>
+</view>
+
+
+
+
+<view class='maskLayer' wx:if="{{chooseSize}}" bindtap='hideModal' catchtouchmove="ture"></view>
+<view class='choose' wx:if="{{chooseSize}}" animation='{{animationData}}' catchtouchmove="ture">
+  <view class='specs'>
+    <view class='image'>
+      <image src="{{goods_img}}"></image>
+    </view>
+
+    <view class='specs_info'>
+      <view class='price_score'>
+        <view class='spec_price' style='color:{{backgroundColor}}'>
+          <view wx:if='{{type==0}}'>￥{{spec_goods_prices}}</view>
+          <view wx:if='{{type==1}}'>￥{{spec_group_prices}}</view>
+          <view class='spec_market_prices'>￥{{spec_market_prices}}</view>
+        </view>
+        <view class='score'>库存：{{spec_goods_scores}}</view>
+      </view>
+      <view class='spec_name'>{{spec_name}}</view>
+
+      <scroll-view scroll-y class='l-sf-style'>
+        <view class='spec_value'>
+          <view catchtap='tochoose' data-spec_id='{{idx}}' wx:for='{{spec_value}}' wx:for-item='items' wx:for-index='idx' class="value {{index==idx?'on':''}}" style="background-color:{{index==idx? backgroundColor:''}}" wx:key="this">{{items}}</view>
+        </view>
+      </scroll-view>
+      <view class='buttons'>
+        <button class='imform' style='background-color:{{backgroundColor}}'  bindtap='tobought'>确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btn'>
+  <view class='cart' bindtap='mineGrey'>
+    <view class='cart_image'>
+      <image src='/image/mineGrey.png'></image>
+    </view>
+    <view class="cart_font">我的</view>
+  </view>
+  <view class='cart carts' bindtap='cart'>
+    <view class='cart_image'>
+      <image src='/image/cartGrey.png'></image>
+    </view>
+    <view class="cart_font">购物车</view>
+  </view>
+  <view class='cart' bindtap='show_home'>
+    <view class='cart_image'>
+      <image src='/image/indexGrey.png'></image>
+    </view>
+    <view class="cart_font">店铺</view>
+  </view>
+  <view class='ok' style='background-color:{{backgroundColor}}'  bindtap='show_spec' data-type='1'>发起拼单</view>
+</view>
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color: {{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>

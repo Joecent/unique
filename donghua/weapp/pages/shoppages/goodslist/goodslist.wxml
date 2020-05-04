@@ -1,0 +1,58 @@
+<!--pages/shoppages/goodslist/goodslist.wxml-->
+
+<view class="container">
+  <view class='shops-conten'>
+    <view class='shops-conten-top'>
+      <view>综合</view>
+      <view>销量</view>
+      <view>新品</view>
+      <view class='shops-conten-img'>
+        价格
+        <image src='/image/jiage.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- <view class='none' hidden='{{coupon_num!=0}}'>
+  <view class='none_image'>
+    <image src='/image/none.png'></image>
+  </view>
+  <view class='tips'>这里什么都没有哦~</view>
+</view> -->
+
+<swiper-item current='currentItem' style="height:{{winHeight}}rpx">
+  <view class='cate_goodslist-con'>
+    <view class='cate_goodslist' bindtap='toGoodsinfo' data-cate_id="{{item.cate_id}}" wx:for="{{goods}}" wx:key="this" data-indx="{{index}}" data-goods_id="{{item.goods_id}}">
+      <view class='cate_goodslist-img'>
+        <image src='{{item.goods_img}}' mode="aspectFill"></image>
+      </view>
+      <view class='cate_goodslist-bt'>
+        <view class='cate_goodslist-name'>
+          <text>{{item.goods_name}}</text>
+        </view>
+        <view class='cate_goodslist-prices'>
+          <text class='cate_goodslist-price fs32' style='color:{{backgroundColor}}'>￥{{item.goods_price[item.goods_price.length-1]}}</text>
+          <text class='market_price'>￥{{item.market_price[item.market_price.length-1]}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{loadall}}" class="loadall">已加载全部</view>
+</swiper-item>
+
+
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style=' background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>

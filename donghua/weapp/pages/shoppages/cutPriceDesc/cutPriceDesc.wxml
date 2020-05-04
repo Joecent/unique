@@ -1,0 +1,82 @@
+<!--pages/shoppages/cutPriceDesc/cutPriceDesc.wxml-->
+<import src="../../../wxParse/wxParse.wxml" />
+
+<view class='banner'>
+  <view class='goods_image'>
+    <swiper autoplay='true' interval='5000' duration='1000' class='swiper' circular="true">
+      <block wx:for='{{goods_image}}' wx:key="this">
+        <swiper-item>
+          <image src='{{item}}' class="slide-image" mode="aspectFill"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+<!-- 倒计时 -->
+
+<!-- <view class='time'>活动倒计时：{{h}}小时 ：{{m}}分 : {{s}}秒</view> -->
+
+<view class='goods_info'>
+  <view class='goods_name'>
+    <view class='text'>
+      <text>{{goods.goods_name}}</text>
+    </view>
+  </view>
+  <view class='price_info'>
+    <view class='goods_price'>
+      <view class='price_num'>
+      <text class='price' style='color:{{backgroundColor}}'>￥{{get_price}}</text>
+      <!-- <text class='realprice'>￥{{goods_price}}</text> -->
+      <text class='kc fs26'>库存:{{goods.goods_score}}</text> 
+      </view>
+      <view class='goods_price_words'>
+        <view class='goods-color fs26'>需要{{goods.kj_num}}人帮砍</view>
+        <view>邀请好友帮砍价,</view>
+        <view>砍价成功后可以超低价拿哦</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='goods_dec'>
+  <view class='goods_dec_title'>商品详情</view>
+  <view class='goods_dec_info'>
+    <view class='uinn'>
+     <view wx:for='{{goods.goods_desc}}'>
+        <image style='width:100%;display:block;' mode='widthFix' src='{{item}}'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<view class='btn'>
+  <!-- <view class='cancel' bindtap='back'>取消</view> -->
+
+  <view class='cart' bindtap='mineGrey'>
+    <view class='cart_image'>
+      <image src='/image/mineGrey.png'></image>
+    </view>
+    <view class="cart_font">我的</view>
+  </view>
+
+
+  <view class='cart carts' bindtap='cart'>
+    <view class='cart_image'>
+      <image src='/image/cartGrey.png'></image>
+    </view>
+    <view class="cart_font">购物车</view>
+    <view class="fl-bt-gwc-fx {{scaleCart? 'on' :''}}" wx:if="{{hasCarts}}">
+      <text>{{totalNum}}</text>
+    </view>
+  </view>
+
+  <view class='cart' bindtap='show_home'>
+    <view class='cart_image'>
+      <image src='/image/indexGrey.png'></image>
+    </view>
+    <view class="cart_font">店铺</view>
+  </view>
+  <view class='ok' style='background-color:{{backgroundColor}}' bindtap='toHelpCut' data-goods_score="{{goods.goods_score}}">去砍价</view>
+</view>

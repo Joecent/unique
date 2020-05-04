@@ -15,8 +15,6 @@ Page({
    */
   data: {
     winHeight: 0,
-    backgroundColor: app.globalData.selectedColor,
-    indexColor: app.globalData.selectedColor
   },
 
   /**
@@ -132,12 +130,6 @@ Page({
         list: res.data,
         winHeight: res.data.length * 130,
       })
-      if(res.data.length==1){
-        wx.setStorage({
-          key: "editaddress",
-          data: res.data[0]
-        })
-      }
     })
   },
 

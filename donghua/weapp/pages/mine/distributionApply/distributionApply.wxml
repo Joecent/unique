@@ -1,0 +1,40 @@
+<view class='container'>
+  <view class='l-content'>
+    <view class='l-content-box'>
+      <view class='l-box-title'>姓名</view>
+      <view class='l-box-input'>
+        <input placeholder="请输入你的姓名" />
+      </view>
+    </view>
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>手机号</view>
+      <view class='l-box-input'>
+        <input placeholder="请输入你的手机号" />
+      </view>
+    </view>
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>验证码</view>
+      <view class='l-box-input2'>
+        <input placeholder="请输入你的手机验证码" />
+      </view>
+      <view class='l-v-code'>获取验证码</view>
+    </view>
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>行业</view>
+      <view class='l-box-input'>
+        <input placeholder="请输入你的行业" />
+      </view>
+    </view>
+
+    <view class='l-content-box'>
+      <view class='l-box-title'>说明</view>
+      <view class='l-box-input'>
+        <textarea placeholder="请输入你的说明" />
+      </view>
+    </view>
+    <view class='l-submit'>提交</view>
+  </view>
+</view>

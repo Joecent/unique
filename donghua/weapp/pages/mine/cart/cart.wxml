@@ -1,0 +1,106 @@
+<!--pages/mine/cart/cart.wxml-->
+<view class='container'>
+  <!-- <view class='title_name'></view> -->
+  <view class="jiesuan-box select">
+    <view class="left-price fs28">
+      <icon bindtap="bindAllSelect" style="font-size:16px;color:{{allSelect?backgroundColor:''}};" class="iconfont {{allSelect?'icon-p':'icon-duoxuankuang'}}"></icon>
+      <view class="all-selected  {{allSelect?'active':''}}" bindtap="bindAllSelect">全选</view>
+    </view>
+    <!-- <text class='length'>共{{list.length}}件</text> -->
+  </view>
+  <view wx:if="{{list.length ==0}}">
+    <view class='none'>
+      <view class='none_image'>
+        <image src='/image/none.png'></image>
+      </view>
+      <view class='tips fs24'>这里什么都没有哦~</view>
+    </view>
+  </view>
+
+
+  <view class="goodsList">
+    <view class="a-gooods" wx:for="{{list}}" wx:key="this">
+      <icon data-index="{{index}}" bindtap="selectTap" style="font-size:16px;margin-right:10rpx;color:{{item.active?backgroundColor:''}};" class="iconfont {{item.active?'icon-p':'icon-duoxuankuang'}}"></icon>
+      <view class="select_button {{item.active? 'active':''}}" bindtap="selectTap" data-index="{{index}}"></view>
+      <view class='details'>
+        <!-- 删除 -->
+        <view style='color:{{backgroundColor}};' class='del_cart fs28' data-uuid="{{item.id}}" data-index="{{index}}" bindtap='dellItem'>
+          <image src='/image/delete.png'></image>
+        </view>
+
+        <view wx:if="{{item.number>0}}">
+          <image src='{{item.image}}' mode="aspectFill"></image>
+        </view>
+        <view wx:else>
+          <image src='/image/xiajia.png' mode='aspectFill'></image>
+        </view>
+
+        <view class='name_author fs24'>
+          <text class='title_details fs30'>{{item.name}}</text>
+        </view>
+        <view class='spec fs22'>
+          <text>库存:{{item.number}}</text>
+
+          <text wx:if="{{item.key_name == null}}">无规格:无规格</text>
+          <text wx:else>{{item.key_name}}</text>
+        </view>
+
+        <text class='price fs28' style='color:{{backgroundColor}}'>￥{{item.price}}</text>
+
+        <!-- <input type='number' name="real_price{{index}}" value='{{item.price}}' bindinput="importPrice" data-index="{{index}}" hidden='true' /> -->
+
+        <view class='num fs30'>
+          <text bindtap='importCountjian' data-index="{{index}}" class='fs40 {{item.count == 1 ? "noclick" : ""}}'>-</text>
+          <input type='number' name='count{{index}}' value='{{item.count}}' bindinput="importCount" data-index="{{index}}"></input>
+          <text bindtap='importCountjia' data-index="{{index}}" class='fs40'>+</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="jiesuan-box" style='border-bottom:none;'>
+    <view class="left-price">
+      <icon bindtap="bindAllSelect" style="font-size:16px;color:{{allSelect?backgroundColor:''}};" class="iconfont {{allSelect?'icon-p':'icon-duoxuankuang'}}"></icon>
+      <view class="fs28 all-selected  {{allSelect?'active':''}}" bindtap="bindAllSelect">全选</view>
+    </view>
+    <text class='total_price fs30'>总额：<text class='total' style='color:{{backgroundColor}}'>￥{{allPrice}}</text></text>
+    <view style=' background-color:{{backgroundColor}}' class="fs32 to-pay-btn {{noSelect?'no-select':''}}" hidden="{{!saveHidden}}" bindtap="toPayOrder" wx:if="{{list.length >0}}">去结算</view>
+
+    <view wx:if="{{list.length ==0}}" style='background:{{backgroundColor}};color:#ffffff' class="to-pay-btn to-pay-btns " hidden="{{!saveHidden}}" bindtap="toPayOrders">去逛逛</view>
+  </view>
+
+</view>
+
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{showLoad}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color: {{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>
+
+<view class='bottomMenu fs24'>
+  <view bindtap='toIndex' class='bottomMenu-item'>
+    <icon class='iconfont icon-shouye-weixuanzhong'></icon>
+    <text>首页</text>
+  </view>
+  <view bindtap='toShops' class='bottomMenu-item'>
+    <icon class='iconfont icon-quanbunormal'></icon>
+    <text>全部商品</text>
+  </view>
+  <view style='color:{{backgroundColor}}' class='bottomMenu-item'>
+    <icon class='iconfont icon-jiebantubiao-'></icon>
+    <text>购物车</text>
+  </view>
+  <view bindtap='toMine' class='bottomMenu-item'>
+    <icon class='iconfont icon-wode'></icon>
+    <text>我的</text>
+  </view>
+</view>

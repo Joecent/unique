@@ -9,23 +9,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    customItem: '全部',
     latitude: '',
     longitude: '',
     name: '',
     address: '选择所在位置',
-    selected: 0,
-    backgroundColor: app.globalData.selectedColor,
-    indexColor: app.globalData.selectedColor
+    selected: 0
   },
-  // bindaddinput(e) {
-  //   var that = this
-  //   console.log('picker发送选择改变，携带值为', e.detail.value)
-  //   var addresslist = e.detail.value
-  //   that.setData({
-  //     address: addresslist[0] + addresslist[1] + addresslist[2]
-  //   })
-  // },
 
   /**
   * 选择所在位置
@@ -115,7 +104,7 @@ Page({
       warn = "收货人不能为空";
     } else if (e.detail.value.phone == "") {
       warn = "手机号不能为空！";
-    } else if (!(/^[1][0-9][0-9]{9}$/.test(e.detail.value.phone))) {
+    } else if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(e.detail.value.phone))) {
       warn = "手机号不正确";
     } else if (that.data.address == undefined || that.data.address == '选择所在位置') {
       warn = "位置不能为空";
@@ -152,11 +141,12 @@ Page({
             })
           }, 1000)
         } else {
-          wx.showModal({
-            title: '提示',
-            content: response.msg,
-            showCancel: false,
+          wx.showLoading({
+            title: '添加失败',
           })
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 1000)
         }
       });
     }

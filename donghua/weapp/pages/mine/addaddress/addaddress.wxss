@@ -68,10 +68,6 @@
   line-height: 100rpx;
   text-align: center;
   font-size: 30rpx;
-  border-radius: 0;
-}
-.addnewaddress button::after{
-  border: none
 }
 .addinput .tiao{
   position:absolute;

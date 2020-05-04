@@ -1,0 +1,47 @@
+<!--pages/mine/express/express.wxml-->
+
+<!-- <view class='express'>
+  <view wx:for="{{express_infos}}" class='infos'>
+    <view class='context'>
+      <view class='images'>
+        <image src='/image/express/dot.png'></image>
+      </view>
+      <view>
+        <view>{{item.context}}</view>
+        <view class='time'>{{item.time}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="none" hidden='{{none}}'>暂无物流信息</view>
+  <view class="error" hidden='{{error}}'>无效的快递单号</view>
+</view> -->
+
+
+
+
+<view class='listview-container'>
+   
+  <view class='playlog-item' wx:for="{{express_infos}}" wx:key="this">
+    <view class='dotline'>
+      <!-- <view class='images'>
+        <image src='/image/express/dot.png'></image>
+      </view> -->
+
+      <!--线  -->
+      <view class="line"></view>
+      <!-- 圆点 -->
+      <view class='dot'></view>
+    </view>
+    <view class='content'>
+      <view class="course">{{item.context}}</view>
+      <view class='chapter'>{{item.time}}</view>
+    </view>
+  </view>
+
+  <view class="none" hidden='{{none}}'>暂无物流信息</view>
+  <view class="error" hidden='{{error}}'>无效的快递单号</view>
+
+  <view class='dingdan fs22' bindtap='toback'>
+    <text>去订单详情</text> 
+  </view>
+</view>

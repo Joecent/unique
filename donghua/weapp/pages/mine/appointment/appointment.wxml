@@ -1,0 +1,58 @@
+<!--pages/mine/appointment/appointment.wxml-->
+
+<view class='container'>
+  <view class='swiper-tab'>
+
+    <view class="swiper-tab-list {{currentTab==0 ? 'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}"  bindtap="swichNav" data-current='0' >可预约</view>
+
+    <view class="swiper-tab-list {{currentTab==1 ? 'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}"   bindtap="swichNav" data-current='1'>不可预约</view>
+  </view>
+
+  <view class='none' hidden='{{order_num!=0}}'>
+    <view class='none_image'>
+      <image src='/image/none.png'></image>
+    </view>
+    <view class='tips'>这里什么都没有哦~</view>
+  </view>
+
+  <swiper current='{{currentTab}}' class="swiper-box" duration="300" bindchange="bindChange">
+    <!-- 可用 -->
+    <swiper-item>
+      <view class='swiper-items'>
+        <view wx:for='{{notpostlist}}' wx:for-item='items' wx:for-index='index' class='list' bindtap='touse' wx:key="this" data-shop_id='{{items.shop_id}}' data-barcode='{{items.order_rand_num}}'>
+          <view class='goods_info'  data-order_status='notpost' data-index='{{index}}'>
+            <image src='{{items.goods_img}}' mode="aspectFill"></image>
+            <view class='num fs28'>
+              <!-- <view class='goods_number'>商品件数：×{{items.goods_number}}</view> -->
+              <!-- <view class='fee'>免运费</view> -->
+              <view class='money_info'>{{items.goods_name}}</view>
+              <view class='money_info'>实付：￥{{items.goods_price}}</view>
+              <view class='order_time'>{{items.service_time}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- 不可用 -->
+    <swiper-item>
+      <view class='swiper-items'>
+        <view wx:for='{{finishlist}}' wx:for-item='items' class='list' wx:key="this">
+          <!-- <view class='title'>
+            <view class='orderstatu'>不可用</view>
+          </view> -->
+          <view class='goods_info' bindtap='orderInfo' data-order_status='finish' data-index='{{index}}'>
+            <image src='{{items.goods_img}}' mode="aspectFill"></image>
+            <view class='num'>
+              <!-- <view class='goods_number'>商品件数：×{{items.goods_number}}</view> -->
+              <view class='num-name'>{{items.goods_name}}</view>
+              <view class='money_info'>实付：￥{{items.goods_price}}</view>
+              <!-- <view class='order_time'>{{items.order_time}}</view> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+</view>
+

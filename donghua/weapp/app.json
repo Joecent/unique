@@ -1,36 +1,52 @@
 {
   "pages": [
-    
-    "pages/index/index",
-    "pages/mine/refundapply/refundapply",
-    "pages/mine/refunddetail/refunddetail",
-    "pages/mine/refundlist/refundlist",
-    "pages/mine/orderlist/orderdetails/orderdetails",
-    "pages/index/singleorderinfo/singleorderinfo",
+    "pages/shoppages/index/index",
+    "pages/mine/distribution/distribution",
+    "pages/shoppages/indexTwo/indexTwo",
+    "pages/shoppages/groupModules/groupModules",
+    "pages/mine/salesDetails/salesDetails",
+    "pages/mine/orCode/orCode",
+    "pages/shoppages/goods/goods",
+    "pages/mine/applyFor/applyFor",
     "pages/mine/mine",
-    "pages/mine/addaddress/addaddress",
-    "pages/mine/address/address",
-    "pages/mine/editaddress/editaddress",
-    "pages/mine/dispatching/dispatching",
-    "pages/mine/orderlist/orderlist",
+    "pages/mine/applyForResult/applyForResult",
     "pages/mine/withdraw/withdraw",
-    "pages/mine/income/income",
-    "pages/template/template",
+    "pages/shoppages/shops/shops",
+    "pages/mine/express/express",
+    "pages/ss/ss",
+    "pages/aa/aa",
+    "pages/shoppages/groupbuy/groupbuy",
+    "pages/shoppages/cutPriceDesc/cutPriceDesc",
+    "pages/mine/cart/cart",
+    "pages/shoppages/singleorderinfo/singleorderinfo",
+    "pages/shoppages/search/search",
+    "pages/mine/address/address",
+    "pages/mine/addaddress/addaddress",
+    "pages/mine/cut/cut",
+    "pages/mine/groupbuy/groupbuy",
     "pages/mine/coupon/coupon",
-    "pages/mine/sale/sale",
-    "pages/mine/mycoupon/mycoupon",
-    "pages/mine/couponUse/couponUse"
+    "pages/mine/refund/refund",
+    "pages/mine/editaddress/editaddress",
+    "pages/mine/orderlist/orderlist",
+    "pages/shoppages/goodslist/goodslist",
+    "pages/mine/couponUse/couponUse",
+    "pages/shoppages/othersCut/othersCut",
+    "pages/shoppages/grouporderinfo/grouporderinfo",
+    "pages/shoppages/shopcut/shopcut",
+    "pages/mine/orderinfo/orderinfo",
+    "pages/shoppages/singleorderinfos/singleorderinfos",
+    "pages/mine/couponCode/couponCode",
+    "pages/mine/appointment/appointment",
+    "pages/shoppages/Collages/Collages",
+    "pages/shoppages/helpCut/helpCut",
+    "pages/mine/refundapply/refundapply",
+    "pages/shoppages/groupOrder/groupOrder"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FF5D35",
+    "navigationBarBackgroundColor": "#ebeaea",
     "navigationBarTitleText": "",
-    "navigationBarTextStyle": "white"
-  },
-  "permission": {
-    "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示"
-    }
+    "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"
 }

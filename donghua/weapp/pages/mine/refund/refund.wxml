@@ -1,0 +1,75 @@
+<view class='title'>
+  <view class='title_name' bindtap="swichNav" data-current='0'>
+    <view class="name {{currentTab==0 ? 'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}">正在处理</view>
+  </view>
+  <view class='title_name' bindtap="swichNav" data-current='1'>
+    <view class="name {{currentTab==1 ? 'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==1 ? backgroundColor:''}}">已完成</view>
+  </view>
+</view>
+<!-- 无 -->
+<view class='none' hidden='{{none}}'>
+      <view class='none_image'>
+        <image src='/image/none.png'></image>
+      </view>
+      <view class='tips'>这里什么都没有哦~</view>
+</view>
+<swiper current='{{currentTab}}' hidden='{{!none}}'  class="swiper-box" duration="300" bindchange="bindChange" >
+  <!-- 正在处理退款订单 -->
+  <swiper-item>
+    <view class='swiper-items'>
+      <view wx:for='{{refund_handling}}' wx:for-item='items' class='list'>
+        <view class='shop_title'>
+          <!-- <view class='shop_info'>
+            <image src='{{items.shop_logo}}' class='shopimage'></image>
+            <text>{{items.shop_name}}</text>
+            <image src='/image/orderlist/toright.png' class='toright'></image>
+          </view> -->
+          <view class='order_sn'>订单编号：{{items.order_sn}}</view>
+          <view class='orderstatu'>申请退款中</view>
+        </view>
+        <view class='goods_info'>
+          <image src='{{items.goods_img[0]}}'></image>
+          <view class='goods_name'>{{items.goods_name[0]}}</view>
+          <view class='price_num'>
+            <view class='num'>件数：×{{items.goods_name.length}}</view>
+            <view class='money_info'>实付：￥{{items.pay_money}}</view>
+          </view>
+        </view>
+        <view class='bottom'>
+          <view class='handle'>
+            <!-- <view>
+              <button class='topay' bindtap='tosee'>查看</button>
+            </view> -->
+            <view>
+              <button class='discard' bindtap='discard' data-refund_sn='{{items.refund_sn}}'>取消退款</button>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </swiper-item>
+  <!-- 已处理完成列表 -->
+  <swiper-item>
+    <view class='swiper-items'>
+      <view wx:for='{{refund_finish}}' wx:for-item='items' class='list'>
+        <view class='shop_title'>
+          <view class='order_sn'>订单编号：{{items.order_sn}}</view>
+          <view class='orderstatu' wx:if='{{items.refund_status==3}}'>退款已完成</view>
+          <view class='orderstatu' wx:if='{{items.refund_status==4}}'>已取消退款</view>
+        </view>
+        <view class='goods_info'>
+          <image src='{{items.goods_img[0]}}'></image>
+          <view class='goods_name'>{{items.goods_name[0]}}</view>
+          <view class='price_num'>
+            <view class='num'>件数：×{{items.goods_name.length}}</view>
+            <view class='money_info'>实付：￥{{items.pay_money}}</view>
+          </view>
+        </view>
+        <!-- <view class='bottom_finish'>
+           <view class='money_info'>实付：￥{{items.pay_money}}（免运费）</view> 
+           <view class='handle'><view><button class='discard'bindtap='rebuy'data-goods_id='{{items.goods_id}}'data-shop_id='{{items.shop_id}}'>再次购买</button></view></view> 
+        </view> -->
+      </view>
+    </view>
+  </swiper-item>
+</swiper>

@@ -1,0 +1,126 @@
+<!-- 搜索 -->
+<template name="is_search">
+  <view class="section" bindtap='to_search_goods'>
+    <image src='/image/search.png'></image>
+    <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' disabled="false" class='fs30' />
+  </view>
+</template>
+<!-- 轮播 -->
+<template name="is_slide">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{imgUrls}}" wx:key="this">
+      <swiper-item>
+        <image src="{{item}}" class="slide-image" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+</template>
+<!-- 领取优惠券 -->
+<template name="is_cash">
+  <view class='couponUses' wx:if="{{is_cash == 1}}">
+    <!-- <view class='couponUse-title'>领取优惠</view> -->
+    <view class='couponUse-img' bindtap='showModal'>
+      <image src='{{cash_bg_img}}'></image>
+    </view>
+  </view>
+</template>
+<!-- 分组 -->
+<template name="is_goods_group">
+  <view class='index-conten'>
+    <view class='index-list'>
+      <view class='index-goodpart' wx:for="{{cates}}" wx:key="{{this}}" bindtap='bindcation' data-cate_id='{{item.cate_id}}' data-index="{{index}}" data-goods_id="{{item.goods_id}}" wx:if="{{index<6}}">
+
+        <block wx:if="{{item.goods_num > 0}}">
+          <view class='index-img'>
+            <image src='{{item.cate_img}}' mode="widthFix"></image>
+          </view>
+          <view class='index-name fs28'>{{item.cate_name}}</view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>
+<!-- 店铺信息 -->
+<template name="shop_info_isshow">
+  <view class='store' wx:if='{{shop_info_isshow==1}}'>
+    <view class='store_logo'>
+      <view class='store_a'>
+        <image src="{{logo}}"></image>
+      </view>
+    </view>
+
+    <view class='store_name' bindsubmit="formSubmit">
+      <view class='shop_info1 fs28'>{{shopa}}</view>
+      <view class='shop_info fs26'>营业时间：{{business}}</view>
+      <view class='shop_info fs26'>
+        店铺地址：{{shop_address}}
+      </view>
+    </view>
+
+    <view class='store-lr'>
+      <view class='store-tel' bindtap="calling">
+        <icon style='color:{{backgroundColor}}' class='iconfont icon-dianhua'></icon>
+      </view>
+      <view class='store-map' bindtap="bindaddinput">
+        <icon style='color:{{backgroundColor}}' class='iconfont icon-dingwei1'></icon>
+      </view>
+    </view>
+  </view>
+</template>
+<!-- 团购 -->
+<template name="is_group">
+  <view class='couponUses' wx:if="{{is_group == 1}}">
+    <view class='couponUses-cons'>
+      <view class='couponUses-title fs28'>拼团专区</view>
+      <view class='couponUses-lr' bindtap='Collage'>
+        <image src='/image/back.png'></image>
+      </view>
+    </view>
+    <view class='couponUses-img' bindtap='Collage'>
+      <image src='{{groupimg}}' mode="aspectFill"></image>
+    </view>
+  </view>
+</template>
+<!-- 砍价 -->
+<template name="is_bargain">
+  <view class='couponUses' wx:if="{{is_bargain == 1}}">
+    <view class='couponUses-cons'>
+      <view class='couponUses-title fs28'>砍价专区</view>
+      <view class='couponUses-lr' bindtap='shopcut'>
+        <image src='/image/back.png'></image>
+      </view>
+    </view>
+    <view class='couponUses-img' bindtap='shopcut'>
+      <image src='{{bargain_bg_img}}' mode="aspectFill"></image>
+    </view>
+  </view>
+</template>
+<!-- 店铺热推 -->
+
+<template name="is_hot_pust">
+  <view class='order'>
+    <text class='line'></text>
+    <text class='txt fs32'>店铺热推</text>
+    <text class='line'></text>
+  </view>
+  <view class='recommend'>
+    <view class='recommend_goodslist'>
+      <block class='goodpart' wx:for='{{rec_goods}}' wx:for-index='idx' wx:for-item='item' wx:key="this">
+        <view class='good' bindtap='toGoodsinfo' data-goods_id='{{item.goods_id}}'>
+          <image src='{{item.goods_img}}' mode="aspectFill" />
+          <view class='goodname fs26 '>{{item.goods_name}}</view>
+          <view class='prices'>
+            <view class='price fs30' style='color:{{backgroundColor}}'>￥{{item.goods_price[item.goods_price.length-1]}}</view>
+            <view class='prices-gwc' catchtap="addCart" data-goods_name="{{item.goods_name}}" data-spec_price="{{item.goods_price}}" data-spec_name="{{item.key_name}}" data-goods_img="{{item.goods_img}}" data-goods_id="{{item.goods_id}}" data-goods_score="{{item.goods_score}}"
+              data-product_id="{{item.product_id}}" data-index="{{index}}" data-spec_img="{{item.spec_img}}" data-market_price='{{item.market_price}}'>
+              <icon style='color:{{backgroundColor}};font-size:40rpx;' class='iconfont icon-jiebantubiao-'></icon>
+            </view>
+          </view>
+        </view>
+        <!-- </view> -->
+      </block>
+      <view wx:if='{{!hidPullUp}}' hidden='{{!loadall}}' bindtap='loadMore' class='load_more'>加载更多 <image src='/image/refund/choose.png'></image></view>
+      <view hidden="{{loadall}}" class="loadall">已加载全部</view>
+    </view>
+  </view>
+</template>

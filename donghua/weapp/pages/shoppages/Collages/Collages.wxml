@@ -1,0 +1,83 @@
+<!--pages/shoppages/Collages/Collages.wxml-->
+<view class="container">
+  <view class='shops-top'>
+
+    <!-- <view class='shops-fenlei' bindtap="clickItemToggeHide">
+      <view class='shops-fenlei-img'>
+        <image src='/image/fenlei.png'></image>
+      </view>
+      <text>分类</text>
+    </view> -->
+    <!-- <view class="section" bindtap='to_search_goods'>
+      <image src='/image/search.png'></image>
+      <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' disabled="false" />
+    </view>
+
+    <view class='shops-lb' bindtap='showButton'>
+      <view class='shops-fenlei-img'>
+        <image src='/image/liebiao1.png'></image>
+      </view>
+      <text>列表</text>
+    </view> -->
+  </view>
+
+  <view class='shops-conten'>
+    <view class='shops-conten-top'>
+      <view>拼团</view>
+      <view>销量</view>
+      <view>新品</view>
+      <view class='shops-conten-img'>
+        价格
+        <image src='/image/jiage.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="couponUses-lists {{showView?'show':'hide'}}">
+  <view class='couponUses-list'>
+    <view class='couponUses-list1' wx:for="{{goods}}" wx:key="this">
+      <view bindtap='toCutGoodsPages' data-goods_id='{{item.goods_id}}'>
+        <view class='img'>
+          <image src='{{item.goods_img}}' mode='aspectFill'></image>
+        </view>
+        <view class='goodsName'>{{item.goods_name}}</view>
+        <view class='price_num'>
+        <view class='price' style='color:{{backgroundColor}}'>¥{{item.group_price[0]}}</view>
+        <view class='group_num'>{{item.group_num}}人团</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{loadall}}" class="loadall">已加载全部</view>
+</view>
+
+<!-- 
+<view class="couponUses-lists {{showView?'hide':'show'}}">
+  <view class='couponUses-con' wx:for="{{rec_goods}}"  wx:key="this">
+    <view bindtap='toCutGoodsPages' data-goods_id='{{item.goods_id}}' class='couponUses-lists-cons'>
+      <view class='img'>
+        <image src='{{item.goods_img}}'></image>
+      </view>
+      <view class='couponUses-cons'>
+        <view class='goodsName'>{{item.goods_name}}</view>
+        <view class='price colors'>¥{{item.group_price}}</view>
+      </view>
+    </view>
+  </view>
+</view> -->
+
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button class='showLoadButton' style='background-color:{{backgroundColor}}'   open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>

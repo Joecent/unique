@@ -1,0 +1,99 @@
+<!--pages/shoppages/grouporderinfo/grouporderinfo.wxml-->
+
+
+<form bindsubmit="formSubmit">
+  <view class="container">
+    <view class='locationchoose' bindtap='bindmodifyaddress'>
+      <view class='title_name'>收货地址
+        <text class='edit' style='color:{{backgroundColor}}'>编辑</text>
+      </view>
+      <view class='name_phone' hidden='{{editaddress !== ""}}'>
+        <text>请选择或添加收货地址</text>
+      </view>
+      <view class='name_phone' hidden='{{editaddress == ""}}'>
+        <view>
+          <text>收货人： {{editaddress.receiver}}</text>
+        </view>
+        <view>
+          <text>电话： {{editaddress.phone}}</text>
+        </view>
+        <view>
+          <text>收货地址： {{editaddress.address}}</text>
+          <text>{{editaddress.detail}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='details'>
+      <image src='{{goods.image}}' mode="aspectFill"></image>
+      <view class='details-lr'>
+        <view class='details-lr-btn'>
+          <view class='name_author'>
+            <text>{{goods.goods_name}}</text>
+            <!-- <view class='spec_info'>{{goods.key_name}}</view> -->
+          </view>
+          <view class='details-price'>
+            <view>
+              <text class='price' style='color:{{backgroundColor}}'>￥{{goods.goods_price}}</text>
+              <text class='market fs24'>{{goods.market_prices}}</text>
+            </view>
+            <view class='num'>
+              <text>x 1</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- <view class='coupon' bindtap='tocoupons'>
+      <text class='couponname'>优惠券</text>
+      <image src='/image/coupon.png' class='couponimage'></image>
+      <text class='couponnum colors fs28'>：{{cash_num}} 张可用</text>
+      <image src='/image/toright.png' class='toright'></image>
+    </view> -->
+    <!-- <view class='time_logistics'>
+      <text>配送方式：无需物流</text>
+      <text>下单时间：2017-10-31 11:48:12</text>
+    </view> -->
+    <view class='time_logistics'>
+      <view>商品总额
+        <text class='price' style='color:{{backgroundColor}}'>￥{{totalPrice}}</text>
+      </view>
+      <view>快递费用
+        <text class='express' style='color:{{backgroundColor}}'>￥{{express_fee}}</text>
+      </view>
+      <view>优惠减免
+        <text class='discount' style='color:{{backgroundColor}}'>￥{{discount}}</text>
+      </view>
+      <view class='total'>实际付款：
+        <text class='totalprice' style='color:{{backgroundColor}}'>￥{{totalMoney}}</text>
+      </view>
+    </view>
+
+    <!-- <view class='message' bindtap='tomessage'>
+      <view>备注留言</view>
+      <view class='tomessage'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view>
+
+    <view class='laymodal' bindtap='hide' wx:if='{{showMessage}}'></view>
+    <view class='message_input' wx:if='{{showMessage}}'>
+      <textarea class='inputmessage' bindblur='input_message' placeholder='可填写给店家的留言' />
+    </view> -->
+
+    <view class='order_info'>
+      <view class='name_phone_input'>
+        备注留言：
+        <input placeholder='请输入需要提醒店家的话' style='width:100%' name="message"></input>
+      </view>
+    </view>
+    <view class='tips'>
+      <text>拼团成功后，商家将进行发货！</text>
+    </view>
+    <view class='pay'>
+      <button form-type='submit' disabled='{{disable}}' style='background-color:{{backgroundColor}};color:#ffffff;'>付款</button>
+    </view>
+  </view>
+</form>

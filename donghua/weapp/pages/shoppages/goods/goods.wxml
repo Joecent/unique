@@ -1,0 +1,220 @@
+<!--pages/shoppages/goods/goods.wxml-->
+
+<import src="../../../wxParse/wxParse.wxml" />
+
+<view class='banner'>
+  <view class='goods_image'>
+    <swiper autoplay='true' interval='5000' duration='1000' class='swiper' circular="true">
+      <block wx:for='{{goods_image}}' wx:key="this">
+        <swiper-item>
+          <image src='{{item}}' class="slide-image" mode="aspectFill"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+
+
+<view class='goods_info'>
+  <view class='goods_name'>
+    <view class='text fs28'>
+      <text>{{goods.goods_name}}</text>
+    </view>
+
+    <view class='goods_info_stlye'>
+      <button bindtap="showStratum" hidden='{{hidShare}}' style='width:60rpx;height: 60rpx;' class='fenxiang' data-name="{{shopa}}">
+        <view style='color:{{backgroundColor}};' class='goods_name-img'>
+          <icon style='font-size:40rpx;' class='iconfont icon-icon1460187932551'></icon>
+        </view>
+      </button>
+      <button style='margin-bottom:2rpx;margin-left:10rpx;width:60rpx;height: 60rpx;' open-type='share' class='fenxiang' data-name="{{shopa}}">
+        <view class='goods_name-img'>
+          <icon style='font-size:35rpx;color:{{backgroundColor}};' class='iconfont icon-fenxiang'></icon>
+        </view>
+      </button>
+    </view>
+  </view>
+
+
+  <view class='price_info'>
+    <view class='goods_price' style='color:{{backgroundColor}}'>
+      <!-- <text class='price' wx:if='{{goods.is_group==0}}'>￥{{goods_price}}</text> -->
+      <view>
+        <text class='price'>￥{{goods_price}}</text>
+        <text class='realprice fs26'>￥{{market_price}}</text>
+      </view>
+      <!-- <view class='sold fs28'>已售{{goods.goods_num}}件</view> -->
+      <!-- <view><text class='kc fs26'>库存：{{spec_goods_scores}}</text></view>  -->
+      <view><text class='kc fs26'>已售{{goods.goods_num}}件</text></view> 
+    </view>
+    <!-- <view class='sold'>{{goods.group_num}}人团</view> -->
+  </view>
+
+  <view class='deal_rule'>
+    <view class='express fs24'>
+      <view class='express_info'>
+        <!-- <image src='/image/goods_info/express_info.png'></image> -->
+        全场包邮</view>
+      <view class='express_info'>
+        <!-- <image src='/image/goods_info/express_info.png'></image> -->
+        七天退换</view>
+      <view class='express_info'>
+        <!-- <image src='/image/goods_info/express_info.png'></image> -->
+        48小时发货</view>
+      <view class='express_info'>
+        <!-- <image src='/image/goods_info/express_info.png'></image> -->
+        假一赔十</view>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 详情 -->
+
+<view class='goods_dec'>
+  <view class='goods_dec_title fs30'>商品详情</view>
+  <view class='goods_dec_info'>
+    <view class='uinn'>
+      <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
+      <view wx:for='{{goods.goods_desc}}'>
+        <image style='width:100%;display:block;' mode='widthFix' src='{{item}}'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<!-- 弹出框 -->
+<view class='maskLayer' wx:if="{{chooseSize}}" bindtap='hideModal' catchtouchmove="ture"></view>
+<view class='choose' wx:if="{{chooseSize}}" animation='{{animationData}}' catchtouchmove="ture">
+  <view class='specs'>
+
+    <view class='image'>
+      <image src="{{spec_image}}"></image>
+    </view>
+
+    <view class='specs_info '>
+      <view class='price_score'>
+        <view class='spec_price' style='color:{{backgroundColor}}'>
+          <view class='fs32'>￥{{spec_goods_prices}}</view>
+          <!-- <view wx:if='{{type==1}}'>￥{{spec_group_prices}}</view> -->
+          <view class='spec_market_prices fs26'>￥{{spec_market_prices}}</view>
+        </view>
+        <view class='score fs24'>库存：{{spec_goods_scores}}</view>
+      </view>
+
+      <view class='spec_name fs28'>{{spec_name}}</view>
+
+      <scroll-view scroll-y class='l-sf-style'>
+        <view class='spec_value fs28'>
+          <view catchtap='tochoose' data-spec_id='{{idx}}' wx:for='{{spec_value}}' wx:for-item='items' wx:for-index='idx' class="value {{index==idx?'on':''}}" style="  background-color:{{index==idx ? backgroundColor:''}};color:white" wx:key="this">{{items}}</view>
+        </view>
+      </scroll-view>
+
+
+
+      <!-- 加减 -->
+      <view class='nums fs28'>
+        <view>购买数量：</view>
+        <view class='num fs30'>
+          <text bindtap='importCountjian' class='fs40 {{item.count == 1 ? "noclick" : ""}}'>-</text>
+          <input type='number' name='count{{index}}' value='{{count}}' bindinput="importCount" disabled="false"></input>
+          <text bindtap='importCountjia' class='fs40'>+</text>
+        </view>
+      </view>
+      <view class='buttons'>
+        <button class='imform' style='background-color:{{backgroundColor}}' bindtap='tobought' data-goods_type="{{goods_type}}">确定</button>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+
+
+<!-- 底部栏 -->
+<view class='buy'>
+  <!-- <view class='cart fs30' bindtap='mineGrey'>
+    <view class='cart_image'>
+      <image src='/image/mineGrey.png'></image>
+    </view>
+    <view class="cart_font">我的</view>
+  </view> -->
+
+  <button class='server' open-type='contact'>
+    <view class='server_image'>
+      <image src='/image/goods_info/server.png'></image>
+    </view>
+    <view class="cart_font">客服</view>
+  </button> 
+
+  <view class='cart fs30' bindtap='show_home'>
+    <view class='cart_image'>
+      <image src='/image/indexGrey.png'></image>
+    </view>
+    <view class="cart_font">店铺</view>
+  </view>
+  
+  <view class='cart carts fs30' bindtap='cart'>
+    <view class='cart_image'>
+      <image src='/image/cartGrey.png'></image>
+    </view>
+    <view class="cart_font">购物车</view>
+    <view class="fl-bt-gwc-fx {{scaleCart? 'on' :''}}" wx:if="{{hasCarts}}">
+      <text>{{count}}</text>
+    </view>
+  </view>
+
+  
+
+
+  <!-- <view class='singlebuys'  bindtap='addCart' data-goods_name="{{goods.goods_name}}" data-spec_price="{{goods_price}}" data-spec_name="{{goods.key_name}}" data-goods_img="{{goods.goods_img}}" data-goods_id="{{goods.goods_id}}" data-goods_score="{{goods.goods_score}}" data-product_id="{{goods.product_id}}" data-index="{{index}}">
+    <view class="cart_fonts">加入购物车</view>
+  </view> -->
+
+  <view class="singlebuys {{showView?'show':'hide'}}" bindtap='show_spec' data-type='1'>
+    <view class="cart_fonts fs30">加入购物车</view>
+  </view>
+
+
+  <view class='singlebuy' style='background-color:{{backgroundColor}}' bindtap='show_spec' data-type='2'>
+    <!-- <view class='price_buy fs30'>￥{{goods_price}}</view> -->
+    <view class='buy_text fs30'>立即购买</view>
+  </view>
+
+</view>
+
+
+<view catchtouchmove="ture" class="bg" bindtap='hideview' style='display:{{display}}'></view>
+<view catchtouchmove="ture" class="classshow" style='width:{{imageWidth-25}}px;height:550px;display:{{display}}'>
+  <view>
+
+    <canvas style="width:{{imageWidth-25}}px;height:490px" canvas-id="myCanvas" class='canvas'></canvas>
+  </view>
+  <view style='border-color: {{backgroundColor}}' class="button_done" hidden='{{!hidLoad}}'>
+  <button class='button_done_btnsave' style='background-color: {{backgroundColor}};color:#ffffff' type="primary" bindtap="savePic">保存图片</button>
+  <button style='color:{{backgroundColor}};background-color: #ffffff;border-color:{{backgroundColor}};border-top-right-radius: 10rpx;border-bottom-right-radius: 10rpx;' class='button_done_btnclose' bindtap='hideview'>关闭图片</button>
+  </view>
+  <view class='view_load_ft' hidden='{{hidLoad}}'>
+    <view class='view_load' animation="{{animationData}}"></view>
+    <view class='view_load_text'>加载中</view>
+  </view>
+
+</view>
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{showLoad}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>

@@ -1,129 +1,137 @@
 <!--pages/mine/mine.wxml-->
-<import src="/pages/template/template.wxml" />
-<view style='padding-bottom:101rpx;'>
-  <view class='background' style='background:{{backgroundColor}}'>
-    <view class='user'>
-      <image src='{{avatar}}'></image>
-    </view>
-    <view class='username fs24' style='color:#ffffff;'>{{name}}</view>
-  </view>
 
-  <!-- 全部订单 -->
-  <view class='container'>
-    <view class='orders'>
-      <view class='title'>
-        <view class='titlename fs30'>全部订单</view>
-        <view class='titlename2 fs30' bindtap='tonotpay' data-bindid='0'>
-          <view class="name">查看订单</view>
-          <view class="image"><image src='/image/one.png' class='titlename-img'></image></view>
-        </view>
-      </view>
-      <view class='orderstatus'>
-        <view class='orderstatu' bindtap='tonotpay' data-bindid='0'>
-          <image src='/image/mine/daichengtuan.png'></image>
-          <view class='statu fs24'>待配送</view>
-        </view>
-        <view class='orderstatu' bindtap='tonotpost' data-bindid='1'>
-          <image src='/image/mine/peisongzhong.png'></image>
-          <view class='statu fs24'>已送达</view>
-        </view>
-        <view class='orderstatu' bindtap='tonotreceive' data-bindid='2'>
-          <image src='/image/mine/yiwancheng.png'></image>
-          <view class='statu fs24'>已完成</view>
-        </view>
-         <view class='orderstatu' bindtap='toservice' data-bindid='3'>
-          <image src='/image/mine/shouhou.png'></image>
-          <view class='statu fs24'>售后</view>
-        </view> 
+<view class='background' style='background:{{backgroundColor}}'>
+  <view class='user'>
+    <image src='{{avatar}}'></image>
+    <!-- <view class='infochange' bindtap='change_info'>
+      <image src='/image/mine/upload.png'></image>更新资料</view> -->
+  </view>
+  <view class='username fs24' style='color:#ffffff;'>{{name}}</view>
+</view>
+
+<!-- 全部订单 -->
+<view class='container'>
+  <view class='orders'>
+    <view class='title'>
+      <view class='titlename fs30'>全部订单</view>
+      <view class='titlename fs30' bindtap='tonotpay' data-bindid='3'>
+        <image src='/image/one.png' class='titlename-img'></image>
       </view>
     </view>
-  </view>
-
-
-
-
-  <view class='container'>
-    <view class='bootmenu'>
-      <!-- <view bindtap='toApplyFor' hidden="{{changeStatus==true}}" class='boot fs30'>
-        <view>
-          <view>申请团长</view>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
-      </view> -->
-      
-
-      <view class='boot fs30' bindtap='toshop' wx:if='{{owner}}'>
-        <view>
-          <text>店主收入
-          </text>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
+    <view class='orderstatus'>
+      <view class='orderstatu' bindtap='tonotpay' data-bindid='0'>
+        <image src='/image/mine/notpay.png'></image>
+        <view class='statu fs24'>待付款</view>
       </view>
-
-      <view bindtap='toGoNext'  wx:if='{{seller}}' class='boot fs30'>
-        <view>
-          <view>我的分销</view>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
-      </view> 
-
-      <view class='boot fs30' bindtap='tosend' wx:if='{{sender}}'>
-        <view>
-          <text>订单信息</text>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
+      <view class='orderstatu' bindtap='tonotpost' data-bindid='1'>
+        <image src='/image/mine/notpost.png'></image>
+        <view class='statu fs24'>待发货</view>
       </view>
-       <view class='boot fs30' bindtap='tomycoupon' wx:if='{{sender}}'>
-        <view>
-          <text>店铺优惠券</text>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
+      <view class='orderstatu' bindtap='tonotreceive' data-bindid='2'>
+        <image src='/image/mine/notreceive.png'></image>
+        <view class='statu fs24'>待收货</view>
       </view>
-      <view class='boot fs30' bindtap='toshopservice' wx:if='{{sender}}'>
-        <view>
-          <text>售后信息</text>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
+      <view class='orderstatu' bindtap='tofinish' data-bindid='3'>
+        <image src='/image/mine/notcomment.png'></image>
+        <view class='statu fs24'>已完成</view>
       </view>
-      
-      <view class='boot fs30' bindtap='tocoupon'>
-        <view>
-          <text>优惠券</text>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
-      </view>
-      <view class='boot fs30' bindtap='toaddress'>
-        <view>
-          <text>收货地址</text>
-        </view>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
-      </view>
-      <!-- <view class='boot'>
-        <button bindtap='calltokf' class='service_button'>联系商家</button>
-        <view class='boot-lr'>
-          <image src='/image/one.png'></image>
-        </view>
-      </view> -->
-
     </view>
   </view>
 </view>
+
+
+
+
+<view style='margin-bottom:122rpx;' class='container'>
+  <view class='bootmenu'>
+    <!-- <view class='boot fs30' bindtap='appointment'>
+      <view>
+        <!-- <image src='/image/mine/group.png'></image> 
+        <text>我的预约</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view> wx:if='{{hidDistribution}}' -->
+
+    <view  class='boot fs30' bindtap='toDistribution'>
+      <view>
+        <text>我的分销</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view>
+
+    <!-- <view class='boot fs30' bindtap='tocoupon'>
+      <view>
+        <text>我的分销</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view> -->
+
+    <view class='boot fs30' bindtap='tocoupon'>
+      <view>
+        <!-- <image src='/image/mine/group.png'></image> -->
+        <text>我的优惠券</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view>
+
+    <!-- <view class='boot fs30' bindtap='tomygroup'>
+      <view>
+        <!-- <image src='/image/mine/group.png'></image> 
+        <text>我的拼团</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view> -->
+
+    <!-- <view class='boot fs30' bindtap='tomycut'>
+
+      <view>
+        <!-- <image src='/image/mine/group.png'></image>
+        <text>我的砍价</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view> -->
+
+
+    <view class='boot fs30' bindtap='toaddress'>
+      <view>
+        <!-- <image src='/image/mine/location.png'></image> -->
+        <text>收货地址</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view>
+    <view class='boot fs30' bindtap='torefund'>
+      <view>
+        <!-- <image src='/image/mine/location.png'></image> -->
+        <text>退款售后</text>
+      </view>
+      <view class='boot-lr'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view>
+
+
+
+    <!-- <view class='boot'>
+      <image src='/image/mine/service.png'></image>
+      <button open-type='contact' class='service_button'>官方客服</button>
+    </view> -->
+  </view>
+</view>
+
 
 
 
@@ -140,6 +148,22 @@
     <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
   </view>
 </view>
-<block>
-  <template is="is_tabBar" data='{{mineColor}}' />
-</block>
+
+<view class='bottomMenu fs24'>
+  <view bindtap='toIndex' class='bottomMenu-item'>
+    <icon class='iconfont icon-shouye-weixuanzhong'></icon>
+    <text>首页</text>
+  </view>
+  <view bindtap='toShops' class='bottomMenu-item'>
+    <icon class='iconfont icon-quanbunormal'></icon>
+    <text>全部商品</text>
+  </view>
+  <view bindtap='toCart' class='bottomMenu-item'>
+    <icon class='iconfont icon-jiebantubiao-'></icon>
+    <text>购物车</text>
+  </view>
+  <view style='color:{{backgroundColor}}' class='bottomMenu-item'>
+    <icon class='iconfont icon-wode'></icon>
+    <text>我的</text>
+  </view>
+</view>

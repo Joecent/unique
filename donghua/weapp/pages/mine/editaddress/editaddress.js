@@ -16,37 +16,28 @@ Page({
     latitude: '',
     longitude: '',
     address_id: '',
-    name: '',
-    customItem: '全部',
-// region: ['全部', '全部', '全部'],
+    name: ''
   },
 
   /**
     * 选择所在位置
     */
-  bindaddinput(e) {
- var that=this
-      console.log('picker发送选择改变，携带值为', e.detail.value)
-    var addresslist = e.detail.value
-      that.setData({
-        address: addresslist[0] + addresslist[1] + addresslist[2]
-      })
-
-    // var that = this
-    // wx.chooseLocation({
-    //   success: function (res) {
-    //     var latitude = res.latitude
-    //     var longitude = res.longitude
-    //     var name = res.name
-    //     var address = res.address
-    //     that.setData({
-    //       latitude: latitude,
-    //       longitude: longitude,
-    //       name: name,
-    //       address: address
-    //     })
-    //   },
-    // })
+  bindaddinput() {
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        var name = res.name
+        var address = res.address
+        that.setData({
+          latitude: latitude,
+          longitude: longitude,
+          name: name,
+          address: address
+        })
+      },
+    })
   },
   /**
    * 提交保存
@@ -59,7 +50,7 @@ Page({
       warn = "收货人不能为空";
     } else if (e.detail.value.phone == "") {
       warn = "手机号码不能为空！";
-    } else if (!(/^[1][0-9][0-9]{9}$/.test(e.detail.value.phone))) {
+    } else if (!(/^[1][3,4,5,7,8][0-9]{9}$/.test(e.detail.value.phone))) {
       warn = "手机号格式不正确";
     } else if (that.data.address == undefined || that.data.address == '选择所在位置') {
       warn = "所在位置不能为空";

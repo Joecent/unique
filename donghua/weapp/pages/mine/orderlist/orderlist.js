@@ -1,12 +1,14 @@
 // pages/mine/orderlist/orderlist.js
 
 import {
-  refuse_group,
-  finish,
-  receive,
+  wait_pay,
   wait,
-  confirmGroups,
-  aftermarketOrder
+  receive,
+  finish,
+  pay,
+  cancel,
+  confirm_receive,
+  some_one_order
 } from '../../../utils/api.js'
 import * as store from '../../../utils/store.js'
 const app = getApp()
@@ -18,129 +20,72 @@ Page({
    */
   data: {
     currentTab: 0,
-    waitGrouplist: [],
-    finshGrouplist: [],
-    refuseGrouplist: [],
+    moreHandel: true,
+    winHeight: 0,
+    notpaylist: [],
+    notreceivelist: [],
     order_num: 0,
-    alreadyGrouplist: [],
-    goods_id: '',
-    page: 1,
-    loadall: true,
-    limit: 5,
-    backgroundColor: app.globalData.selectedColor,
-    indexColor: app.globalData.selectedColor
+    notpostlist: [],
+    somenotpay:[],
+    goods_id:''
   },
-  //联系商家
-  call(e){
-    wx.makePhoneCall({
-      phoneNumber: e.currentTarget.dataset.shop_phone,
-    })
-  },
-  //申请售后
-  offer(e){
-    console.log(e.currentTarget.dataset.items,'4')
-    store.set('order_detail', e.currentTarget.dataset.items)
-      wx.navigateTo({
-        url: '/pages/mine/refundapply/refundapply',
-      })
-  },
-  //查看售后详情
-  serviceinfo(e){
-    wx.navigateTo({
-      url: '/pages/mine/refunddetail/refunddetail?order_id='+e.currentTarget.dataset.order_id+'&user_id='+e.currentTarget.dataset.user_id,
-    })
-  },
-  //确认收货
-  sureConfirm: function (e) {
+
+  topay(e) {
     console.log(e)
-    wx.showLoading({
-      title: '加载中',
-    })
     var that = this
-    confirmGroups({
-      order_id: e.currentTarget.dataset.order_id,
+    pay({
+      shop_id: e.currentTarget.dataset.shop_id,
+      user_id: app.globalData.userid,
+      order_sn: e.currentTarget.dataset.order_sn
     }).then((res) => {
-      wx.hideLoading()
-      if (res.error_code == "1000") {
-        var change_id = e.currentTarget.dataset.order_id
-        var alreadyGrouplist = that.data.alreadyGrouplist
-        for (var i = 0; i < alreadyGrouplist.length; i++) {
-            if (alreadyGrouplist[i].order_id == change_id) {
-              alreadyGrouplist[i].shipping_status = 2
-          }
+      wx.requestPayment({
+        appId: res.appId,
+        timeStamp: res.timeStamp,
+        nonceStr: res.nonceStr,
+        package: res.package,
+        signType: res.signType,
+        paySign: res.paySign,
+        success: function() {
+          //that.some_one_order()
+          that.notpay()
+        },
+        fail: function(res) {
+          wx.showLoading({
+            title: '付款失败',
+          })
+          setTimeout(function() {
+            wx.hideLoading()
+          }, 1000)
         }
-        that.setData({
-          alreadyGrouplist: alreadyGrouplist
-        })
-        wx.showLoading({
-          title: res.msg,
-        })
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 1000)
-      } else {
-        wx.showLoading({
-          title: res.msg,
-        })
-        setTimeout(function () {
-          wx.hideLoading()
-        }, 1000)
-      }
+      })
     })
   },
-  //查看详情
-  seebtn: function(e) {
-    console.log(e)
-    var groupdetail = JSON.stringify(e.currentTarget.dataset.items)
-    // store.set('', e.currentTarget.dataset.items)
-    wx.navigateTo({
-      url: '/pages/mine/orderlist/orderdetails/orderdetails?groupdetail=' + groupdetail
+
+  discard(e) {
+    var that = this
+    wx.showModal({
+      title: '提示',
+      content: '是否确认取消？',
+      success: function(res) {
+        if (res.confirm) {
+          cancel({
+            order_id: e.currentTarget.dataset.order_id,
+            user_id: app.globalData.userid,
+            reason: ''
+          }).then((res) => {
+            wx.showLoading({
+              title: '取消成功',
+            })
+            setTimeout(function() {
+              wx.hideLoading()
+              //that.some_one_order()
+              that.notpay()
+            }, 500)
+          })
+        }
+      },
     })
   },
- 
-
-  // getTimes() {
-  //   var that = this
-  //   var timer = null;
-
-  //   timer = setInterval(function() {
-  //     var waitGrouplist = that.data.waitGrouplist
-  //     var length = waitGrouplist.length
-  //     for (var i = 0; i < length; i++) {
-  //       if (waitGrouplist[i].group_time > 0) {
-  //         waitGrouplist[i].group_time -= 1
-  //         let t = waitGrouplist[i].group_time * 1000
-  //         if (t > 0) {
-  //           let d = Math.floor(t / 86400000)
-  //           let h = Math.floor((t / 3600000) % 24)
-  //           let m = Math.floor((t / 60000) % 60)
-  //           let s = Math.floor((t / 1000) % 60)
-  //           d = d < 10 ? '0' + d : d
-  //           h = h < 10 ? '0' + h : h
-  //           m = m < 10 ? '0' + m : m
-  //           s = s < 10 ? '0' + s : s
-  //           let countdown = d + "天" + h + "小时" + m + "分钟" + s + "秒"
-  //           waitGrouplist[i].groups_time = countdown
-
-  //         } else {
-  //           let flag = waitGrouplist.every((val, ind) =>
-  //             val.group_time <= 0)
-  //           if (flag) clearInterval(timer)
-  //           waitGrouplist[i].groups_time = '拼团已结束'
-  //           //  that.show()
-  //         }
-  //       }
-  //     }
-  //     that.setData({
-  //       waitGrouplist: waitGrouplist
-  //     })
-  //   }, 1000);
-  // },
-  // refund: function(e) {
-  //   wx.navigateTo({
-  //     url: '/pages/mine/refundapply/refundapply?order_id=' + e.currentTarget.dataset.order_id + '&order_money=' + e.currentTarget.dataset.group_price,
-  //   })
-  // },
 
   swichNav(e) {
     var that = this
@@ -151,136 +96,210 @@ Page({
         currentTab: e.currentTarget.dataset.current
       })
     }
-    that.show()
+  },
+
+  
+  // some_one_order(){
+  //   var that = this
+  //   some_one_order({
+  //     user_id: store.get('user_id'),
+  //     shop_id:app.globalData.shop_id,
+  //     order_type: 1
+  //   }).then((res) =>{
+  //     console.log(res,"全部订单")
+  //     if(res.error_code == 1000){
+  //       var notpays = res.data
+  //       that.setData({
+  //         somenotpay: notpays,
+  //         winHeight: res.data.length * 350,
+  //         order_num: res.data.length,
+  //       })
+  //     } else if (res.error_code == 1001) {
+  //       that.setData({
+  //         order_num: 0,
+  //         winHeight: res.data.length * 500,
+  //       })
+  //     }
+  //   })
+  // },
+
+   
+
+  /**
+   * 待付款方法
+   */
+  notpay() {
+    var that = this
+    wait_pay({
+      user_id: store.get('user_id')
+    }).then((res) => {
+      console.log(res, "待付款")
+      if (res.error_code == 1000) {
+        var notpaylist_pre = res.data
+        notpaylist_pre.forEach(function (item) {
+          item.goods_number = item.goodscost.length
+        })
+
+        notpaylist_pre.sort(that.compare("order_id"));
+        
+        that.setData({
+          notpaylist: notpaylist_pre,
+          winHeight: notpaylist_pre.length * 550,
+          order_num: notpaylist_pre.length
+        })
+      } else if (res.error_code == 1001) {
+        that.setData({
+          order_num: 0,
+          winHeight: res.data.length * 500,
+        })
+      }
+    })
+  },
+
+  // 判断数组 从大到小排
+  compare: function (property) {
+    return function (a, b) {
+      var value1 = a[property];
+      var value2 = b[property];
+      return value2 - value1;
+    }
   },
 
   /**
-   * 正在拼
+   * 待发货方法
    */
-  waitGroup() {
-    wx.showLoading({
-      title: '加载中',
-      mask: false,
-    })
+  notpost() {
     var that = this
     wait({
-      user_id: store.get('user_id'),
-      shop_id: app.globalData.shop_id,
-      page: that.data.page,
-      limit: that.data.limit
+      user_id: store.get('user_id')
     }).then((res) => {
-      wx.hideLoading()
-      if (res.data != '') {
-        that.setData({
-          waitGrouplist: res.data,
-          // totalPage: res.data.totalPage,
-          order_num: 1,
+      console.log(res,"待发货")
+      if (res.error_code == 1000) {
+        var notpostlist_pre = res.data
+        notpostlist_pre.forEach(function(item) {
+          item.goods_number = item.goodscost.length
         })
-        // that.getTimes(that.data.waitGrouplist)
-
-      } else {
+        //notpostlist_pre.goods_number=res.data.goodscost.length
+        that.setData({
+          winHeight: res.data.length * 500,
+          order_num: res.data.length,
+          notpostlist: notpostlist_pre
+        })
+      }else if (res.error_code == 1001) {
         that.setData({
           order_num: 0,
-          waitGrouplist:[],
+          winHeight: res.data.length * 400,
         })
       }
-
     })
   },
 
   /**
-   * 配送中
+   * 待收货方法
    */
-  alreadyGroup() {
-    wx.showLoading({
-      title: '加载中',
-      mask: false,
-    })
+  notreceive() {
     var that = this
     receive({
-      user_id: store.get('user_id'),
-      shop_id: app.globalData.shop_id,
-      page: that.data.page,
-      limit: that.data.limit
+      user_id: store.get('user_id')
     }).then((res) => {
-      wx.hideLoading()
-      if (res.data != '') {
-        that.setData({
-          order_num: 1,
-          alreadyGrouplist: res.data,
-          // totalPage: res.data.totalPage
+      if (res.error_code == 1000) {
+        var notreceive_pre = res.data
+        notreceive_pre.forEach(function(item) {
+          item.goods_number = item.goodscost.length
         })
-      } else {
+        that.setData({
+          notreceivelist: notreceive_pre,
+          winHeight: res.data.length * 500,
+          order_num: res.data.length
+        })
+      } else if (res.error_code == 1001) {
         that.setData({
           order_num: 0,
-          alreadyGrouplist:[],
+          winHeight: res.data.length * 500,
         })
       }
-
     })
   },
 
   /**
-   * 已完成
+   * 已完成方法
    */
-  finshGroup() {
-    wx.showLoading({
-      title: '加载中',
-      mask: false,
-    })
+  finish() {
     var that = this
+    // wx.getSystemInfo({
+    //   success: function (res) {
+    //     that.setData({
+    //       winHeight: res.windowHeight
+    //     });
+    //   }
+    // });
     finish({
-      user_id: store.get('user_id'),
-      shop_id: app.globalData.shop_id,
-      page: that.data.page,
-      limit: that.data.limit
+      user_id: store.get('user_id')
     }).then((res) => {
-      wx.hideLoading()
-      if (res.data != '') {
-        that.setData({
-          finshGrouplist: res.data,
-          // totalPage: res.data.totalPage,
-          order_num: 1
+      if (res.error_code == 1000) {
+        var finishlist_pre = res.data
+        finishlist_pre.forEach(function(item) {
+          item.goods_number = item.goodscost.length
         })
-      } else {
+        that.setData({
+          finishlist: finishlist_pre,
+          winHeight: res.data.length * 500,
+          order_num: res.data.length
+        })
+      } else if (res.error_code == 1001) {
         that.setData({
           order_num: 0,
-          finshGrouplist:[],
+          winHeight: res.data.length * 500,
         })
       }
-
     })
   },
-  /**
-   * 售后
-   */
-  service(){
-    wx.showLoading({
-      title: '加载中',
-      mask: false,
-    })
+
+
+  toexpress(e) {
     var that = this
-    aftermarketOrder({
-      user_id: store.get('user_id'),
-      shop_id: app.globalData.shop_id,
-      page: that.data.page,
-    }).then((res) => {
-      wx.hideLoading()
-      if (res.data.goodsOrder != '') {
-        that.setData({
-          serviceList: res.data.goodsOrder,
-          // totalPage: res.data.totalPage,
-          order_num: 1
-        })
-      } else {
-        that.setData({
-          order_num: 0,
-          finshGrouplist: [],
-        })
-      }
-
+    wx.navigateTo({
+      url: '/pages/mine/express/express?order_id=' + e.currentTarget.dataset.order_id,
     })
   },
+
+  purchase(e) {
+    wx.navigateTo({
+      url: '/pages/shoppages/goods/goods?goods_id=' + e.currentTarget.dataset.goods_id
+    })
+  },
+
+
+  comfirm_get(e) {
+    var that = this
+    wx.showModal({
+      title: '确认收货',
+      content: '收货后商家将收到款项，是否确认？',
+      success: function(res) {
+        if (res.confirm) {
+          confirm_receive({
+            order_id: e.currentTarget.dataset.order_id,
+            shop_id: app.globalData.shop_id,
+            user_id: app.globalData.userid
+          }).then((res) => {
+            if (res.error_code == 1000) {
+              that.show()
+            } else {
+              wx.showLoading({
+                title: '确认收货失败',
+              })
+              setTimeout(function() {
+                wx.hideLoading()
+              }, 500)
+            }
+          })
+        }
+      }
+    })
+  },
+
+
+
   bindChange(e) {
     var that = this
     that.setData({
@@ -289,26 +308,83 @@ Page({
     that.show()
   },
 
-  show() {
+
+  showmore(e) {
     var that = this
     that.setData({
-      page: 1,
-      loadall: true
+      moreHandel: e.currentTarget.dataset.id
     })
-    if (that.data.currentTab == 0) {
-      that.waitGroup()
+  },
+
+  show() {
+    var that = this
+     if (that.data.currentTab == 0) {
+      that.notpay()   
     } else if (that.data.currentTab == 1) {
-      that.alreadyGroup()
+      that.notpost()
     } else if (that.data.currentTab == 2) {
-      that.finshGroup()
+      that.notreceive()
     } else if (that.data.currentTab == 3) {
-      that.service()
+      that.finish()
     }
-    
   },
 
 
-
+  orderInfo(e) {
+    var that = this
+    // if (e.currentTarget.dataset.order_status == 'some_one_order'){
+    //   wx.setStorage({
+    //     key: 'orderinfo',
+    //     data: {
+    //       order_status: e.currentTarget.dataset.order_status,
+    //       order: that.data.somenotpay[e.currentTarget.dataset.index]
+    //     }
+    //   })
+    //  }
+    // else 
+    if (e.currentTarget.dataset.order_status == 'notpay') {
+      wx.setStorage({
+        key: 'orderinfo',
+        data: {
+          order_status: e.currentTarget.dataset.order_status,
+          order: that.data.notpaylist[e.currentTarget.dataset.index]
+        }
+      })
+    } else if (e.currentTarget.dataset.order_status == 'notreceive') {
+      wx.setStorage({
+        key: 'orderinfo',
+        data: {
+          order_status: e.currentTarget.dataset.order_status,
+          order: that.data.notreceivelist[e.currentTarget.dataset.index]
+        }
+      })
+    } else if (e.currentTarget.dataset.order_status == 'notpost') {
+      wx.setStorage({
+        key: 'orderinfo',
+        data: {
+          order_status: e.currentTarget.dataset.order_status,
+          order: that.data.notpostlist[e.currentTarget.dataset.index]
+        }
+      })
+    } else if (e.currentTarget.dataset.order_status == 'finish') {
+      wx.setStorage({
+        key: 'orderinfo',
+        data: {
+          order_status: e.currentTarget.dataset.order_status,
+          order: that.data.finishlist[e.currentTarget.dataset.index]
+        }
+      })
+    }
+    wx.navigateTo({
+      url: '/pages/mine/orderinfo/orderinfo',
+    })
+  },
+  
+  refund(e) {
+    wx.navigateTo({
+      url: '/pages/mine/refundapply/refundapply?order_id=' + e.currentTarget.dataset.order_id + '&order_money=' + e.currentTarget.dataset.order_money,
+    })
+  },
 
 
   /**
@@ -316,17 +392,13 @@ Page({
    */
   onLoad: function(options) {
     var that = this
-
     that.setData({
+      bar: app.globalData.barHeight,
       currentTab: options.bindid,
+      backgroundColor: app.globalData.selectedColor,
     })
-
-    const promise = new Promise(function(resolve, reject) {
-      if (that.show()) {
-        resolve(value);
-      }
-    });
-    // promise.then(that.getTimes())
+    that.show()
+   // that.some_one_order()
   },
 
   /**
@@ -340,7 +412,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
   },
 
   /**
@@ -368,121 +439,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    console.log('加载')
-    wx.showLoading({
-      title: '加载中',
-      mask: false,
-    })
-    var that = this
-    // if (that.data.page < that.data.totalPage) {
-    if (that.data.currentTab == 0) {
-      //待成团
-      wait({
-        user_id: store.get('user_id'),
-        shop_id: app.globalData.shop_id,
-        page: that.data.page + 1,
-        limit: that.data.limit
-      }).then((res) => {
-        wx.hideLoading()
-        if (res.data != '') {
-          var grouplist = that.data.waitGrouplist
-          for (var i = 0; i < res.data.length; i++) {
-            grouplist.push(res.data[i])
-          }
-          that.setData({
-            waitGrouplist: grouplist,
-            // totalPage: res.data.totalPage,
-            page: that.data.page + 1,
-          })
-        } else {
-          that.setData({
-            loadall: false
-          })
-        }
-      })
-    } else if (that.data.currentTab == 1) {
-      //配送中
-      receive({
-        user_id: store.get('user_id'),
-        shop_id: app.globalData.shop_id,
-        page: that.data.page + 1,
-        limit: that.data.limit
-      }).then((res) => {
-        wx.hideLoading()
-        if (res.data != '') {
-          var grouplist = that.data.alreadyGrouplist
-          for (var i = 0; i < res.data.length; i++) {
-            grouplist.push(res.data[i])
-          }
-          that.setData({
-            alreadyGrouplist: grouplist,
-            // totalPage: res.data.totalPage,
-            page: that.data.page + 1
-          })
-        } else {
-          that.setData({
-            loadall: false
-          })
-        }
 
-      })
-    } else if (that.data.currentTab == 2) {
-      //已完成
-      finish({
-        user_id: store.get('user_id'),
-        shop_id: app.globalData.shop_id,
-        page: that.data.page + 1,
-        limit: that.data.limit
-      }).then((res) => {
-        wx.hideLoading()
-        var grouplist = that.data.finshGrouplist
-        for (var i = 0; i < res.data.length; i++) {
-          grouplist.push(res.data[i])
-        }
-        if (res.data != '') {
-          that.setData({
-            finshGrouplist: grouplist,
-            // totalPage: res.data.totalPage,
-            page: that.data.page + 1
-          })
-        } else {
-          that.setData({
-            loadall: false
-          })
-        }
-      })
-    } else if (that.data.currentTab == 3) {
-      //售后
-      aftermarketOrder({
-        user_id: store.get('user_id'),
-        shop_id: app.globalData.shop_id,
-        page: that.data.page + 1,
-        limit: that.data.limit
-      }).then((res) => {
-        wx.hideLoading()
-        var grouplist = that.data.serviceList
-        for (var i = 0; i < res.data.length; i++) {
-          grouplist.push(res.data[i])
-        }
-        if (res.data != '') {
-          that.setData({
-            serviceList: grouplist,
-            // totalPage: res.data.totalPage,
-            page: that.data.page + 1
-          })
-        } else {
-          that.setData({
-            loadall: false
-          })
-        }
-      })
-    }
-    // } else {
-    //   wx.hideLoading()
-    //   that.setData({
-    //     loadall: false
-    //   })
-    // }
   },
 
   /**

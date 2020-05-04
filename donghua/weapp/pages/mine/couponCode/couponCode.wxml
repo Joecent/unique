@@ -1,0 +1,14 @@
+<!--pages/mine/couponCode/couponCode.wxml-->
+
+
+<view class="container page">
+  <view class="panel">
+    <view class="barcode">
+      <view class="barnum">{{code}}</view>
+      <canvas canvas-id="barcode" />
+    </view>
+  </view>
+  <view class='tips'>
+      <text>可用于商家线下核销优惠券</text>
+  </view>
+</view>

@@ -1,0 +1,64 @@
+<!--pages/shoppages/shopcut/shopcut.wxml-->
+<view class="container">
+  <view class='shops-conten'>
+    <view class='shops-conten-top'>
+      <view>砍价专区</view>
+      <view>销量</view>
+      <view>新品</view>
+      <view class='shops-conten-img'>
+        价格
+        <image src='/image/jiage.png'></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="couponUses-lists {{showView?'show':'hide'}}">
+    <view class='couponUses-list'>
+      <view class='couponUses-list1' wx:for="{{goods}}" data-goods_id='{{item.goods_id}}' bindtap='toCutGoodsPage' wx:key="this" data-goods_price='{{item.goods_price}}' data-get_price='{{item.get_price}}'>
+        <view class='img'>
+          <image src='{{item.goods_img}}' mode="aspectFill"></image>
+        </view>
+        <view class='goodsName'>{{item.goods_name}}</view>
+        <view class='shopcut-con'>
+          <view class='price' style='color:{{backgroundColor}}'>¥{{item.get_price}}</view>
+          <view class='goods-title ' catchtap='toCutGoodsPage' data-goods_id='{{item.goods_id}}' wx:key="this" data-goods_price='{{item.goods_price}}' data-get_price='{{item.get_price}}'>
+            <text style='background-color:{{backgroundColor}}'>去砍价</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view hidden="{{loadall}}" class="loadall">已加载全部</view>
+  </view>
+
+
+  <!-- <view class="couponUses-lists {{showView?'hide':'show'}}">
+    <view class='couponUses-con' wx:for="{{cut_goods_list}}" data-goods_id='{{item.goods_id}}' bindtap='toCutGoodsPage' wx:key="this" data-goods_price='{{item.goods_price}}' data-get_price='{{item.get_price}}'>
+      <view class='img'>
+        <image src='{{item.goods_img}}' mode="aspectFill"></image>
+      </view>
+      <view class='couponUses-cons'>
+      <view class='goodsName'>{{item.goods_name}}</view>
+      <view class='shopcut-con'>
+        <view class='price colors'>¥{{item.get_price}}</view>
+        <view class='goods-title' bindtap='toCutGoodsPage' data-goods_id='{{item.goods_id}}' bindtap='toCutGoodsPage' wx:key="this" data-goods_price='{{item.goods_price}}' data-get_price='{{item.get_price}}'>
+          <text  class='color-bg'>去砍价</text>
+        </view>
+      </view>
+      </view>
+    </view>
+  </view> -->
+</view>
+
+<!-- 授权弹出框 -->
+<view class='showLoad' wx:if='{{ungetInfo}}'>
+  <view class='showLoadModal'>
+    <view class='showLoad_title'>你还没有登录</view>
+    <view class='showLoad_tip'>为了提供更好的服务</view>
+    <view class='showLoad_tip'>请在稍后的提示框中点击允许</view>
+    <view class='showLoad_image'>
+      <image src='/image/load.png'></image>
+    </view>
+    <view class='permite'>允许</view>
+    <button style='background-color:{{backgroundColor}}' class='showLoadButton' open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+  </view>
+</view>

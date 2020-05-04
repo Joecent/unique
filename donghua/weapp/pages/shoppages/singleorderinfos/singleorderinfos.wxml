@@ -1,0 +1,136 @@
+<!--pages/shoppages/singleorderinfos/singleorderinfos.wxml-->
+
+<form bindsubmit="formSubmit">
+  <view class="container">
+
+    <!-- <view class='locationchoose' bindtap='bindmodifyaddress'>
+      <view class='title_name'>收货地址
+        <text class='edit'>编辑</text>
+      </view>
+      <view class='name_phone' hidden='{{editaddress !== ""}}'>
+        <text>请选择或添加收货地址</text>
+      </view>
+      <view class='name_phone' hidden='{{editaddress == ""}}'>
+        <view>
+          <text>收货人： {{editaddress.receiver}}</text>
+        </view>
+        <view>
+          <text>电话： {{editaddress.phone}}</text>
+        </view>
+        <view>
+          <text>收货地址： {{editaddress.address}}</text>
+          <text>{{editaddress.detail}}</text>
+        </view>
+      </view>
+    </view> -->
+
+
+    <!-- <view class='shops'>
+      <image></image>
+      <text>购物清单</text>
+    </view> -->
+
+    <view class='details' wx:for="{{goods}}" wx:key="this">
+      <view class='detail-img'>
+        <image src='{{item.image}}' mode='aspectFill'></image>
+      </view>
+      <view class='details-lr'>
+        <view class='name_author'>
+          <text>{{item.name}}</text>
+        </view>
+        <view class='details-lr-bt'>
+          <text class='price'>￥{{item.price}}</text>
+          <view class='num'>
+            <text>x {{item.count}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='coupon' bindtap='tocoupons'>
+      <text class='couponname'>优惠券</text>
+      <image src='/image/coupon.png' class='couponimage'></image>
+      <text class='couponnum'>：{{cash_num}} 张可用</text>
+      <image src='/image/toright.png' class='toright'></image>
+    </view>
+
+    <view class='z-price'>
+      <text>共{{goods.length}}件商品</text>
+      <text class='z-prices'>合计： <text>￥{{totalPrice}}</text> </text>
+    </view>
+
+    <!-- <view class='time_logistics'>
+      <text>配送方式：无需物流</text>
+      <text>下单时间：2017-10-31 11:48:12</text>
+    </view> -->
+
+    <!-- <view class='message' bindtap='tomessage'>
+      <view>买家留言</view>
+      <view class='tomessage'>
+        <image src='/image/one.png'></image>
+      </view>
+    </view>
+
+    <view class='laymodal' bindtap='hide' wx:if='{{showMessage}}'></view>
+    <view class='message_input' wx:if='{{showMessage}}'>
+      <textarea class='inputmessage' bindblur='input_message' placeholder='可填写给店家的留言' />
+    </view> -->
+
+    <view class='time_logistics'>
+      <view>商品总额
+        <text class='price'>￥{{totalPrice}}</text>
+      </view>
+
+      <!-- <view>快递费用
+        <text class='express'>￥{{express_fee}}</text>
+      </view> -->
+
+      <view>优惠减免
+        <text class='discount'>￥{{discount}}</text>
+      </view>
+      <view class='total'>实际付款：
+        <text class='totalprice'>￥{{totalMoney}}</text>
+      </view>
+    </view>
+
+
+   <view class='order_info'>
+      <view class='name_phone_input'>
+        用户姓名：
+        <input placeholder='请输入使用者姓名' name="service_name" value=''></input>
+      </view>
+      <view class='name_phone_input'>
+        联系电话：
+        <input placeholder='请输入使用者联系方式' name="service_phone"></input>
+      </view>
+     
+     <view class='time'>
+        <picker mode="date" value="{{date}}" start="" end="" bindchange="bindDateChange" class='time_choose' name="dates">
+          <view class="picker">
+            预约时间：
+            <text class='time_choose-time'>{{date || '请选择时间'}}</text>
+          </view>
+          <!-- <view class='picker-img'>
+          <image src='/image/goods_info/tomore_gray.png'></image>
+        </view> -->
+        </picker>
+        <picker mode="time" value="{{time}}" bindchange="bindTimeChange" class='time_chooses' name="times">
+          <view class="picker">
+            {{time || '12:00'}}
+          </view>
+        </picker>
+      </view>
+
+      <view class='name_phone_input'>
+        备注留言：
+        <input placeholder='请输入需要提醒店家的话' style='width:100%' name="message"></input>
+      </view>
+    </view>
+
+    <view class='pay'>
+      <view class='totals'>实付：
+        <text>￥{{totalMoney}}</text> </view>
+      <button style='background-color:{{backgroundColor}};' form-type='submit' disabled='{{disable}}'>付款</button>
+    </view>
+  </view>
+</form>

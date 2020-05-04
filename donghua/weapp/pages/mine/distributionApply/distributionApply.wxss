@@ -1,0 +1,61 @@
+/* pages/mine/distribution/distribution.wxss */
+page{
+  background: #ffffff;
+}
+.l-content{
+  padding: 20rpx;
+}
+
+.l-content-box{
+  margin-bottom: 30rpx;
+  position: relative
+}
+
+.l-box-title{
+ font-size: 28rpx;
+ padding-bottom: 10rpx;
+ color: #101010;
+}
+
+.l-box-input2{
+  width: 60%;
+}
+
+.l-box-input input,.l-box-input2 input,.l-box-input textarea{
+  width: 100%;
+  height: 80rpx;
+  border: 1px solid #e1dddd;
+  font-size: 28rpx;
+  color: #888888;
+  padding: 0 15rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+}
+
+.l-box-input textarea{
+  height: 300rpx;
+  padding-top: 15rpx;
+  line-height: auto;
+}
+
+.l-v-code{
+  position: absolute;
+  color: #c79e62;
+  font-size: 28rpx;
+  width: 40%;
+  text-align: center;
+  right: 0;
+  line-height: 80rpx;
+  bottom: 0;
+  font-weight: bold;
+}
+
+.l-submit{
+  background: #409eff;
+  color: #ffffff;
+  font-weight: bold;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 6%;
+}
