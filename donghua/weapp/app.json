@@ -13,10 +13,7 @@
     "pages/mine/withdraw/withdraw",
     "pages/shoppages/shops/shops",
     "pages/mine/express/express",
-    "pages/ss/ss",
-    "pages/aa/aa",
     "pages/shoppages/groupbuy/groupbuy",
-    "pages/shoppages/cutPriceDesc/cutPriceDesc",
     "pages/mine/cart/cart",
     "pages/shoppages/singleorderinfo/singleorderinfo",
     "pages/shoppages/search/search",
@@ -30,7 +27,6 @@
     "pages/mine/orderlist/orderlist",
     "pages/shoppages/goodslist/goodslist",
     "pages/mine/couponUse/couponUse",
-    "pages/shoppages/othersCut/othersCut",
     "pages/shoppages/grouporderinfo/grouporderinfo",
     "pages/shoppages/shopcut/shopcut",
     "pages/mine/orderinfo/orderinfo",
@@ -38,9 +34,9 @@
     "pages/mine/couponCode/couponCode",
     "pages/mine/appointment/appointment",
     "pages/shoppages/Collages/Collages",
-    "pages/shoppages/helpCut/helpCut",
     "pages/mine/refundapply/refundapply",
-    "pages/shoppages/groupOrder/groupOrder"
+    "pages/shoppages/groupOrder/groupOrder",
+    "pages/mine/evaluate/evaluate"
   ],
   "window": {
     "backgroundTextStyle": "light",

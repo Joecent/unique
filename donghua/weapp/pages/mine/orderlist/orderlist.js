@@ -97,7 +97,14 @@ Page({
       })
     }
   },
-
+  toEvaluate(){
+    wx.navigateTo({
+      url: '/pages/mine/evaluate/evaluate',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
   
   // some_one_order(){
   //   var that = this

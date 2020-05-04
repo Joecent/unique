@@ -122,7 +122,7 @@
 .scroll_right {
   position: fixed;
   /* top: 50px; */
-  right: 0;
+  left: 200rpx;
   overflow: auto;
   flex: 1;
   width: 100%;
@@ -181,7 +181,7 @@
   position: relative;
   width: 70%;
   display: block;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
@@ -280,7 +280,7 @@
   width: 200rpx;
   /* height: 100%; */
   top: 0;
-  z-index: 1000;
+  z-index: 101;
   position: absolute;
   background: #ebeaea;
 }
@@ -388,7 +388,7 @@ minl-bg {
 }
 
 .nav_right_lf {
-  width: 100%;
+  width: 36%;
   padding-right: 20rpx;
   padding-left: 30rpx;
   display: -webkit-box;
@@ -429,7 +429,7 @@ minl-bg {
 
 .choose {
   position: fixed;
-  z-index: 100;
+  z-index: 103;
   bottom: 0rpx;
   width: 100%;
   height: 80%;
@@ -578,7 +578,8 @@ minl-bg {
   display: flex;
   flex-direction: row;
   background-color: white;
- box-shadow: 6rpx 6rpx 6rpx 6rpx #aaa;
+  box-shadow: 6rpx 6rpx 6rpx 6rpx #aaa;
+  z-index: 102;
 }
 .bottomMenu-item{
   width: 25%;

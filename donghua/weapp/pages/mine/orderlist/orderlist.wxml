@@ -164,6 +164,9 @@
           <view class='bottom'>
             <view class='handle'>
               <view>
+                <button class='rebuy' bindtap='toEvaluate' data-order_status='finish' data-index='{{index}}'>去评价</button>
+              </view>
+              <view>  
                 <button class='rebuy' bindtap='orderInfo' data-order_status='finish' data-index='{{index}}'>查看详情</button>
               </view>
             </view>

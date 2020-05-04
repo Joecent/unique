@@ -1,0 +1,80 @@
+/* pages/my/evaluate/evaluate.wxss */
+.evaluate{
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  margin-bottom: 40rpx;
+  position: relative;
+}
+.evaluate text{
+  width: 80%;
+  float: left;
+}
+.evaluate .pinfen{
+  width: auto;
+  margin-right: 60rpx;
+}
+.evaluate .evaluate1_text{
+  font-size: 36rpx;
+  color: #999999;
+}
+.evaluate .evaluate{
+  width: 37rpx;
+  height: 33rpx;
+  display: block;
+  float: left;
+  margin-right: 20rpx;
+  margin-top: 13.5rpx;
+}
+.evaluate .star{
+  width: 41rpx;
+  height: 40rpx;
+  display: block;
+  float: left;
+  margin-right: 20rpx;
+  margin-top: 10rpx;
+}
+.evaluate .evaluate1{
+  width: 58rpx;
+  height: 54rpx;
+  display: block;
+  float: left;
+  margin-right: 20rpx;
+  margin-top: 3rpx;
+}
+.evaluate .stars{
+  position: absolute;
+  top: 0;
+  left: 120rpx;
+}
+.evaluate textarea{
+  width: 80%;
+  float: left;
+}
+.star-image {
+  position: absolute;
+  top: 0;
+  width: 50rpx;
+  height: 50rpx;
+  src: "/images/my/star.png";
+}
+.item {
+  position: absolute;
+  top: 0;
+  width: 50rpx;
+  height: 50rpx;
+}
+.addnewaddress button{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 30rpx;
+  background-color: #ff7f50;
+  border-radius: 0;
+}

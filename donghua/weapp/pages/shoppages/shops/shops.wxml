@@ -2,17 +2,17 @@
 
 <view class="container">
   <view class='shops-top'>
-    <view class='shops-fenlei' bindtap="clickItemToggeHide">
+    <!-- <view class='shops-fenlei' bindtap="clickItemToggeHide">
       <view class='shops-fenlei-img'>
         <image src='/image/fenlei.png'></image>
       </view>
       <text class='fs24'>分类</text>
-    </view>
+    </view> -->
 
-    <view class="section" bindtap='to_search_goods'>
+    <!-- <view class="section" bindtap='to_search_goods'>
       <image src='/image/search.png'></image>
       <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' disabled="false" class='fs30' />
-    </view>
+    </view> -->
 
     <!-- <view class='shops-lb ' bindtap='showButton'>
       <view class='shops-fenlei-img'>
@@ -37,9 +37,9 @@
 <!--左侧栏-->
 <!-- scroll_left -->
 
-<view wx:if="{{showModalStatus}}" bindtap="hideModals" class="commodity_screen" catchtouchmove="ture"></view>
+<!-- <view wx:if="{{showModalStatus}}" bindtap="hideModals" class="commodity_screen" catchtouchmove="ture"></view> -->
 
-<scroll-view class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left  {{ishide?'cbp-spmenu-open':''}} " scroll-y="true" style="height:{{winHeight + 100}}px;" scroll-with-animation="true" scroll-top="{{scrollTop}}" wx:if="{{showModalStatus}}" catchtouchmove="ture">
+<scroll-view class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left  {{ishide?'cbp-spmenu-open':''}} " scroll-y="true" style="height:{{winHeight+70}}px;" scroll-with-animation="true" scroll-top="{{scrollTop}}"catchtouchmove="ture">
   <view class="nav_left">
     <view class="fs28 nav_left_items {{index == idx ?'active':''}}"  style="border-left-style:{{index==idx?'solid':''}};border-left-color:{{index == idx ? backgroundColor:''}};border-left-width:{{index == idx?'6px':''}}" bindtap="switchRightTab" data-item-index="{{index}}" wx:for="{{goods}}" wx:for-item="item" wx:key="*this" id="a{{idx}}" wx:if="{{item.goods.length > 0}}">
       <text>{{item.cate_name}}</text>
@@ -49,7 +49,7 @@
 
 
 <!--右侧栏-->
-<scroll-view scroll-y="true" class="scroll_right" style="height:{{winHeight-75}}px;" scroll-into-view="{{scrollTopId}}" scroll-with-animation="true" bindscroll="scroll">
+<scroll-view scroll-y="true" class="scroll_right" style="height:{{winHeight+35}}px;" scroll-into-view="{{scrollTopId}}" scroll-with-animation="true" bindscroll="scroll">
 
   <view class="nav_right" wx:if="{{booleans==true}}">
     <view class='mink' wx:for="{{goods}}" wx:for-index="idx" wx:for-item="item" wx:key="*this">
@@ -58,7 +58,7 @@
         <view class='minl-bg'>
           <!-- <image src='/image/bg.png'></image> -->
           <view class='minl-title' style='color:{{backgroundColor}}'>{{item.cate_name}}
-            <view class='span' style='background:{{backgroundColor}}'></view>
+            <!-- <view class='span' style='background:{{backgroundColor}}'></view> -->
           </view>
           
         </view>
@@ -91,7 +91,7 @@
         <view class='minl-bg minl-bg1'>
           <!-- <image src='/image/bg.png'></image> -->
           <view class='minl-title' style='color:{{backgroundColor}}'>{{item.cate_name}}
-              <view class='span' style='background:{{backgroundColor}}'></view>
+              <!-- <view class='span' style='background:{{backgroundColor}}'></view> -->
           </view>
 
         </view>

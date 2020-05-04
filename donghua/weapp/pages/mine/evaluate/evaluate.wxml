@@ -1,0 +1,27 @@
+<!--pages/my/evaluate/evaluate.wxml-->
+<form bindsubmit="formSubmit">
+  <view class="container">
+    <view class='evaluate'>
+      <image src='/image/mine/evaluate.png' class='evaluate'></image>
+      <text>商品评价</text>
+    </view>
+    <view class='evaluate'>
+      <text class='pinfen'>评价</text>
+      <view class='stars'>
+        <block wx:for="{{stars}}">
+          <image class="star-image" style="left: {{item*80}}rpx" src="{{key > item ?(key-item == 0.5?halfSrc:selectedSrc) : normalSrc}}">
+            <!-- <view class="item" style="left:0rpx" data-key="{{item+0.5}}" bindtap="selectLeft"></view> -->
+            <view class="item" data-key="{{item+1}}" bindtap="selectRight"></view>
+          </image>
+        </block>
+      </view>
+    </view>
+    <view class='evaluate'>
+      <image src='/image/mine/evaluate1.png' class='evaluate1'></image>
+      <textarea name='comment' placeholder='商品满足你的期待吗？ 说说你对它的评价吧！'></textarea>
+    </view>
+    <view class='addnewaddress'>
+      <button form-type='submit'>发布</button>
+    </view>
+  </view>
+</form>

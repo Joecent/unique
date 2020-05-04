@@ -33,15 +33,15 @@ Page({
     animation: '',
     height: '',
     width: '',
-    ishide: false,
+    ishide: true,
     // showView: true,
-    showModalStatus: false,
+    //showModalStatus: true,
     count: 1,
     idx: 0,
     spec_goods_scores: [],
     spec_spec_imgs: [],
     spec_market_prices: [],
-    booleans: true,
+    booleans: false,
     ungetInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     
@@ -87,13 +87,13 @@ Page({
     var that = this
     that.setData({
       ishide: true,
-      showModalStatus: true
+      //showModalStatus: true
     });
   },
 
   hideModals: function() {
     this.setData({
-      showModalStatus: false,
+      //showModalStatus: false,
     })
   },
 
@@ -407,8 +407,8 @@ Page({
       idx: index,
       // 左侧点击类样式
       //curNav: id,
-      ishide: !that.data.ishide,
-      showModalStatus: !that.data.showModalStatus
+      //ishide: !that.data.ishide,
+      //showModalStatus: !that.data.showModalStatus
     })
   },
 
