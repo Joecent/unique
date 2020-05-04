@@ -1,4 +1,7 @@
 /* pages/my/evaluate/evaluate.wxss */
+.container{
+  background-color: white;
+}
 .evaluate{
   width: 100%;
   height: 60rpx;
@@ -77,4 +80,14 @@
   font-size: 30rpx;
   background-color: #ff7f50;
   border-radius: 0;
+}
+.photos{
+  background-color: white;
+  margin-top: 20rpx;
+  padding: 10rpx 40rpx 20rpx;
+}
+.photos image{
+  width: 180rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
 }
