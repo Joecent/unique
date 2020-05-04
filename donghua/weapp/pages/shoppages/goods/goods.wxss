@@ -116,10 +116,52 @@ swiper {
   height: 60rpx;
   border-bottom: 1px solid #f0f0f0;
   line-height: 60rpx;
-  padding-left: 40rpx;
+  padding:0 150rpx;
+  display: flex;
+  justify-content: space-between;
 }
-
-
+.on {
+ border-bottom-style: solid;
+ border-bottom-width: 1rpx;
+}
+.valuation{
+  margin: 10rpx 0;
+}
+.user_info{
+  display: flex;
+  padding: 0 40rpx;
+}
+.user_info .photo image{
+  border-radius: 50%;
+  width: 60rpx;
+  height: 60rpx;
+}
+.user_info .name_time{
+  margin-left: 10rpx;
+}
+.user_info .name_time .name{
+  color: #333;
+  font-size: 26rpx;
+}
+.user_info .name_time .time{
+  color: #aaa;
+  font-size: 24rpx;
+}
+.valuation_content{
+  margin: 16rpx 0;
+  padding: 0 40rpx;
+}
+.valuation_content .content{
+  font-size: 30rpx;
+  color: #333;
+}
+.valuation .images{
+  padding: 0 40rpx;
+}
+.valuation .images image{
+  width: 380rpx;
+  height: 400rpx;
+}
 /* .goods_dec_words {
   background-color: #f0f0f0;
   margin-top: 18rpx;

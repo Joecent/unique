@@ -23,6 +23,7 @@ Page({
        * 页面的初始数据
        */
       data: {
+        currentTab:0,
         hidLoad: true,
         animationData: {},
         hidShare: true,
@@ -50,6 +51,9 @@ Page({
         totalNum: 0,
         count: 1,
         showView: false,
+        valuations:[{
+
+        }]
       },
 
       /**
@@ -371,8 +375,19 @@ Page({
         })
       },
 
-
-
+      /**
+       * 切换Tab
+       */
+      changeTab(e){
+        var that = this
+        if (that.currentTab == e.currentTarget.dataset.current) {
+          return false;
+        } else {
+          that.setData({
+            currentTab: e.currentTarget.dataset.current
+          })
+        }
+      },
       /**
        * 打开规格
        */

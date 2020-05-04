@@ -74,15 +74,41 @@
 <!-- 详情 -->
 
 <view class='goods_dec'>
-  <view class='goods_dec_title fs30'>商品详情</view>
-  <view class='goods_dec_info'>
-    <view class='uinn'>
-      <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
-      <view wx:for='{{goods.goods_desc}}'>
-        <image style='width:100%;display:block;' mode='widthFix' src='{{item}}'></image>
-      </view>
-    </view>
+  <view class='goods_dec_title fs30'>
+    <view class="goods_info_title {{currentTab==0?'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" bindtap="changeTab" data-current='0'>商品详情</view>
+    <view class="goods_info_title {{currentTab==1?'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==1 ? backgroundColor:''}}" bindtap="changeTab" data-current='1'>买家评价</view>
   </view>
+  <swiper current='{{currentTab}}'>
+    <swiper-item>
+      <view class='goods_dec_info'>
+        <view class='uinn'>
+          <!-- <template is="wxParse" data="{{wxParseData:article.nodes}}" /> -->
+          <view wx:for='{{goods.goods_desc}}'>
+            <image style='width:100%;display:block;' mode='widthFix' src='{{item}}'></image>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class="goods_valuations">
+        <view wx:for='{{valuations}}' class="valuation">
+          <view class="user_info">
+            <view class="photo"><image src="http://image.linwushop.com/wxphoto/2018/05/15-10:27:00-15263512208389.jpeg" /></view>
+            <view class="name_time">
+              <view class="name">小黑</view>
+              <view class="time">2020-02-03 20:03:06</view>
+            </view>
+          </view>
+          <view class="valuation_content">
+            <view class="content">很好用很好用</view>
+          </view>
+          <view class="images">
+            <image src="http://image.linwushop.com/wxphoto/2018/05/12-16:05:30-15261123305066.jpeg"></image>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
 </view>
 
 
