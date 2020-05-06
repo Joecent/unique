@@ -71,12 +71,12 @@
 
 
 
-<!-- 详情 -->
+<!-- 详情 ;border-bottom-color:{{currentTab==0 ? backgroundColor:''}} -->
 
 <view class='goods_dec'>
   <view class='goods_dec_title fs30'>
-    <view class="goods_info_title {{currentTab==0?'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}};border-bottom-color:{{currentTab==0 ? backgroundColor:''}}" bindtap="changeTab" data-current='0'>商品详情</view>
-    <view class="goods_info_title {{currentTab==1?'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}};border-bottom-color:{{currentTab==1 ? backgroundColor:''}}" bindtap="changeTab" data-current='1'>买家评价</view>
+    <view class="goods_info_title {{currentTab==0?'on':''}}" style="color:{{currentTab==0 ? backgroundColor:''}}" bindtap="changeTab" data-current='0'>商品详情</view>
+    <view class="goods_info_title {{currentTab==1?'on':''}}" style="color:{{currentTab==1 ? backgroundColor:''}}" bindtap="changeTab" data-current='1'>买家评价</view>
   </view>
   <swiper current='{{currentTab}}'>
     <swiper-item>

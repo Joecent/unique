@@ -92,7 +92,7 @@
   /* position: fixed;  */
   left: -100px;
   top: 0;
-  border-top: 1rpx solid #dedede;
+  /* border-top: 1rpx solid #dedede; */
 }
 
 /*左侧栏list的item*/

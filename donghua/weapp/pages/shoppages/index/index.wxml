@@ -3,7 +3,7 @@
 <!-- 搜索 -->
 <view class="section" bindtap='to_search_goods'>
   <image src='/image/search.png'></image>
-  <input placeholder="请输入商品关键字进行搜索" placeholder-class='holder' disabled="false" class='fs30' />
+  <input placeholder="云南白茶" placeholder-class='holder' disabled="false" class='fs30' />
 </view>
 
 <!-- 轮播图 -->
@@ -101,7 +101,7 @@
 
 
 <!-- 店铺名称 -->
-<!-- <view class='store' wx:if='{{shop_info_isshow==1}}'>
+<view class='store' wx:if='{{shop_info_isshow==1}}'>
   <view class='store_logo'>
     <view class='store_a'>
       <image src="{{logo}}"></image>
@@ -125,7 +125,7 @@
     </view>
   </view>
 </view>
- -->
+ 
 
 <!-- 分类 -->
 <!-- <view class='index-conten'>
