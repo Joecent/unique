@@ -2,3 +2,13 @@
 密码：donghuafupin@2020
 管理员手机号：18213991930
 管理员：孙千然
+
+小程序账号：huansheng_2020@163.com
+密码：donghuafupin@2020
+appid  :	wx124f34088bfd7045
+secret : b8372fced79232ce2a0c130b190e5eae
+
+
+支付号：1591799751
+操作密码：donghua@2020
+秘钥：sjelsjxlgjtoslejxl1345643214slsi

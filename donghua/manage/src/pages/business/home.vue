@@ -135,50 +135,50 @@
 						name: '商品',
 						order: '1'
 					},
-					// {
-					// 	children: [{
-					// 			name: '优惠券',
-					// 			path: '/business/marketing/coupon'
-					// 		},
-					// 		{
-					// 			name: '帮砍价',
-					// 			path: '/business/marketing/cut'
-					// 		},
-					// 		// {
-					// 		//   name:'会员制',
-					// 		//    path:'/business/marketing/member'
-					// 		// },
-					// 		//  {
-					// 		//   name:'帮送礼',
-					// 		//   path:'/home/marketing/gift'
-					// 		// },
-					// 		//  {
-					// 		//   name:'限时抢购',
-					// 		//   path:'/home/marketing/flash'
-					// 		// },
-					// 		//  {
-					// 		//   name:'抽奖',
-					// 		//   path:'/home/marketing/reword'
-					// 		// }
-					// 	],
-					// 	name: '促销',
-					// 	order: '2'
-					// },
-					// {
-					// 	children: [{
-					// 		name: '店铺用户',
-					// 		path: '/business/user/member'
-					// 	}, ],
-					// 	name: '用户',
-					// 	order: '3'
-					// },
+					{
+						children: [{
+								name: '优惠券',
+								path: '/business/marketing/coupon'
+							},
+							// {
+							// 	name: '帮砍价',
+							// 	path: '/business/marketing/cut'
+							// },
+							// {
+							//   name:'会员制',
+							//    path:'/business/marketing/member'
+							// },
+							//  {
+							//   name:'帮送礼',
+							//   path:'/home/marketing/gift'
+							// },
+							//  {
+							//   name:'限时抢购',
+							//   path:'/home/marketing/flash'
+							// },
+							//  {
+							//   name:'抽奖',
+							//   path:'/home/marketing/reword'
+							// }
+						],
+						name: '促销',
+						order: '2'
+					},
+					{
+						children: [{
+							name: '店铺用户',
+							path: '/business/user/member'
+						}, ],
+						name: '用户',
+						order: '3'
+					},
 					{
 					children:[
-//                         {
-//                             name: '店铺设置',
-//                             path: '/business/shop/modify'
-//                         
-//                         },
+                        {
+                            name: '店铺设置',
+                            path: '/business/shop/modify'
+                        
+                        },
 					//{
 					//name:'配送设置',
 					//path:'/business/shop/logistics'
@@ -187,32 +187,32 @@
                             name: '打印机',
                             path: '/business/shop/shopinfo'
                         },
-						// {
-						// 	name:'二维码',
-						// 	path:'/business/shop/qrCode'
-						// }
+						{
+							name:'二维码',
+							path:'/business/shop/qrCode'
+						}
                         ],
 
 						name: '店铺',
 						order: '2'
 					},
-					// {
-					// 	children:[{
-					// 		name:'分销成员',
-					// 		path:'/business/distribution/member'
-					// 	},
-					// 	{
-					// 		name:'提现管理',
-					// 		path:'/business/distribution/withdrawal'
-					// 	},
-					// 	{
-					// 		name:'分销配置',
-					// 		path:'/business/distribution/configuration'
-					// 	}
-					// 	],
-					// 	name:'分销',
-					// 	order:'5'
-					// },
+					{
+						children:[{
+							name:'分销成员',
+							path:'/business/distribution/member'
+						},
+						{
+							name:'提现管理',
+							path:'/business/distribution/withdrawal'
+						},
+						{
+							name:'分销配置',
+							path:'/business/distribution/configuration'
+						}
+						],
+						name:'分销',
+						order:'5'
+					},
 					// {
 					// 	children:[{
 					// 		name:'小程序授权',

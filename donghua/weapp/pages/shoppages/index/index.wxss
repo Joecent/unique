@@ -220,6 +220,7 @@ swiper {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  font-weight: bold;
 }
 
 .store_name-xing {

@@ -13,7 +13,6 @@
       <el-button type="primary" class="login_button" @click.native.prevent="handleSubmit2" :loading="logining">登录</el-button>
       
     </el-form-item>
-      <el-button type="text" class="regist" @click.native.prevent="handleReset3">注册</el-button>
       <el-button type="text" class="forget" @click.native.prevent="handleReset2">忘记密码？</el-button>
   </el-form>
 </div>
@@ -75,21 +74,28 @@ export default {
             //auth_level  1 超级用户  2 合作商家 3 小程序商家   4分销代理
 
             if (res) {
-              if (res.data.user.auth_level==1) {
-                 store.set('user', res.data.user)
-                 store.set('token', res.data.token)
-                  store.set('shopAuth',1)
-                 this.$router.push({path:'/shopchoose'})
-              }else if (res.data.user.auth_level==3||2) {
-                store.set('user',res.data.user)
-                store.set('token',res.data.token)
-                store.set('shopAuth',3)
-                this.$router.push({path:'/shopchoose'})
-              }else if (res.error_code==1006) {
-                this.$message.error(res.msg)
-              }else if (res.error_code==1007) {
-                this.$message.error(res.msg)
-              }
+               store.set('user', res.data.user)
+               store.set('token', res.data.token)
+               store.set('shopAuth',3)
+               store.set('currentshopid', 32)
+              this.$router.push({
+						    path: '/business/order/order_data'
+					    })
+              // if (res.data.user.auth_level==1) {
+              //    store.set('user', res.data.user)
+              //    store.set('token', res.data.token)
+              //     store.set('shopAuth',1)
+              //    this.$router.push({path:'/shopchoose'})
+              // }else if (res.data.user.auth_level==3||2) {
+              //   store.set('user',res.data.user)
+              //   store.set('token',res.data.token)
+              //   store.set('shopAuth',3)
+              //   this.$router.push({path:'/shopchoose'})
+              // }else if (res.error_code==1006) {
+              //   this.$message.error(res.msg)
+              // }else if (res.error_code==1007) {
+              //   this.$message.error(res.msg)
+              // }
             }
           })
         } else {

@@ -1,11 +1,11 @@
 <template>
   <div class="login">
       <div class="background">
-        <img class="full-screen" src="@/assets/images/login.png">
+       
       </div>
       <div class="front">
         <div class="center">
-          <div class="title" @click="back">邻伍</div>
+          <div class="title" @click="back">津东联盟</div>
           <transition name="fade" mode="out-in">
           <router-view />
           </transition>
@@ -18,7 +18,7 @@
 import cWaves from '@/components/cWaves'
 import * as store from '@/utils/sdk/store'
 import { getSessionId } from '@/utils/api'
-
+// <img class="full-screen" src="@/assets/images/login.png">
 export default {
   name: 'login',
   components: {

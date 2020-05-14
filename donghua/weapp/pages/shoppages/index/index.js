@@ -98,9 +98,9 @@ Page({
           cash_bg_img:res.data.data.cash_bg_img
         })
         //  修改首页标题
-        wx.setNavigationBarTitle({
-          title: that.data.shopa
-        })
+        // wx.setNavigationBarTitle({
+        //   title: that.data.shopa
+        // })
 
         
       }

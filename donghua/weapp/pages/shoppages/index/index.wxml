@@ -109,21 +109,21 @@
   </view>
 
   <view class='store_name' bindsubmit="formSubmit">
-    <view class='shop_info1 fs28'>{{shopa}}</view>
-    <view class='shop_info fs26'>营业时间：{{business}}</view>
+    <view class='shop_info1 fs30'>{{shopa}}</view>
+    <!-- <view class='shop_info fs26'>营业时间：{{business}}</view> -->
     <view class='shop_info fs26'>
-      店铺地址：{{shop_address}}
+      所在地：{{shop_address}}
     </view>
   </view>
 
-  <view class='store-lr'>
+  <!-- <view class='store-lr'>
     <view class='store-tel' bindtap="calling">
    <icon style='color:{{backgroundColor}}' class='iconfont icon-dianhua'></icon>
     </view>
     <view class='store-map' bindtap="bindaddinput">
     <icon style='color:{{backgroundColor}}' class='iconfont icon-dingwei1'></icon>
     </view>
-  </view>
+  </view> -->
 </view>
  
 
